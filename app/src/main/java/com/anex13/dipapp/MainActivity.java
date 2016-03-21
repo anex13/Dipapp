@@ -11,13 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.app.FragmentTransaction;
 
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-   Fragment frag1= new frag1();
-   Fragment frag2= new frag2();
-   Fragment frag3= new frag3();
-   Fragment frag4= new frag4();
+
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,38 +23,38 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         FragmentTransaction fTrans = getFragmentManager().beginTransaction();
 
-        if (id == R.id.menuautoscan) {
-            fTrans.replace(R.id.content, frag1);
-            fTrans.commit();
-        } else if (id == R.id.menuping) {
-            fTrans.replace(R.id.content, frag2);
-            fTrans.commit();
-        } else if (id == R.id.menulanscan) {
-            fTrans.replace(R.id.content, frag3);
-            fTrans.commit();
-        } else if (id == R.id.menuwiki) {
-            fTrans.replace(R.id.content, frag4);
-            fTrans.commit();
+        Fragment fragment = null;
+        switch (id) {
+            case R.id.menuautoscan:
+                fragment = new frag1();
+                break;
+            case R.id.menuping:
+                fragment = new frag2();
+                break;
+            case R.id.menulanscan:
+                fragment = new frag3();
+                break;
+            default:
+                fragment = new frag4();
+                break;
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        fTrans.replace(R.id.content, fragment).commit();
+        drawer.closeDrawers();
         return true;
     }
 }
