@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/menuautoscan"
+        android:icon="@drawable/ic_restore_black_24dp"
+        android:title="Auto scaner">
+    </item>
+    <item
+        android:id="@+id/menuping"
+        android:icon="@drawable/ic_restore_black_24dp"
+        android:title="Ping"></item>
+    <item
+        android:id="@+id/menulanscan"
+        android:icon="@drawable/ic_restore_black_24dp"
+        android:title="Lan scaner"></item>
+    <item
+        android:id="@+id/menuwiki"
+        android:icon="@drawable/ic_restore_black_24dp"
+        android:title="wiki"></item>
+    <group android:id="@+id/group1">
+        <item
+            android:id="@+id/menusetings"
+            android:title="Settings"></item>
+        <item
+            android:id="@+id/menuexit"
+            android:title="Exit"></item>
+    </group>
 </menu>
