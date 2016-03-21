@@ -1,5 +1,6 @@
 package com.anex13.dipapp;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,11 +14,10 @@ import android.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    frag1 frag1;
-    frag2 frag2;
-    frag3 frag3;
-    frag4 frag4;
-    FragmentTransaction fTrans;
+   Fragment frag1= new frag1();
+   Fragment frag2= new frag2();
+   Fragment frag3= new frag3();
+   Fragment frag4= new frag4();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +40,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        fTrans = getFragmentManager().beginTransaction();
+        FragmentTransaction fTrans = getFragmentManager().beginTransaction();
 
         if (id == R.id.menuautoscan) {
-            fTrans.add(R.id.content, frag1);
+            fTrans.replace(R.id.content, frag1);
+            fTrans.commit();
         } else if (id == R.id.menuping) {
             fTrans.replace(R.id.content, frag2);
+            fTrans.commit();
         } else if (id == R.id.menulanscan) {
             fTrans.replace(R.id.content, frag3);
+            fTrans.commit();
         } else if (id == R.id.menuwiki) {
             fTrans.replace(R.id.content, frag4);
+            fTrans.commit();
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
