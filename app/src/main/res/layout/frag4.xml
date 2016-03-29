@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/frag4"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+    android:layout_height="match_parent"
+    android:background="#e0e0e0">
+
+
+    <ImageButton
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:id="@+id/winbtn"
+        android:background="@drawable/win"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="11dp" />
+
+    <ImageButton
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:id="@+id/nixbtn"
+        android:background="@drawable/nix"
+        android:layout_alignTop="@+id/winbtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp" />
+
+    <ImageButton
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:id="@+id/lanbtn"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/lan"
+        android:layout_below="@+id/winbtn"
+        android:layout_alignLeft="@+id/winbtn"
+        android:layout_alignStart="@+id/winbtn"/>
+
+    <ImageButton
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:id="@+id/mobbtn"
+        android:background="@drawable/mob"
+        android:layout_alignTop="@+id/lanbtn"
+        android:layout_alignLeft="@+id/nixbtn"
+        android:layout_alignStart="@+id/nixbtn" />
+</RelativeLayout>
