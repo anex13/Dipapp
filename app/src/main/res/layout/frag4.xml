@@ -46,4 +46,13 @@
         android:layout_alignTop="@+id/lanbtn"
         android:layout_alignLeft="@+id/nixbtn"
         android:layout_alignStart="@+id/nixbtn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv"
+        android:layout_below="@+id/lanbtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp" />
 </RelativeLayout>
