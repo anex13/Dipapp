@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 public class frag4 extends Fragment implements View.OnClickListener {
     TextView tv;// для проверки работоспособности
@@ -14,20 +16,26 @@ public class frag4 extends Fragment implements View.OnClickListener {
     ImageButton mobbtn;
     ImageButton nixbtn;
     // хз чо тут происходит
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView =
                 inflater.inflate(R.layout.frag4, container, false);
-
+        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.wikibtn);
         tv = (TextView) rootView.findViewById(R.id.tv);
         winbtn = (ImageButton) rootView.findViewById(R.id.winbtn);
+        winbtn.startAnimation(anim);
         lanbtn = (ImageButton) rootView.findViewById(R.id.lanbtn);
+        lanbtn.startAnimation(anim);
         mobbtn = (ImageButton) rootView.findViewById(R.id.mobbtn);
+        mobbtn.startAnimation(anim);
         nixbtn = (ImageButton) rootView.findViewById(R.id.nixbtn);
+        nixbtn.startAnimation(anim);
         nixbtn.setOnClickListener(this);
         winbtn.setOnClickListener(this);
         lanbtn.setOnClickListener(this);
         mobbtn.setOnClickListener(this);
+
         return rootView;
 
     }
@@ -48,6 +56,7 @@ public class frag4 extends Fragment implements View.OnClickListener {
             default:
                 tv.setText("mob");
                 break;
+
         }
 
     }
