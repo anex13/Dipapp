@@ -1,17 +1,15 @@
 package com.anex13.dipapp;
-    import android.app.Activity;
     import android.app.Fragment;
     import android.os.Bundle;
-    import android.util.Log;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
 
-public class frag1 extends Fragment {
+public class frag_autoscan extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-               return inflater.inflate(R.layout.frag1, null);
+               return inflater.inflate(R.layout.autoscan, null);
     }
 }
 

@@ -3,7 +3,6 @@ package com.anex13.dipapp;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +27,9 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        Fragment fragment = new frag_wiki();
+        FragmentTransaction fTrans = getFragmentManager().beginTransaction();
+        fTrans.replace(R.id.content, fragment).commit();
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -41,19 +42,20 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         switch (id) {
             case R.id.menuautoscan:
-                fragment = new frag1();
+                fragment = new frag_autoscan();
                 break;
             case R.id.menuping:
-                fragment = new frag2();
+                fragment = new frag_ping();
                 break;
             case R.id.menulanscan:
-                fragment = new frag3();
+                fragment = new frag_lanscan();
                 break;
             default:
-                fragment = new frag4();
+                fragment = new frag_wiki();
                 break;
         }
         fTrans.replace(R.id.content, fragment).commit();
+        fTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         drawer.closeDrawers();
         return true;
     }
