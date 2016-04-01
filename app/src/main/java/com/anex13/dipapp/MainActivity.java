@@ -1,14 +1,14 @@
 package com.anex13.dipapp;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,17 +27,14 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        Fragment fragment = new frag_wiki();
-        FragmentTransaction fTrans = getFragmentManager().beginTransaction();
-        fTrans.replace(R.id.content, fragment).commit();
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+        showFragment(new frag_wiki(), false);
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        FragmentTransaction fTrans = getFragmentManager().beginTransaction();
 
         Fragment fragment = null;
         switch (id) {
@@ -54,9 +51,17 @@ public class MainActivity extends AppCompatActivity
                 fragment = new frag_wiki();
                 break;
         }
-        fTrans.replace(R.id.content, fragment).commit();
-        fTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        drawer.closeDrawers();
+        showFragment(fragment, false);
         return true;
+    }
+
+    public void showFragment(Fragment fragment, boolean addToBackStack) {
+        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        if (addToBackStack) {
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
+        drawer.closeDrawers();
     }
 }

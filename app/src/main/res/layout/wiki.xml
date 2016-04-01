@@ -1,55 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e0e0e0"
-    >
-<TableRow>
+    android:orientation="vertical">
 
-    <ImageButton
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:id="@+id/winbtn"
-        android:background="@drawable/win"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        android:translationZ="5dp" />
+    <TableRow>
 
-    <ImageButton
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:id="@+id/nixbtn"
-        android:background="@drawable/nix"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="5dp"
-        android:translationZ="5dp" />
-</TableRow>
-<TableRow>
-    <ImageButton
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:id="@+id/lanbtn"
-        android:background="@drawable/lan"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
-        android:translationZ="5dp"
-         />
+        <ImageButton
+            android:id="@+id/winbtn"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/win"
+            android:translationZ="5dp" />
 
-    <ImageButton
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:id="@+id/mobbtn"
-        android:background="@drawable/mob"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:translationZ="5dp" />
-</TableRow>
+        <ImageButton
+            android:id="@+id/nixbtn"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/nix"
+            android:translationZ="5dp" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageButton
+            android:id="@+id/lanbtn"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/lan"
+            android:translationZ="5dp" />
+
+        <ImageButton
+            android:id="@+id/mobbtn"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/mob"
+            android:translationZ="5dp" />
+    </TableRow>
 </TableLayout>

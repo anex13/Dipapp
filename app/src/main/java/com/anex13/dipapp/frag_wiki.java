@@ -1,6 +1,5 @@
 package com.anex13.dipapp;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
     ImageButton lanbtn;
     ImageButton mobbtn;
     ImageButton nixbtn;
+
     // хз чо тут происходит
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,13 +26,11 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
         lanbtn.setOnClickListener(this);
         mobbtn.setOnClickListener(this);
         return rootView;
-
     }
-    @Override
-    public void onClick (View v) {
-        FragmentTransaction fTrans = getFragmentManager().beginTransaction();
-        Fragment fragment = null;
 
+    @Override
+    public void onClick(View v) {
+        Fragment fragment = null;
         switch (v.getId()) {
             case R.id.nixbtn:
                 fragment = new wiki_web();
@@ -46,12 +44,7 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
             default:
                 fragment = new wiki_web();
                 break;
-
         }
-        fTrans.add(R.id.content, fragment);
-        // бэкстак почимуто не пашет или я чот не то делаю ?
-      //  fTrans.addToBackStack(null);
-        fTrans.commit();
-        fTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ((MainActivity) getActivity()).showFragment(fragment, true);
     }
 }
