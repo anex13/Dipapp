@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-        showFragment(new frag_wiki(), false);
+        showFragment(new frag_wiki(), false,"0","0");
     }
 
     @Override
@@ -51,13 +50,16 @@ public class MainActivity extends AppCompatActivity
                 fragment = new frag_wiki();
                 break;
         }
-        showFragment(fragment, false);
+        showFragment(fragment, false,"0","0");
         return true;
     }
 
-    public void showFragment(Fragment fragment, boolean addToBackStack) {
+    public void showFragment(Fragment fragment, boolean addToBackStack,String tag, String arg) {
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        Bundle bundle = new Bundle();
+        bundle.putString(tag, arg);
+        fragment.setArguments(bundle);
         if (addToBackStack) {
             transaction.addToBackStack(null);
         }

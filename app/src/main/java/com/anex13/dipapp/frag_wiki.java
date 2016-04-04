@@ -28,23 +28,30 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
+
     @Override
     public void onClick(View v) {
         Fragment fragment = null;
+        String arg;
         switch (v.getId()) {
             case R.id.nixbtn:
-                fragment = new wiki_web();
+                fragment = new wiki_sublist();
+                arg ="1";
                 break;
             case R.id.winbtn:
-                fragment = new wiki_web();
+                fragment = new wiki_sublist();
+                arg ="2";
                 break;
             case R.id.lanbtn:
-                fragment = new wiki_web();
+                fragment = new wiki_sublist();
+                arg ="3";
                 break;
             default:
-                fragment = new wiki_web();
+                fragment = new wiki_sublist();
+                arg ="4";
                 break;
         }
-        ((MainActivity) getActivity()).showFragment(fragment, true);
+        ((MainActivity) getActivity()).showFragment(fragment, true ,"wiki",arg);
     }
+
 }
