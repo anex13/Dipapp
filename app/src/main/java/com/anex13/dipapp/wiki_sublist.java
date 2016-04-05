@@ -24,14 +24,14 @@ public class wiki_sublist extends Fragment {
             "01. Настройка прав доступа.", };
     private String[] lan_array = {
             "00. Настройки минских провайдеров .",
-            "01. основные настройки роутера.",};
+            "01. Основные настройки роутера.",};
 
 
     private String[] mob_array = {
             "00. Настройки белоруских операторов .",
-            "01. настройка интернета в Android",
-            "02. настройка интернета в iOS",
-            "03. настройка интернета в Windows",};
+            "01. Настройка интернета в Android",
+            "02. Настройка интернета в iOS",
+            "03. Настройка интернета в Windows",};
 
     private String[] wiki_list;
 
@@ -41,7 +41,7 @@ public class wiki_sublist extends Fragment {
                 inflater.inflate(R.layout.wiki_sublist, container, false);
         bundle = getArguments();
         lv = (ListView) rootView.findViewById(R.id.wikilist);
-       // tv = (TextView) rootView.findViewById(R.id.textView2);
+
 
         if (bundle != null) {
             recieveInfo = bundle.getString("wiki","0_0");

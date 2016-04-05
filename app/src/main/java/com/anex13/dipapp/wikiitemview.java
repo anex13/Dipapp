@@ -23,10 +23,10 @@ public class wikiitemview extends Fragment {
         if (bundle != null) {
             recieveInfo=bundle.getString("wiki1tem","0_o");
                     url="file:///android_res/raw/w"+recieveInfo+".htm";
-            }
-        webView = (WebView) rootView.findViewById(R.id.webView);
+        }
+            webView = (WebView) rootView.findViewById(R.id.webView);
             webView.loadUrl(url);
-           // webView.loadUrl("file:///android_assets/w1.htm");
+
 
 
         return rootView;

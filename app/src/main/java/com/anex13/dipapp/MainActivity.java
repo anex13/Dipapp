@@ -1,5 +1,6 @@
 package com.anex13.dipapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,11 +15,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -39,15 +41,23 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.menuautoscan:
                 fragment = new frag_autoscan();
+                toolbar.setTitle(R.string.frag1);
+              //toolbar.setBackgroundColor(Color.RED);
                 break;
             case R.id.menuping:
                 fragment = new frag_ping();
+                toolbar.setTitle(R.string.frag2);
+              //toolbar.setBackgroundColor(Color.MAGENTA);
                 break;
             case R.id.menulanscan:
                 fragment = new frag_lanscan();
+                toolbar.setTitle(R.string.frag3);
+              //toolbar.setBackgroundColor(Color.BLUE);
                 break;
             default:
                 fragment = new frag_wiki();
+                toolbar.setTitle(R.string.frag4);
+              //toolbar.setBackgroundColor(Color.GREEN);
                 break;
         }
         showFragment(fragment, false,"0","0");
