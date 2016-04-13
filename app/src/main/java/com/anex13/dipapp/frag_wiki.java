@@ -52,6 +52,8 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
                 break;
         }
         ((MainActivity) getActivity()).showFragment(fragment, true ,"wiki",arg);
+
+
     }
 
 }
