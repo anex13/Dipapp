@@ -1,6 +1,7 @@
 package com.anex13.dipapp;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +16,18 @@ public class frag_ping extends Fragment implements View.OnClickListener {
     TextView tv;
     String ans;
     Button serchbtn;
+    final String TAG="mylogs";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.ping, container, false);
+        tv= (TextView)rootView.findViewById(R.id.textView2);
         serchbtn = (Button) rootView.findViewById(R.id.button);
         serchbtn.setOnClickListener(this);
         return rootView;
     }
     public void onClick(View v) {
-        ans = ping("ya.ru");
+        ans = ping("8.8.8.8");
         if (ans != null) {
             tv.setText(ans);
         }
@@ -34,6 +37,7 @@ public class frag_ping extends Fragment implements View.OnClickListener {
         try {
             Process process = Runtime.getRuntime().exec(
                     "/system/bin/ping -c 8 " + url);
+            //
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     process.getInputStream()));
             int i;
@@ -42,10 +46,9 @@ public class frag_ping extends Fragment implements View.OnClickListener {
             while ((i = reader.read(buffer)) > 0)
                 output.append(buffer, 0, i);
             reader.close();
-
-            // body.append(output.toString()+"\n");
+            //body.append(output.toString()+"\n");
             str = output.toString();
-            // Log.d(TAG, str);
+            Log.d(TAG, str);
         } catch (IOException e) {
             // body.append("Error\n");
             e.printStackTrace();
