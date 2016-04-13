@@ -8,13 +8,15 @@
         android:id="@+id/pingurl"
         android:contentDescription="введите адрес"
         android:editable="true"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:inputType="textWebEditText|textWebEmailAddress"
+        android:text="google.com" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Ping"
         android:id="@+id/button"
         android:layout_gravity="right"
         android:layout_alignParentTop="true"
@@ -26,7 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="Результаты проверки"
         android:id="@+id/textView2"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/button"
@@ -34,5 +36,6 @@
         android:layout_alignParentBottom="true"
         android:autoText="false"
         android:editable="false"
-        android:enabled="false" />
+        android:enabled="false"
+        android:textColor="#000000" />
 </RelativeLayout>
