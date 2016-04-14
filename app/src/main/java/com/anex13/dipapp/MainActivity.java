@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-        showFragment(new frag_wiki(), false, "0", "0");
+        showFragment(new frag_wiki(), false);
 
     }
     @Override
@@ -73,18 +73,15 @@ public class MainActivity extends AppCompatActivity
         }
         toolbar.setBackgroundColor(color);
         getWindow().setNavigationBarColor(color);
-        showFragment(fragment, false, "0", "0");
+        showFragment(fragment, false);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void showFragment(Fragment fragment, boolean addToBackStack,String tag, String arg) {
+    public void showFragment(Fragment fragment, boolean addToBackStack) {
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        Bundle bundle = new Bundle();
-        bundle.putString(tag, arg);
-        fragment.setArguments(bundle);
         if (addToBackStack) {
             transaction.addToBackStack(null);
            // getSupportActionBar().setDisplayHomeAsUpEnabled(true);

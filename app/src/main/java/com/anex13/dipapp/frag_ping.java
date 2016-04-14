@@ -17,7 +17,6 @@ public class frag_ping extends Fragment implements View.OnClickListener {
     String ans;
     Button serchbtn;
     EditText pingurl;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.ping, container, false);
@@ -36,6 +35,12 @@ public class frag_ping extends Fragment implements View.OnClickListener {
             tv.setText(ans);
         }
     }
+
+    //new tread new runable, service content provider
+    //бд-> content provider -> ui
+    //intent service несколько экшенов
+
+    //broadcast reciever
     public String ping(String url) {
         String str = "";
         try {

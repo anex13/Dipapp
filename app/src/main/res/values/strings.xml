@@ -12,4 +12,26 @@
     <string name="frag3">LanScan</string>
     <string name="frag4">Wiki</string>
 
+    <string-array name="nix_array">
+        <item>00. Основные команды Bash.</item>
+        <item>01. Что стоит сделать после установки.</item>
+    </string-array>
+    <string-array name="win_array">
+        <item>00. Полезные команды .</item>
+        <item>01. Настройка прав доступа.</item>
+    </string-array>
+
+    <string-array name="lan_array">
+        <item>00. Настройки минских провайдеров .</item>
+        <item>01. Основные настройки роутера.</item>
+    </string-array>
+
+
+    <string-array name="mob_array">
+        <item>00. Настройки белоруских операторов .</item>
+        <item>01. Настройка интернета в Android</item>
+        <item>02. Настройка интернета в iOS</item>
+        <item>03. Настройка интернета в Windows</item>
+    </string-array>
+
 </resources>

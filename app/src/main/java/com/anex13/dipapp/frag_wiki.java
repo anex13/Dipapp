@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import static com.anex13.dipapp.Pageenum.*;
 
 public class frag_wiki extends Fragment implements View.OnClickListener {
     ImageButton winbtn;
@@ -31,27 +32,22 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Fragment fragment = null;
-        String arg;
+        Pageenum pageenum;
         switch (v.getId()) {
             case R.id.nixbtn:
-                fragment = new wiki_sublist();
-                arg ="1";
+                pageenum =WIN;
                 break;
             case R.id.winbtn:
-                fragment = new wiki_sublist();
-                arg ="2";
+                pageenum =NIX;
                 break;
             case R.id.lanbtn:
-                fragment = new wiki_sublist();
-                arg ="3";
+                pageenum =LAN;
                 break;
             default:
-                fragment = new wiki_sublist();
-                arg ="4";
+                pageenum =MOB;
                 break;
         }
-        ((MainActivity) getActivity()).showFragment(fragment, true ,"wiki",arg);
+        ((MainActivity) getActivity()).showFragment( wiki_sublist.getInstance(pageenum), true);
 
 
     }
