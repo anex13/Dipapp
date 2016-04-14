@@ -1,0 +1,2443 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 15">
+<meta name=Originator content="Microsoft Word 15">
+<link rel=File-List href="w20.files/filelist.xml">
+<link rel=Edit-Time-Data href="w20.files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Команды командной строки ( CMD ) Windows</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Мисько Роман</o:Author>
+  <o:LastAuthor>Мисько Роман</o:LastAuthor>
+  <o:Revision>6</o:Revision>
+  <o:TotalTime>20</o:TotalTime>
+  <o:Created>2016-04-14T06:15:00Z</o:Created>
+  <o:LastSaved>2016-04-14T08:04:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1444</o:Words>
+  <o:Characters>8236</o:Characters>
+  <o:Lines>68</o:Lines>
+  <o:Paragraphs>19</o:Paragraphs>
+  <o:CharactersWithSpaces>9661</o:CharactersWithSpaces>
+  <o:Version>16.00</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<link rel=themeData href="w20.files/themedata.thmx">
+<link rel=colorSchemeMapping href="w20.files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>130</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>RU</w:LidThemeOther>
+  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SplitPgBreakAndParaMark/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="&#45;-"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="false"
+  DefSemiHidden="false" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="371">
+  <w:LsdException Locked="false" Priority="0" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 9"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="header"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footer"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index heading"/>
+  <w:LsdException Locked="false" Priority="35" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of figures"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope return"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="line number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="page number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of authorities"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="macro"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="toa heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 5"/>
+  <w:LsdException Locked="false" Priority="10" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Closing"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Signature"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Message Header"/>
+  <w:LsdException Locked="false" Priority="11" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Salutation"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Date"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Block Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Hyperlink"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="FollowedHyperlink"/>
+  <w:LsdException Locked="false" Priority="22" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Document Map"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Plain Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="E-mail Signature"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Top of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Bottom of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal (Web)"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Acronym"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Cite"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Code"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Definition"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Keyboard"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Preformatted"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Sample"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Typewriter"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Variable"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Table"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation subject"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="No List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Contemporary"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Elegant"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Professional"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Balloon Text"/>
+  <w:LsdException Locked="false" Priority="39" Name="Table Grid"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Theme"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" QFormat="true"
+   Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" QFormat="true"
+   Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" QFormat="true"
+   Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" QFormat="true"
+   Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" QFormat="true"
+   Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" QFormat="true"
+   Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="TOC Heading"/>
+  <w:LsdException Locked="false" Priority="41" Name="Plain Table 1"/>
+  <w:LsdException Locked="false" Priority="42" Name="Plain Table 2"/>
+  <w:LsdException Locked="false" Priority="43" Name="Plain Table 3"/>
+  <w:LsdException Locked="false" Priority="44" Name="Plain Table 4"/>
+  <w:LsdException Locked="false" Priority="45" Name="Plain Table 5"/>
+  <w:LsdException Locked="false" Priority="40" Name="Grid Table Light"/>
+  <w:LsdException Locked="false" Priority="46" Name="Grid Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="Grid Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="Grid Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="46" Name="List Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="List Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="List Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 6"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--body
+	{max-width: 96%;}
+h1
+	{max-width: 96%;}
+img
+	{max-width: 96%;}
+
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:1;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:0 0 0 0 0 0;}
+@font-face
+	{font-family:Georgia;
+	panose-1:2 4 5 2 5 4 5 2 3 3;
+	mso-font-charset:204;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+h1
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Заголовок 1 Знак";
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:18.0pt;
+	font-family:"Georgia",serif;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	color:black;
+	font-weight:normal;}
+h3
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Заголовок 3 Знак";
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:13.5pt;
+	font-family:"Times New Roman",serif;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+a:link, span.MsoHyperlink
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+span.1
+	{mso-style-name:"Заголовок 1 Знак";
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Заголовок 1";
+	mso-ansi-font-size:16.0pt;
+	mso-bidi-font-size:16.0pt;
+	font-family:"Calibri Light",sans-serif;
+	mso-ascii-font-family:"Calibri Light";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"Calibri Light";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#2E74B5;
+	mso-themecolor:accent1;
+	mso-themeshade:191;}
+span.3
+	{mso-style-name:"Заголовок 3 Знак";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Заголовок 3";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Calibri Light",sans-serif;
+	mso-ascii-font-family:"Calibri Light";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"Calibri Light";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#1F4D78;
+	mso-themecolor:accent1;
+	mso-themeshade:127;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-style-unhide:no;
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-size:10.0pt;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;}
+@page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:2.0cm 42.5pt 2.0cm 3.0cm;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Обычная таблица";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman",serif;}
+</style>
+<![endif]-->
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<meta name=robots content="index,all">
+<meta name=author content="Белый Александр Email: ab@ab57.ru">
+<meta name=Description
+content="Список команд CMD Windows в алфавитном &#13;&#10;порядке с кратким описанием и примерами использования. Имена большинства команд &#13;&#10;являются ссылками на страницы помощи.">
+<meta name=Keywords content="команда,Windows,файл,каталог,сеть,CMD">
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1026"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=RU link=blue vlink=purple style='tab-interval:35.4pt'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>Список</span></b><b style='mso-bidi-font-weight:
+normal'><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'>
+</span></b><b style='mso-bidi-font-weight:normal'><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>команд</span></b><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'> Windows <span
+class=GramE>( Windows</span> CMD ) <o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><span
+style='mso-spacerun:yes'>    </span>Список команд включает в себя наиболее
+полный перечень, представленный не только внутренними командами CMD, но и
+утилитами командной строки. В разных версиях операционных систем семейства <span
+class=SpellE>Windows</span> набор команд, их входные параметры, синтаксис и
+отображение результатов могут различаться. Одна и та же утилита командной
+строки может присутствовать в стандартной поставке одной версии <span
+class=SpellE>Windows</span>, но отсутствовать или входить в состав
+дополнительных средств, например, <span class=SpellE>Resource</span> <span
+class=SpellE>Kit</span> или <span class=SpellE>Software</span> <span
+class=SpellE>Development</span> <span class=SpellE>Kit</span>, для другой.
+Некоторые из приведенных команд, устарели, и не поддерживаются или не имеют
+смысла в современных операционных системах. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'>Названия наиболее
+распространенных команд, представленных на данной странице, являются ссылками и
+ведут на страницу с подробным описанием и примерами использования. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>APPEND</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - позволяет программам открывать файлы данных из указанных папок
+так, как будто они находятся в текущей папке. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'>ARP</span></b><span
+lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'> - </span><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>просмотр</span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> </span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>и</span><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'>
+</span><span style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>изменение</span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> </span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>таблиц</span><span lang=EN-US style='font-size:11.0pt;font-family:
+"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";color:black;
+mso-ansi-language:EN-US'> ARP (Address Resolution Protocol)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>ASSOC</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - просмотр или изменение сопоставлений расширений файлов
+приложениям<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>AT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление планировщиком задач<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>ATTRIB</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение атрибутов файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>BCDBOOT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - копирование в системный раздел файлов загрузки и создание
+нового хранилища конфигурации загрузки (BCD)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>BCDEDIT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - редактирование хранилища данных конфигурации загрузки (BCD)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>BOOTCFG</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - редактирование параметров загрузки в файле boot.ini<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>BOOTSECT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - редактирование загрузочных секторов для обеспечения загрузки
+NTLDR или BOOTMGR<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CACLS</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - редактирование списков управления доступом к файлам (ACL - <span
+class=SpellE>Access</span> <span class=SpellE>Control</span> <span
+class=SpellE>List</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CALL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - вызов из командного файла подпрограмм или других командных
+файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'>CD</span></b><span
+lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'> - </span><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>смена</span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> </span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>каталога</span><span lang=EN-US style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> (Change Directory)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CHANGE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение настроек сервера терминалов. Контексты - LOGON, PORT,
+USER<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CHGLOGON</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение настроек сервера терминалов, аналогично CHANGE LOGON<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CHGPORT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение настроек сервера терминалов, аналогично CHANGE PORT<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CHGUSR</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение настроек сервера терминалов, аналогично CHANGE USER<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CHCP</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - просмотр или изменение текущей кодовой страницы<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CHKDSK</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - проверка диска (<span class=SpellE>Check</span> <span
+class=SpellE>Disk</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CHKNTFS</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - проверка признака ошибки файловой системы и управление
+проверкой диска при загрузке <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CHOICE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - реализация пользовательского ввода в командном файле<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CIPHER</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение или изменение шифрования файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CLIP</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - перенаправление вывода утилит командной строки в буфер обмена <span
+class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CLS</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - очистка экрана в командной строке<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CMD</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - запуск новой копии интерпретатора командной строки<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>COLOR</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение цвета текста и фона в окне CMD<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>COMMAND</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - запуск новой копии интерпретатора командной строки MS-DOS<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>COMP</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - сравнение содержимого файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>COMPACT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление сжатием и распаковкой файлов в разделах NTFS<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>CONVERT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - преобразование файловой системы из FAT в NTFS<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>COPY</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - копирование файлов и каталогов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DATE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение или изменение даты<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DEBUG</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - запуск отладчика <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DEFRAG</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - дефрагментация диска<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DEL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - удаление одного или нескольких файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DevCon</span></b></span><span style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление устройствами в командной строке<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DIANTZ</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> — тоже что и MAKECAB, создание архивов .<span class=SpellE>cab</span>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DIR</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение списка файлов и каталогов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DISKPART</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление разделами дисков из командной строки<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DOSKEY</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - редактирование и повторный вызов команд <span class=SpellE>Windows</span>,
+использование макросов.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>DRIVERQUERY</span></b><span style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отобразить информацию об установленных драйверах.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>ECHO</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - вывод текста на экран консоли<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>EDIT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - запуск текстового редактора<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>ENDLOCAL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - конец локальных изменений переменных окружения в командном
+файле<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>ERASE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - аналогично команде DEL - удаление файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'>ESENTUTL</span></b><span
+lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'> - </span><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>обслуживание</span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> </span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>баз</span><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'>
+</span><span style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>данных</span><span lang=EN-US style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> Extensible Storage Engine </span><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>для</span><span lang=EN-US style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> Windows<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>EVENTCREATE</span></b><span style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - запись сообщения в журнал событий <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>EXIT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - выход из процедуры или командного файла<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>EXPAND</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - распаковка сжатых файлов CAB-файлов.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>EXTRACT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - извлечение содержимого, распаковка CAB-файлов в <span
+class=SpellE>Windows</span> (EXTRAC32)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FC</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - сравнение содержимого файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FIND</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - поиск строки символов в файле<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FINDSTR</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - поиск строк в файлах с использованием регулярных выражений<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FOR</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - организация циклической обработки результатов выполнения других
+команд, списков, и строк в текстовых файлах<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FORFILES</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - выполнение указанной команды для каждого файла из заданной
+группы<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FORMAT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - форматирование диска <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FSUTIL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление файловой системой<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FTP</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - консольный FTP-клиент<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>FTYPE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - просмотр и изменение расширений файлов и сопоставленных им
+приложений<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>GETMAC</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение физического адреса сетевого адаптера (MAC-адреса)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>GOTO </span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>- команда безусловного перехода в командном файле<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>GPRESULT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение результирующей политики (<span class=SpellE>RSoP</span>)
+<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>GPUPDATE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - обновление групповых политик.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>HELP</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - вызов справки командной строки <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>HOSTNAME</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение имени компьютера<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>iCACLS</span></b></span><span style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление списками доступа (ACL) <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>IF</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - оператор условного выполнения команд в пакетном файле<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>IPCONFIG</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> просмотр и управление конфигурацией протокола IP<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>LABEL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - редактирование меток тома дисков<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>LOGMAN</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление монитором оценки производительности системы<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>LOGOFF</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - завершение сеанса пользователя<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MAKECAB</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - создание сжатых файлов формата CAB<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MEM</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - вывод справки об использовании памяти в MS-DOS<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MD</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - создание нового каталога<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MKLINK</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - создание символической ссылки на файл или каталог<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MODE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - конфигурирование системных устройств в среде CMD<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MORE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - постраничный вывод в консоли<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MOUNTVOL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление точками монтирования томов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MOVE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - перемещение файлов и каталогов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MOVEFILE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - перемещение или удаление занятых файлов при следующей
+перезагрузке<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>MSG</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отправка сообщений пользователям.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>NBTSTAT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - просмотр статистических данных NETBIOS через TCP/IP (<span
+class=SpellE>NetBT</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>NET</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление ресурсами локальной сети<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>NETCFG</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение и изменение конфигурации компонентов сети<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>NETSH</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - командная сетевая оболочка (<span class=SpellE>Network</span> <span
+class=SpellE>Shell</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>NETSTAT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение статистики сетевых соединений<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>NSLOOKUP</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - просмотр данных DNS в командной строке<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>OPENFILES</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление открытыми по сети или локально файлами<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PATH</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение или изменение путей поиска исполняемых файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PATHPING</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - трассировка маршрута с возможностью оценки качества участков
+трассы<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PAUSE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - пауза при выполнении командного файла<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PING</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> утилита проверки доступности узла<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PKGMGR</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление программными пакетами <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>POPD </span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>- возврат в каталог, ранее запомненный с помощью команды PUSHD<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PNPUTIL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - конфигурирование драйверов устройств <span class=SpellE>PnP</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>POWERCFG</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - настройка параметров системы электропитания <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PRINT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - печать текстового файла<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PROMPT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение строки приглашения в консоли<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>PUSHD</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - сохранить текущий путь каталога<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>QPROCESS</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отобразить состояние процессов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>QUERY</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - опросить состояние процессов и сеансов пользователей<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>QUSER</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отобразить информацию о сеансах пользователей<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RASDIAL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление сеансами удаленного доступа<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RASPHONE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление сеансами удаленного доступа<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RD</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - удаление каталога<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>REAGENTC</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - <span class=SpellE>адимнистрирование</span> <span class=SpellE>стреды</span>
+восстановления <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RECOVER</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - восстановление файлов на поврежденном диске<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>REG</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - утилита командной строки для работы с реестром <span
+class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>REGEDIT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - импорт и экспорт данных реестра <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>REGSVR32</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - регистрация или отмена регистрации DLL<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>REGINI</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление доступом к разделам реестра<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>REM</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - комментарий в строке командного файла<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RENAME (REN) </span></b><span style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>- переименование файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>REPLACE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - замена или добавление файлов в <span class=SpellE>катологах</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RESET</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - сброс сеанса удаленного рабочего стола (RDP сессии)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RMDIR</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - удаление каталога<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>ROBOCOPY</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - утилита резервного копирования и синхронизации каталогов (<span
+class=SpellE>Robust</span> <span class=SpellE>File</span> <span class=SpellE>and</span>
+<span class=SpellE>Folder</span> <span class=SpellE>Copy</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>ROUTE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление таблицей маршрутизации<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RUNAS</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - запуск приложения от имени другого пользователя<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>RUNDLL32</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - запуск DLL в качестве приложения<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'>SC</span></b><span
+lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'> - </span><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>управление</span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> </span><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'>службами</span><span lang=EN-US style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> Windows (Service Control)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SCHTASKS</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление планировщиком задач<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SCLIST</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение списка системных служб<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SET</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение и изменение переменных среды окружения <span
+class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SETLOCAL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - установка локальных переменных в командном файле<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SETX</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - утилита для создания системных переменных<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SFC</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - проверка и восстановление системных файлов <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SHARE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - просмотр, создание и удаление разделяемых в локальной сети
+ресурсов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SHIFT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> сдвиг входных параметров для командного файла<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SHUTDOWN</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - выключение или перезагрузка компьютера<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SLEEP</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - задержка по времени в пакетном файле<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SORT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - сортировка строк в текстовом файле <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>START</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - запуск приложения или командного файла<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SUBST</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - назначение (отмена назначения) каталогу буквы диска<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>SYSTEMINFO</span></b><span style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение информации о системе<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TAKEOWN</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение владельца файла или каталога<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TASKKILL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - завершение процессов на локальной или удаленной системе.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TASKLIST</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение списка выполняющихся приложений и служб <span
+class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TIME</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение и установка системного времени<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'>TELNET</span></b><span
+lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'> - telnet-</span><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>клиент</span><span lang=EN-US style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> Windows<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'>TFTP</span></b><span
+lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black;mso-ansi-language:EN-US'> - TFTP-</span><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>клиент</span><span lang=EN-US style='font-size:
+11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black;mso-ansi-language:EN-US'> Windows<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TIMEOUT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - задержка в пакетных файлах<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TITLE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - изменение заголовка окна CMD.EXE<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TRACERT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - трассировка маршрута к удаленному узлу<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TREE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение структуры каталога в графическом виде<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TYPE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - вывод на экран содержимого текстового файла<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TypePerf</span></b></span><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'> - вывод сведений о производительности на экран
+или в журнал<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>TZUTIL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление часовыми поясами в среде <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>VER</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - отображение версии операционной системы<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>VERIFY</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - управление режимом проверки записываемых файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>VOL</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - вывод данных метки тома<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>VSSADMIN</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - администрирование службы теневого копирования томов.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>WAITFOR</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - организация обмена сигналами между компьютерами<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>WHERE</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - определение места расположения файлов <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>WHOAMI</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - вывод имени текущего пользователя<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>WINDIFF</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - сравнение содержимого файлов<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>WINRM</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - удаленное управление <span class=SpellE>Windows</span> из
+командной строки<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>WINRS</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - удаленная командная строка (<span class=SpellE>Remote</span> <span
+class=SpellE>Shell</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>WINSAT</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - средство проверки производительности <span class=SpellE>Windows</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>WMIC</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - выполнение команды WMI<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:11.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:black'>XCOPY</span></b><span style='font-size:11.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:black'> - копирование файлов и папок<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><span
+style='mso-spacerun:yes'>            </span><span style='display:none;
+mso-hide:all'><o:p></o:p></span></span></p>
+
+<div>
+
+<p class=MsoNormal><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black;display:none;mso-hide:
+all'><script  type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter10501945 = new Ya.Metrika({id:10501945, enableAll: true});
+        }
+        catch(e) { }
+    });
+})(window, "yandex_metrika_callbacks");
+</script><script  src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer">
+</script></span><span style='font-size:11.0pt;font-family:"Arial",sans-serif;
+mso-fareast-font-family:"Times New Roman";color:black'><noscript><span
+style='mso-spacerun:yes'>            </span><o:p></o:p></span></p>
+
+</div>
+
+</div>
+
+</noscript><!-- /Yandex.Metrika counter --><!-- Вставьте этот тег в заголовке страницы или непосредственно перед закрывающим тегом основной части. -->
+</body>
+
+</html>

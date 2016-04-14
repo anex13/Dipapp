@@ -18,8 +18,6 @@ public class frag_ping extends Fragment implements View.OnClickListener {
     Button serchbtn;
     EditText pingurl;
 
-    final String TAG="mylogs";
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.ping, container, false);
