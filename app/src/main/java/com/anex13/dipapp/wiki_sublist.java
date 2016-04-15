@@ -26,10 +26,10 @@ public class wiki_sublist extends Fragment {
     public static wiki_sublist getInstance(Pageenum pageenum) {
         wiki_sublist fragment = new wiki_sublist();
         Bundle bundle = new Bundle();
-        bundle.putString(TAG_PAGEENUM,pageenum.name());
+        bundle.putString(TAG_PAGEENUM, pageenum.name());
         fragment.setArguments(bundle);
 
-        return null;
+        return fragment;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,59 +42,28 @@ public class wiki_sublist extends Fragment {
 
         if (bundle != null) {
 
-            pageenum=Pageenum.valueOf(bundle.getString(TAG_PAGEENUM,Pageenum.WIN.name()));
+            pageenum = Pageenum.valueOf(bundle.getString(TAG_PAGEENUM, "1"));
+
+        } else if (savedInstanceState != null && savedInstanceState.containsKey(TAG_PAGEENUM)) {
+            pageenum = Pageenum.valueOf(savedInstanceState.getString(TAG_PAGEENUM,"1" ));
         }
-        wiki_list =getResources().getStringArray(pageenum.getList());
+        //Pageenum.WIN.name()
+        wiki_list = getResources().getStringArray(pageenum.getList());
         lv.setAdapter(new ArrayAdapter<>(lv.getContext(), android.R.layout.simple_list_item_1, wiki_list));
         lv.setTextFilterEnabled(true);
         //Обрабатываем щелчки на элементах ListView:
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                       public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-
-                                          switch (position) {
-                                              case 0:
-                                                  itemid = recieveInfo + '0';
-                                                  break;
-                                              case 1:
-                                                  itemid = recieveInfo + '1';
-                                                  break;
-                                              case 2:
-                                                  itemid = recieveInfo + '2';
-                                                  break;
-                                              case 3:
-                                                  itemid = recieveInfo + '3';
-                                                  break;
-                                              case 4:
-                                                  itemid = recieveInfo + '4';
-                                                  break;
-                                              case 5:
-                                                  itemid = recieveInfo + '5';
-                                                  break;
-                                              case 6:
-                                                  itemid = recieveInfo + '6';
-                                                  break;
-                                              case 7:
-                                                  itemid = recieveInfo + '7';
-                                                  break;
-                                              case 8:
-                                                  itemid = recieveInfo + '8';
-                                                  break;
-                                              case 9:
-                                                  itemid = recieveInfo + '9';
-                                                  break;
-                                              default:
-                                                  itemid = recieveInfo + "err";
-                                                  break;
-
-                                          }
-                                          ((MainActivity) getActivity()).showFragment(new wikiitemview(), true);
+                                          ((MainActivity) getActivity()).showFragment(wikiitemview.getInstance(pageenum, position), true);
                                       }
-
                                   }
         );
-        //
-
         return rootView;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TAG_PAGEENUM, pageenum.name());
+    }
 }

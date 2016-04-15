@@ -11,8 +11,18 @@ import android.webkit.WebView;
 public class wikiitemview extends Fragment {
     WebView webView;
     Bundle bundle;
-    String recieveInfo;
-    String url;
+    public static final String TAG_PAGEENUM = "pageenum";
+    static Pageenum pageenum1=Pageenum.WIN;
+    static int position1;
+
+
+    public static wikiitemview getInstance(Pageenum pageenum, int position) {
+        position1=position;
+        pageenum1=pageenum;
+        return new wikiitemview();
+    }
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView =
@@ -21,15 +31,19 @@ public class wikiitemview extends Fragment {
         bundle = getArguments();
 
         if (bundle != null) {
-            recieveInfo=bundle.getString("wiki1tem","0_o");
-                    url="file:///android_res/raw/w"+recieveInfo+".htm";
+            pageenum1 = Pageenum.valueOf(bundle.getString(TAG_PAGEENUM, Pageenum.WIN.name()));
+        } else if (savedInstanceState != null && savedInstanceState.containsKey(TAG_PAGEENUM)) {
+            pageenum1 = Pageenum.valueOf(savedInstanceState.getString(TAG_PAGEENUM, Pageenum.WIN.name()));
         }
-            webView = (WebView) rootView.findViewById(R.id.webView);
-            webView.loadUrl(url);
-
-
+        webView = (WebView) rootView.findViewById(R.id.webView);
+        webView.loadUrl("file:///android_res/raw/w" + pageenum1.getPosition()+position1 + ".htm");
 
         return rootView;
 
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TAG_PAGEENUM, pageenum1.name());
     }
 }

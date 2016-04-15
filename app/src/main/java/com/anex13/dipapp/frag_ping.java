@@ -39,7 +39,6 @@ public class frag_ping extends Fragment implements View.OnClickListener {
     //new tread new runable, service content provider
     //бд-> content provider -> ui
     //intent service несколько экшенов
-
     //broadcast reciever
     public String ping(String url) {
         String str = "";
@@ -55,11 +54,8 @@ public class frag_ping extends Fragment implements View.OnClickListener {
             while ((i = reader.read(buffer)) > 0)
                 output.append(buffer, 0, i);
             reader.close();
-            //body.append(output.toString()+"\n");
             str = output.toString();
-            //Log.d(TAG, str);
         } catch (IOException e) {
-            // body.append("Error\n");
             e.printStackTrace();
         }
         return str;

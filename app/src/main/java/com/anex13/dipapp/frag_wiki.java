@@ -13,7 +13,6 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
     ImageButton mobbtn;
     ImageButton nixbtn;
 
-    // хз чо тут происходит
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,10 +34,10 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
         Pageenum pageenum;
         switch (v.getId()) {
             case R.id.nixbtn:
-                pageenum =WIN;
+                pageenum =NIX;
                 break;
             case R.id.winbtn:
-                pageenum =NIX;
+                pageenum =WIN;
                 break;
             case R.id.lanbtn:
                 pageenum =LAN;
