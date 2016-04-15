@@ -1,4 +1,5 @@
 package com.anex13.dipapp;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,13 +30,17 @@ public class frag_ping extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         String url;
         url = pingurl.getText().toString();
-        ans = ping(url);
-        //сюда какой нибудь прогресбар надо
-        if (ans != null) {
-            tv.setText(ans);
+        tv.setText("Please wait");
+        new PingTask().execute(url);
+    }
+    private class PingTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... urls) {
+            return ping(urls[0]);
+        }
+        protected void onPostExecute(String result) {
+            tv.setText(result);
         }
     }
-
     //new tread new runable, service content provider
     //бд-> content provider -> ui
     //intent service несколько экшенов
