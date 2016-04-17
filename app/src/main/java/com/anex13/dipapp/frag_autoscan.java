@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class frag_autoscan extends Fragment {
+public class Frag_autoscan extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

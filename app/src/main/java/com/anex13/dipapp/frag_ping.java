@@ -13,7 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class frag_ping extends Fragment implements View.OnClickListener {
+public class Frag_ping extends Fragment implements View.OnClickListener {
     TextView tv;
     String ans;
     Button serchbtn;

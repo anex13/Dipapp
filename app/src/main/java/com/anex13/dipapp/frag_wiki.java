@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import static com.anex13.dipapp.Pageenum.*;
 
-public class frag_wiki extends Fragment implements View.OnClickListener {
+public class Frag_wiki extends Fragment implements View.OnClickListener {
     ImageButton winbtn;
     ImageButton lanbtn;
     ImageButton mobbtn;
@@ -46,7 +46,7 @@ public class frag_wiki extends Fragment implements View.OnClickListener {
                 pageenum =MOB;
                 break;
         }
-        ((MainActivity) getActivity()).showFragment( wiki_sublist.getInstance(pageenum), true);
+        ((MainActivity) getActivity()).showFragment( Wiki_sublist.getInstance(pageenum), true);
 
 
     }

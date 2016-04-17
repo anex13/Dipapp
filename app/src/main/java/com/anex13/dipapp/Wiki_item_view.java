@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 
-public class wikiitemview extends Fragment {
+public class Wiki_item_view extends Fragment {
     WebView webView;
     Bundle bundle;
     public static final String TAG_PAGEENUM = "pageenum";
@@ -16,10 +16,10 @@ public class wikiitemview extends Fragment {
     static int position1;
 
 
-    public static wikiitemview getInstance(Pageenum pageenum, int position) {
+    public static Wiki_item_view getInstance(Pageenum pageenum, int position) {
         position1=position;
         pageenum1=pageenum;
-        return new wikiitemview();
+        return new Wiki_item_view();
     }
 
 

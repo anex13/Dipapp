@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-        showFragment(new frag_wiki(), false);
+        showFragment(new Frag_wiki(), false);
 
     }
     @Override
@@ -51,22 +51,22 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         switch (id) {
             case R.id.menuautoscan:
-                fragment = new frag_autoscan();
+                fragment = new Frag_autoscan();
                 toolbar.setTitle(R.string.frag1);
                 color=0xffff9800;
                 break;
             case R.id.menuping:
-                fragment = new frag_ping();
+                fragment = new Frag_ping();
                 toolbar.setTitle(R.string.frag2);
                 color=0xff009688;
                 break;
             case R.id.menulanscan:
-                fragment = new frag_lanscan();
+                fragment = new Frag_lanscan();
                 toolbar.setTitle(R.string.frag3);
                 color=0xff8bc34a;
                 break;
             default:
-                fragment = new frag_wiki();
+                fragment = new Frag_wiki();
                 toolbar.setTitle(R.string.frag4);
                 color=0xff3f51b5;
                 break;

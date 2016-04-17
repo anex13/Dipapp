@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-public class wiki_sublist extends Fragment {
+public class Wiki_sublist extends Fragment {
     public static final String TAG_PAGEENUM = "pageenum";
     private Pageenum pageenum;
     // TextView tv;
@@ -23,8 +22,8 @@ public class wiki_sublist extends Fragment {
 
     private String[] wiki_list;
 
-    public static wiki_sublist getInstance(Pageenum pageenum) {
-        wiki_sublist fragment = new wiki_sublist();
+    public static Wiki_sublist getInstance(Pageenum pageenum) {
+        Wiki_sublist fragment = new Wiki_sublist();
         Bundle bundle = new Bundle();
         bundle.putString(TAG_PAGEENUM, pageenum.name());
         fragment.setArguments(bundle);
@@ -54,7 +53,7 @@ public class wiki_sublist extends Fragment {
         //Обрабатываем щелчки на элементах ListView:
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                       public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                                          ((MainActivity) getActivity()).showFragment(wikiitemview.getInstance(pageenum, position), true);
+                                          ((MainActivity) getActivity()).showFragment(Wiki_item_view.getInstance(pageenum, position), true);
                                       }
                                   }
         );
