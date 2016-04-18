@@ -52,7 +52,7 @@ public class FragWiki extends Fragment implements View.OnClickListener {
                 break;
         }
 
-
+        ((MainActivity) getActivity()).showFragment( WikiSublist.getInstance(pageenum), true);
     }
 
 }
