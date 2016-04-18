@@ -1,13 +1,18 @@
 package com.anex13.dipapp;
-import android.support.v4.app.Fragment;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import static com.anex13.dipapp.Pageenum.*;
 
-public class Frag_wiki extends Fragment implements View.OnClickListener {
+import static com.anex13.dipapp.Pageenum.LAN;
+import static com.anex13.dipapp.Pageenum.MOB;
+import static com.anex13.dipapp.Pageenum.NIX;
+import static com.anex13.dipapp.Pageenum.WIN;
+
+public class FragWiki extends Fragment implements View.OnClickListener {
     ImageButton winbtn;
     ImageButton lanbtn;
     ImageButton mobbtn;
@@ -34,19 +39,18 @@ public class Frag_wiki extends Fragment implements View.OnClickListener {
         Pageenum pageenum;
         switch (v.getId()) {
             case R.id.nixbtn:
-                pageenum =NIX;
+                pageenum = NIX;
                 break;
             case R.id.winbtn:
-                pageenum =WIN;
+                pageenum = WIN;
                 break;
             case R.id.lanbtn:
-                pageenum =LAN;
+                pageenum = LAN;
                 break;
             default:
-                pageenum =MOB;
+                pageenum = MOB;
                 break;
         }
-        ((MainActivity) getActivity()).showFragment( Wiki_sublist.getInstance(pageenum), true);
 
 
     }

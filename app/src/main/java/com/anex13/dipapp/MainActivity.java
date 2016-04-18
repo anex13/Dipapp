@@ -16,8 +16,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     Toolbar toolbar;
-    int color ;
+    int color;
     ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +33,10 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-        showFragment(new Frag_wiki(), false);
+        showFragment(new FragWiki(), false);
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -51,24 +53,24 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         switch (id) {
             case R.id.menuautoscan:
-                fragment = new Frag_autoscan();
+                fragment = new FragAutoscan();
                 toolbar.setTitle(R.string.frag1);
-                color=0xffff9800;
+                color = 0xffff9800;
                 break;
             case R.id.menuping:
-                fragment = new Frag_ping();
+                fragment = new FragPing();
                 toolbar.setTitle(R.string.frag2);
-                color=0xff009688;
+                color = 0xff009688;
                 break;
             case R.id.menulanscan:
-                fragment = new Frag_lanscan();
+                fragment = new FragLanscan();
                 toolbar.setTitle(R.string.frag3);
-                color=0xff8bc34a;
+                color = 0xff8bc34a;
                 break;
             default:
-                fragment = new Frag_wiki();
+                fragment = new FragWiki();
                 toolbar.setTitle(R.string.frag4);
-                color=0xff3f51b5;
+                color = 0xff3f51b5;
                 break;
         }
         toolbar.setBackgroundColor(color);
@@ -84,8 +86,8 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         if (addToBackStack) {
             transaction.addToBackStack(null);
-           // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-           // getSupportActionBar().setDisplayShowHomeEnabled(true);
+            // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            // getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         }
         transaction.commit();

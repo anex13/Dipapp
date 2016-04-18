@@ -1,7 +1,7 @@
 package com.anex13.dipapp;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Wiki_sublist extends Fragment {
+public class WikiSublist extends Fragment {
     public static final String TAG_PAGEENUM = "pageenum";
     private Pageenum pageenum;
     // TextView tv;
@@ -22,8 +22,8 @@ public class Wiki_sublist extends Fragment {
 
     private String[] wiki_list;
 
-    public static Wiki_sublist getInstance(Pageenum pageenum) {
-        Wiki_sublist fragment = new Wiki_sublist();
+    public static WikiSublist getInstance(Pageenum pageenum) {
+        WikiSublist fragment = new WikiSublist();
         Bundle bundle = new Bundle();
         bundle.putString(TAG_PAGEENUM, pageenum.name());
         fragment.setArguments(bundle);
@@ -44,7 +44,7 @@ public class Wiki_sublist extends Fragment {
             pageenum = Pageenum.valueOf(bundle.getString(TAG_PAGEENUM, "1"));
 
         } else if (savedInstanceState != null && savedInstanceState.containsKey(TAG_PAGEENUM)) {
-            pageenum = Pageenum.valueOf(savedInstanceState.getString(TAG_PAGEENUM,"1" ));
+            pageenum = Pageenum.valueOf(savedInstanceState.getString(TAG_PAGEENUM, "1"));
         }
         //Pageenum.WIN.name()
         wiki_list = getResources().getStringArray(pageenum.getList());
