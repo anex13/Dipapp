@@ -11,18 +11,21 @@ import java.io.InputStreamReader;
  * Created by namel on 21.04.2016.
  */
 public class IntentSrvs extends IntentService {
+
+
     public static int ttl=54;
     public static int count=1;
-    public static String url ="";
+    public static String url ="url";
     public IntentSrvs() {super("PingSrvc");    }
     String str = "";
+    public static final String ANSVER = "ansver";
+
     public void onCreate() {super.onCreate();    }
-    public static final String PARAM_IN_MSG = "imsg";
-    public static final String PARAM_OUT_MSG = "omsg";
+
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String url = intent.getStringExtra("Url");
+        String url = intent.getStringExtra("url");
         ttl = intent.getIntExtra("ttl", 54);
         count = intent.getIntExtra("count", 4);
 
@@ -43,14 +46,13 @@ public class IntentSrvs extends IntentService {
             e.printStackTrace();
         }
         Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction(PingReciever.ACTION_RESP);
+        broadcastIntent.setAction(FragPing.BROADCAST_ACTION);
         broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        broadcastIntent.putExtra(PARAM_OUT_MSG, str);
+        broadcastIntent.putExtra(ANSVER, str);
         sendBroadcast(broadcastIntent);
     }
-
-
-
+    //kontent provider
+    
     public void onDestroy() {
         super.onDestroy();
 
