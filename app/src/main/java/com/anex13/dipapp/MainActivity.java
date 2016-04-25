@@ -55,22 +55,26 @@ public class MainActivity extends AppCompatActivity
             case R.id.menuautoscan:
                 fragment = new FragAutoscan();
                 toolbar.setTitle(R.string.frag1);
-                color = R.color.colorMonitor;
+                color = 0xffff9800;
+             //   color = R.color.colorMonitor;
                 break;
             case R.id.menuping:
                 fragment = new FragPing();
                 toolbar.setTitle(R.string.frag2);
-                color = R.color.colorPing;
+                color =0xff009688 ;
+              //  color = R.color.colorPing;
                 break;
             case R.id.menulanscan:
                 fragment = new FragLanscan();
                 toolbar.setTitle(R.string.frag3);
-                color = R.color.colorLanscan;
+                color = 0xff8bc34a;
+              //  color = R.color.colorLanscan;
                 break;
             default:
                 fragment = new FragWiki();
                 toolbar.setTitle(R.string.frag4);
-                color = R.color.colorWiki;
+                color = 0xff3f51b5;
+               // color = R.color.colorWiki ;
                 break;
         }
         toolbar.setBackgroundColor(color);
