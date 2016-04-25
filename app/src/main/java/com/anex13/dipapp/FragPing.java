@@ -69,7 +69,6 @@ public class FragPing extends Fragment implements View.OnClickListener {
                 getActivity().getApplicationContext().startService(pingIntent);
                 break;
             default:
-                tv.setText("Тут будет трасировка");
                 Intent traceIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url).putExtra(IntentSrvs.action, "trace");
                 getActivity().getApplicationContext().startService(traceIntent);
                 break;

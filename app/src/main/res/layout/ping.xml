@@ -9,7 +9,7 @@
         android:contentDescription="url ping"
         android:singleLine="true"
         android:inputType="textWebEditText|textWebEmailAddress"
-        android:text="mail.bulbash.com"
+        android:text="google.com"
         android:layout_alignBottom="@+id/buttonping"
         android:layout_toStartOf="@+id/buttonping"
         android:layout_marginEnd="4dp" />

@@ -64,27 +64,22 @@ public class IntentSrvs extends IntentService {
                 sendBroadcast(broadcastIntent);
                 break;
             default:
-                //запилить обработчик трасера
-                //
-                //
-                String last =" ";
-                String pingansw = "";
+                String last = "";
                 String now = "";
                 int ttl1 = 1;
                 do {
-                    last=now;
-                    pingansw = ping(url, ttl1, 1);
-                    String[] splitedstr = pingansw.split("\n");
-                    now = splitedstr[1].replaceFirst(":(.*)exceeded","").replaceFirst(":(.*)ms","");
-                    result="step "+ttl1 +" "+now;
-                    ttl1= ttl1+1;
+                    last = now;
+                    String[] splitedstr = ping(url, ttl1, 1).split("\n");
+                    now = splitedstr[1].replaceFirst(":(.*)exceeded", "").replaceFirst(":(.*)ms", "");
+                    result = "step " + ttl1 + " " + now;
+                    ttl1 = ttl1 + 1;
                     Intent broadcastIntent1 = new Intent();
                     broadcastIntent1.setAction(FragPing.BROADCAST_ACTION);
                     broadcastIntent1.addCategory(Intent.CATEGORY_DEFAULT);
                     broadcastIntent1.putExtra(ANSVER, result);
                     sendBroadcast(broadcastIntent1);
                 }
-                while (now!=last && ttl1!=54);
+                while (now != last );
                 break;
         }
 
