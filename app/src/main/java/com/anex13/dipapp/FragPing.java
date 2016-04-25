@@ -65,12 +65,10 @@ public class FragPing extends Fragment implements View.OnClickListener {
         tv.setText("Please wait");
         switch (v.getId()) {
             case R.id.buttonping:
-                Intent pingIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url).putExtra(IntentSrvs.action,"ping");
-                getActivity().getApplicationContext().startService(pingIntent);
+                IntentSrvs.startPing(getActivity(), url);
                 break;
             default:
-                Intent traceIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url).putExtra(IntentSrvs.action, "trace");
-                getActivity().getApplicationContext().startService(traceIntent);
+                IntentSrvs.startTrace(getActivity(), url);
                 break;
         }
     }
