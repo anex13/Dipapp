@@ -18,19 +18,21 @@ public class FragPing extends Fragment implements View.OnClickListener {
     BroadcastReceiver receiver;
     TextView tv;
     String ans;
-    Button serchbtn;
+    Button pingbtn;
+    Button tracebtn;
     EditText pingurl;
     public final static String ANSVER = "ansver";
-    public final static String ACTION = "ping";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.ping, container, false);
         tv = (TextView) rootView.findViewById(R.id.textView2);
-        serchbtn = (Button) rootView.findViewById(R.id.button);
+        pingbtn = (Button) rootView.findViewById(R.id.buttonping);
+        tracebtn = (Button) rootView.findViewById(R.id.buttontrace);
         pingurl = (EditText) rootView.findViewById(R.id.pingurl);
-        serchbtn.setOnClickListener(this);
+        pingbtn.setOnClickListener(this);
+        tracebtn.setOnClickListener(this);
         receiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
                 ans = intent.getStringExtra(ANSVER);
@@ -61,10 +63,17 @@ public class FragPing extends Fragment implements View.OnClickListener {
         String url;
         url = pingurl.getText().toString();
         tv.setText("Please wait");
-        //отсюда
-        Intent pingIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url);
-        getActivity().getApplicationContext().startService(pingIntent);
-
-
+        switch (v.getId()) {
+            case R.id.buttonping:
+                Intent pingIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url);
+                getActivity().getApplicationContext().startService(pingIntent);
+                break;
+            default:
+                tv.setText("Тут будет трасировка");
+                Intent traceIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url);
+                //.putExtra(IntentSrvs.ttl, url).putExtra(IntentSrvs.count, url);
+                getActivity().getApplicationContext().startService(traceIntent);
+                break;
+        }
     }
 }

@@ -3,8 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
-
-
-
-
+    <color name="colorWiki">#ff3f51b5</color>
+    <color name="colorPing">#ff009688</color>
+    <color name="colorLanscan">#ff8bc34a</color>
+    <color name="colorMonitor">#ffff9800</color>
 </resources>

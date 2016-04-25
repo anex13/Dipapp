@@ -52,7 +52,7 @@ public class IntentSrvs extends IntentService {
         sendBroadcast(broadcastIntent);
     }
     //kontent provider
-    
+
     public void onDestroy() {
         super.onDestroy();
 
