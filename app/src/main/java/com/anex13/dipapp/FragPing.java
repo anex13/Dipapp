@@ -36,7 +36,7 @@ public class FragPing extends Fragment implements View.OnClickListener {
         receiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
                 ans = intent.getStringExtra(ANSVER);
-                tv.setText(ans);
+                tv.setText(ans+"\n" + tv.getText());
             }
         };
 
@@ -65,13 +65,12 @@ public class FragPing extends Fragment implements View.OnClickListener {
         tv.setText("Please wait");
         switch (v.getId()) {
             case R.id.buttonping:
-                Intent pingIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url);
+                Intent pingIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url).putExtra(IntentSrvs.action,"ping");
                 getActivity().getApplicationContext().startService(pingIntent);
                 break;
             default:
                 tv.setText("Тут будет трасировка");
-                Intent traceIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url);
-                //.putExtra(IntentSrvs.ttl, url).putExtra(IntentSrvs.count, url);
+                Intent traceIntent = new Intent(getActivity().getApplicationContext(), IntentSrvs.class).putExtra(IntentSrvs.url, url).putExtra(IntentSrvs.action, "trace");
                 getActivity().getApplicationContext().startService(traceIntent);
                 break;
         }
