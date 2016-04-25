@@ -2,6 +2,7 @@ package com.anex13.dipapp;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -79,7 +80,7 @@ public class IntentSrvs extends IntentService {
                     broadcastIntent1.putExtra(ANSVER, result);
                     sendBroadcast(broadcastIntent1);
                 }
-                while (now != last );
+                while (!now.equals(last)&& !TextUtils.isEmpty(now));
                 break;
         }
 
