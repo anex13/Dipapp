@@ -7,15 +7,15 @@
     </item>
     <item
         android:id="@+id/menuping"
-        android:icon="@drawable/ic_restore_black_24dp"
-        android:title="Ping"></item>
+        android:icon="@drawable/ic_swap_calls_black_24dp"
+        android:title="Ping and Trace"></item>
     <item
         android:id="@+id/menulanscan"
-        android:icon="@drawable/ic_restore_black_24dp"
+        android:icon="@drawable/ic_search_black_24dp"
         android:title="Lan scaner"></item>
     <item
         android:id="@+id/menuwiki"
-        android:icon="@drawable/ic_restore_black_24dp"
+        android:icon="@drawable/ic_local_library_black_24dp"
         android:title="wiki"></item>
     <group android:id="@+id/group1">
         <item

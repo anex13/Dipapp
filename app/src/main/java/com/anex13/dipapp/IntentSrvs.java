@@ -28,7 +28,7 @@ public class IntentSrvs extends IntentService {
         try {
 
             Process process = Runtime.getRuntime().exec(
-                    "/system/bin/ping -c " + count + " -t " + ttl + " " + url);
+                    "/system/bin/ping -W 1 -c " + count + " -t " + ttl + " " + url);
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     process.getInputStream()));
             int i;
@@ -59,21 +59,31 @@ public class IntentSrvs extends IntentService {
                 sendBroadcast(broadcastIntent);
                 break;
             case ACTION_TRACE:
-                String last = "";
+                String last = "0";
                 String now = "";
                 int ttl1 = 1;
+                String result="tracing";
                 do {
-                    last = now;
-                    String[] splitedstr = ping(url, ttl1, 1).split("\n");
-                    now = splitedstr[1].replaceFirst(":(.*)exceeded", "").replaceFirst(":(.*)ms", "");
-                    String result = "step " + ttl1 + " " + now;
-                    ttl1 = ttl1 + 1;
                     Intent broadcastIntent1 = new Intent();
                     broadcastIntent1.setAction(FragPing.BROADCAST_ACTION);
                     broadcastIntent1.addCategory(Intent.CATEGORY_DEFAULT);
                     broadcastIntent1.putExtra(ANSVER, result);
                     sendBroadcast(broadcastIntent1);
-                } while (!now.equals(last) && !TextUtils.isEmpty(now));
+                    last = now;
+                    String[] splitedstr = ping(url, ttl1, 1).split("\n");
+                    now = splitedstr[1].replaceFirst(":(.*)exceeded", "").replaceFirst(":(.*)ms", "");
+                    if (now==""){
+                        last= String.valueOf(ttl1);
+                    }
+                    result = "step " + ttl1 + " answer " + now;
+                    ttl1 = ttl1 + 1;
+
+                } while (!now.equals(last));
+                Intent broadcastIntent1 = new Intent();
+                broadcastIntent1.setAction(FragPing.BROADCAST_ACTION);
+                broadcastIntent1.addCategory(Intent.CATEGORY_DEFAULT);
+                broadcastIntent1.putExtra(ANSVER, "\n Tracing finished \n");
+                sendBroadcast(broadcastIntent1);
                 break;
         }
     }
@@ -91,4 +101,6 @@ public class IntentSrvs extends IntentService {
         pingIntent.putExtra(PARAM_URL, url);
         context.startService(pingIntent);
     }
+    public void onDestroy() {
+        super.onDestroy();}
 }
