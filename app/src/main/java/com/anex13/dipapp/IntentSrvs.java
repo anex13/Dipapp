@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
@@ -14,6 +15,8 @@ import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by namel on 21.04.2016.
@@ -26,6 +29,7 @@ public class IntentSrvs extends IntentService {
     private static final String PARAM_URL = "url";
     public static final String ANSVER = "ansver";
     final static String LOG_TAG = "myLogs";
+    final static String LOG = "myLogs";
 
     public IntentSrvs() {
         super("PingSrvc");
@@ -146,18 +150,61 @@ public class IntentSrvs extends IntentService {
                 try {
                     InetAddress inet = InetAddress.getByName(host);
                     boolean reachable = inet.isReachable(1000);
-                    scanresult= "host " +host+ (reachable ? "reachable" : "not reachable");
+                        String mac=getHardwareAddress(host);
+                    scanresult= "host " +host+ "reachable" + mac;
+                        Intent broadcastIntent = new Intent();
+                        broadcastIntent.setAction(FragPing.BROADCAST_ACTION);
+                        broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                        broadcastIntent.putExtra(ANSVER, scanresult);
+                        sendBroadcast(broadcastIntent);
                 } catch (UnknownHostException e) {
                     Log.e(LOG_TAG, "Not found", e);
                 } catch (IOException e) {
                     Log.e(LOG_TAG, "IO Error", e);
                 }
-                Intent broadcastIntent = new Intent();
-                broadcastIntent.setAction(FragPing.BROADCAST_ACTION);
-                broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                broadcastIntent.putExtra(ANSVER, scanresult);
-                sendBroadcast(broadcastIntent);
+
             }
         };
+    }
+    private final static String TAG = "HardwareAddress";
+    private final static String REQ = "select vendor from oui where mac=?";
+    // 0x1 is HW Type:  Ethernet (10Mb) [JBP]
+    // 0x2 is ARP Flag: completed entry (ha valid)
+    private final static String MAC_RE = "^%s\\s+0x1\\s+0x2\\s+([:0-9a-fA-F]+)\\s+\\*\\s+\\w+$";
+    private final static int BUF = 8 * 1024;
+
+    public static String getHardwareAddress(String ip) {
+        String hw = "  no mac";
+        BufferedReader bufferedReader = null;
+        try {
+            if (ip != null) {
+                String ptrn = String.format(MAC_RE, ip.replace(".", "\\."));
+                Pattern pattern = Pattern.compile(ptrn);
+                bufferedReader = new BufferedReader(new FileReader("/proc/net/arp"), BUF);
+                String line;
+                Matcher matcher;
+                while ((line = bufferedReader.readLine()) != null) {
+                    matcher = pattern.matcher(line);
+                    if (matcher.matches()) {
+                        hw = matcher.group(1);
+                        break;
+                    }
+                }
+            } else {
+                Log.e(TAG, "ip is null");
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "Can't open/read file ARP: " + e.getMessage());
+            return hw;
+        } finally {
+            try {
+                if(bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+        }
+        return hw;
     }
 }
