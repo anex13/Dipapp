@@ -1,4 +1,5 @@
 package com.anex13.dipapp;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -29,25 +32,44 @@ import java.util.concurrent.TimeUnit;
 
 public class FragLanscan extends Fragment implements View.OnClickListener {
     BroadcastReceiver receiver;
-    TextView tv;
-    String ans;
+    // ListView lv;
+    String[] ans;
     Button btnscn;
     EditText scanurl;
     public final static String ANSVER = "ansver";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp";
+    LinearLayout linLayout=null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.lanscan, container, false);
-        tv = (TextView) rootView.findViewById(R.id.scanresult);
+        final View rootView = inflater.inflate(R.layout.lanscan, container, false);
         btnscn = (Button) rootView.findViewById(R.id.buttonscn);
         scanurl = (EditText) rootView.findViewById(R.id.editText);
         btnscn.setOnClickListener(this);
+        // lv = (ListView) rootView.findViewById(R.id.wikilist);
+
+        linLayout = (LinearLayout) rootView.findViewById(R.id.linrnet);
+
         receiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
-                ans = intent.getStringExtra(ANSVER);
-                tv.setText(ans+"\n" + tv.getText());
-            }
+                ans = intent.getStringArrayExtra(ANSVER);
+
+
+                LayoutInflater ltInflater = getActivity().getLayoutInflater();
+
+                    View item = ltInflater.inflate(R.layout.lan_item, linLayout, false);
+                    TextView tvName = (TextView) item.findViewById(R.id.textHostname);
+                    tvName.setText(ans[0]);
+                    TextView tvip = (TextView) item.findViewById(R.id.textIP);
+                    tvip.setText( ans[1]);
+                    TextView tvmac = (TextView) item.findViewById(R.id.textMacAddr);
+                    tvmac.setText("mac: " + ans[2]);
+                    TextView tvvendor = (TextView) item.findViewById(R.id.textVendor);
+                    tvvendor.setText("vendor: " + ans[3]);
+                    item.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                    linLayout.addView(item);
+                }
+
         };
 
 
@@ -58,7 +80,7 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         String url;
         url = scanurl.getText().toString();
-        tv.setText("Please wait");
+        linLayout.removeAllViews();
         IntentSrvs.startScan(getActivity(), url);
     }
 

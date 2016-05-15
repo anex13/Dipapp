@@ -29,7 +29,6 @@ public class IntentSrvs extends IntentService {
     private static final String PARAM_URL = "url";
     public static final String ANSVER = "ansver";
     final static String LOG_TAG = "myLogs";
-    final static String LOG = "myLogs";
 
     public IntentSrvs() {
         super("PingSrvc");
@@ -56,6 +55,14 @@ public class IntentSrvs extends IntentService {
         return str;
     }
 
+    public Boolean statechk(String url) {
+        boolean str;
+        String pingansver = ping(url, 54, 1);
+        str = !pingansver.contains("100% packet loss");
+        Log.i(LOG_TAG, "state chk " + pingansver);
+        // Некоторые девайсы не пингуются =\
+        return str;
+    }
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -99,8 +106,9 @@ public class IntentSrvs extends IntentService {
                 break;
             case ACTION_SCAN:
                 ExecutorService executor = Executors.newFixedThreadPool(NB_THREADS);
-                for (int dest = 0; dest < 255; dest++) {
+                for (int dest = 1; dest < 255; dest++) {
                     String host = "192.168.100." + dest;
+                    //забрать и обработать урлу из фрагмента
                     executor.execute(pingRunnable(host));
                 }
                 Log.i(LOG_TAG, "Waiting for executor to terminate...");
@@ -141,35 +149,38 @@ public class IntentSrvs extends IntentService {
     }
 
     private static final int NB_THREADS = 10;
-
+    String hostname = "";
+    String mac;
 
     private Runnable pingRunnable(final String host) {
         return new Runnable() {
             public void run() {
-                String scanresult="";
-                try {
-                    InetAddress inet = InetAddress.getByName(host);
-                    boolean reachable = inet.isReachable(1000);
-                        String mac=getHardwareAddress(host);
-                    scanresult= "host " +host+ "reachable" + mac;
-                        Intent broadcastIntent = new Intent();
-                        broadcastIntent.setAction(FragPing.BROADCAST_ACTION);
-                        broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                        broadcastIntent.putExtra(ANSVER, scanresult);
-                        sendBroadcast(broadcastIntent);
-                } catch (UnknownHostException e) {
-                    Log.e(LOG_TAG, "Not found", e);
-                } catch (IOException e) {
-                    Log.e(LOG_TAG, "IO Error", e);
+                String[] scanresult = new String[4];
+                boolean state = statechk(host);
+                if (state == true) {
+                    try {
+                        // state=InetAddress.getByName(host).isReachable(1000);
+                        hostname = InetAddress.getByName(host).getHostName();
+                        mac = getHardwareAddress(host);
+                    } catch (UnknownHostException e) {
+                        Log.e(LOG_TAG, "Not found", e);
+                    }
+                    // if (state==true){
+                    scanresult[0] = hostname;
+                    scanresult[1] = host;
+                    scanresult[2] = mac;
+                    scanresult[3] = "vendor";
+                    Intent broadcastIntent = new Intent();
+                    broadcastIntent.setAction(FragPing.BROADCAST_ACTION);
+                    broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                    broadcastIntent.putExtra(ANSVER, scanresult);
+                    sendBroadcast(broadcastIntent);
                 }
-
             }
         };
     }
+
     private final static String TAG = "HardwareAddress";
-    private final static String REQ = "select vendor from oui where mac=?";
-    // 0x1 is HW Type:  Ethernet (10Mb) [JBP]
-    // 0x2 is ARP Flag: completed entry (ha valid)
     private final static String MAC_RE = "^%s\\s+0x1\\s+0x2\\s+([:0-9a-fA-F]+)\\s+\\*\\s+\\w+$";
     private final static int BUF = 8 * 1024;
 
@@ -198,7 +209,7 @@ public class IntentSrvs extends IntentService {
             return hw;
         } finally {
             try {
-                if(bufferedReader != null) {
+                if (bufferedReader != null) {
                     bufferedReader.close();
                 }
             } catch (IOException e) {
@@ -208,3 +219,5 @@ public class IntentSrvs extends IntentService {
         return hw;
     }
 }
+// https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf   база mac-vendor  какнибудь запилить
+// InetAddress.getByName("host ip").getHostName();  hostname по ip
