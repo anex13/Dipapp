@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-< xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.anex13.dipapp">
 
     <application
@@ -21,8 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider android:name="SRVContentProvider"
-            android:autority="com.anex13.providers.SRVContentProvider"></provider>
+        <provider
+            android:name=".SRVContentProvider"
+            android:autority="com.anex13.providers.SRVContentProvider">
+        </provider>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
