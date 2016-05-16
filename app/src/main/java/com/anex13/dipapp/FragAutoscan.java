@@ -30,10 +30,13 @@ import java.util.List;
 
 public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private TimeAlarm alarm;
+    ListView lv;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.autoscan, container, false);
         FloatingActionButton fab =(FloatingActionButton) rootView.findViewById(R.id.fab);
+
+        lv = (ListView) rootView.findViewById(R.id.srvlist);
         alarm = new TimeAlarm();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,11 +59,12 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        return new CursorLoader(uri,null,null,null,null);
+        return new CursorLoader(getContext(),SRVContentProvider.SERVERS_CONTENT_URI,null,null,null,null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        lv.setAdapter(new SRVadapter(getActivity(),data));
  //диствью сет адаптер (тнью май курсор адаптер (курсор))
     }
 
