@@ -23,7 +23,7 @@
         </activity>
         <provider
             android:name=".SRVContentProvider"
-            android:autority="com.anex13.providers.SRVContentProvider">
+            android:authorities="com.anex13.providers.SRVContentProvider">
         </provider>
 
     </application>
