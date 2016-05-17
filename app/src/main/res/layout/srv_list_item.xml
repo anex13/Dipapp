@@ -28,7 +28,8 @@
         android:id="@+id/switch1"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/imageButton"
-        android:layout_alignBottom="@+id/srvurl" />
+        android:layout_marginEnd="24dp"
+        android:layout_alignBottom="@+id/imageButton" />
 
     <ImageButton
         android:layout_width="40dp"
@@ -37,6 +38,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/srvurl"
-        android:background="@android:drawable/presence_online" />
+        android:background="@android:drawable/presence_away" />
 
 </RelativeLayout>

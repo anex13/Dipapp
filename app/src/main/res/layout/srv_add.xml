@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addsrvurl"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/infurl"
+        android:layout_below="@+id/addsrvname" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/addsrvname"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/infname" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infurl"
+        android:src="@android:drawable/ic_menu_info_details"
+        android:background="#00ffffff"
+        android:layout_alignTop="@+id/addsrvurl"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/addsrvurl" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infname"
+        android:src="@android:drawable/ic_menu_info_details"
+        android:background="#00ffffff"
+        android:layout_alignBottom="@+id/addsrvname"
+        android:layout_toEndOf="@+id/addsrvurl"
+        android:layout_alignParentTop="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addchkurl"
+        android:layout_below="@+id/addsrvurl"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/infurl" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infchk"
+        android:src="@android:drawable/ic_menu_info_details"
+        android:background="#00ffffff"
+        android:layout_below="@+id/infurl"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/addchkurl" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable alarm"
+        android:id="@+id/addswitchalarm"
+        android:checked="false"
+        android:layout_below="@+id/addupdatetime"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/inftime" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Server"
+        android:id="@+id/addsrvbutton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/addcancelbutton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/addcancelbutton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/infchk" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addupdatetime"
+        android:inputType="number"
+        android:layout_below="@+id/addchkurl"
+        android:layout_alignEnd="@+id/addswitchalarm" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/inftime"
+        android:src="@android:drawable/ic_menu_info_details"
+        android:background="#00ffffff"
+        android:layout_alignTop="@+id/addupdatetime"
+        android:layout_toEndOf="@+id/addchkurl"
+        android:layout_alignBottom="@+id/addupdatetime"
+        android:layout_alignStart="@+id/infchk" />
+
+    <ViewSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewSwitchername"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Server name"
+            android:id="@+id/textView7"
+            android:layout_alignBaseline="@+id/viewSwitchertime"
+            android:layout_alignBottom="@+id/viewSwitchertime"
+            android:layout_alignParentStart="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Server Name"
+            android:id="@+id/textView10"
+            android:layout_below="@+id/addupdatetime"
+            android:layout_alignParentStart="true"
+            android:paddingTop="40dp"
+            android:textSize="10dp"
+            android:paddingLeft="5dp" />
+
+    </ViewSwitcher>
+
+    <ViewSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewSwitchertime"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/addchkurl"
+        android:layout_alignBottom="@+id/addswitchalarm">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update time in minutes"
+            android:id="@+id/textView6"
+            android:layout_alignBaseline="@+id/viewSwitchertime"
+            android:layout_alignBottom="@+id/viewSwitchertime"
+            android:layout_alignParentStart="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update time"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/addupdatetime"
+            android:layout_alignParentStart="true"
+            android:paddingTop="40dp"
+            android:textSize="10dp"
+            android:paddingLeft="5dp" />
+
+    </ViewSwitcher>
+
+    <ViewSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewSwitcherurl"
+        android:layout_below="@+id/addsrvname"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Server url or IP"
+            android:id="@+id/textView"
+            android:layout_alignBaseline="@+id/viewSwitchertime"
+            android:layout_alignBottom="@+id/viewSwitchertime"
+            android:layout_alignParentStart="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Server url"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/addupdatetime"
+            android:layout_alignParentStart="true"
+            android:paddingTop="40dp"
+            android:textSize="10dp"
+            android:paddingLeft="5dp" />
+    </ViewSwitcher>
+
+    <ViewSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewSwitcherchkurl"
+        android:layout_below="@+id/addsrvurl"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Url for check network"
+            android:id="@+id/textView4"
+            android:layout_alignBaseline="@+id/viewSwitchertime"
+            android:layout_alignBottom="@+id/viewSwitchertime"
+            android:layout_alignParentStart="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Check url or IP"
+            android:id="@+id/textView11"
+            android:layout_below="@+id/addupdatetime"
+            android:layout_alignParentStart="true"
+            android:paddingTop="40dp"
+            android:textSize="10dp"
+            android:paddingLeft="5dp" />
+    </ViewSwitcher>
+
+
+</RelativeLayout>

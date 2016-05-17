@@ -26,6 +26,11 @@
         <item>01. Основные настройки роутера.</item>
     </string-array>
 
+    <string-array name="srvlistmenu">
+        <item>Edit</item>
+        <item>Delete</item>
+        <item>Rescan</item>
+    </string-array>
 
     <string-array name="mob_array">
         <item>00. Настройки белоруских операторов .</item>

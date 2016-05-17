@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.TextView;
 
 /**
  * Created by namel on 16.05.2016.
@@ -23,6 +24,10 @@ public class SRVadapter extends CursorAdapter{
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
+    Server server = new Server(cursor);
+        ((TextView) view.findViewById(R.id.srvname)).setText(server.getName());
+        ((TextView) view.findViewById(R.id.srvurl)).setText(server.getUrl());
+        //((TextView) view.findViewById(R.id.srvstate)).setText(server.getName());
+        //((TextView) view.findViewById(R.id.srvname)).setText(server.getName());
     }
 }
