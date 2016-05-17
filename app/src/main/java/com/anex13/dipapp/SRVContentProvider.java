@@ -24,16 +24,16 @@ public class SRVContentProvider extends android.content.ContentProvider {
     static final String SERVER_ID = "_id";
     static final String SERVER_NAME = "name";
     static final String SERVER_URL = "url";
-    static final String SERVER_CHKURL = "check url";
-    static final String UPDATE_TIME = "update time";
+    static final String SERVER_CHKURL = "checkurl";
+    static final String UPDATE_TIME = "updatetime";
     static final String FAIL_NOTIFICATION = "notification";
     static final String SERVER_STATE = "state";
 
     // Скрипт создания таблицы
     static final String DB_CREATE = "create table " + SRV_TABLE + "("
             + SERVER_ID + " integer primary key autoincrement, "
-            + SERVER_NAME + " text, " + SERVER_URL + " text" + SERVER_CHKURL
-            + " text" + UPDATE_TIME + " integer" + FAIL_NOTIFICATION + " Bool"
+            + SERVER_NAME + " text, " + SERVER_URL + " text," + SERVER_CHKURL
+            + " text," + UPDATE_TIME + " integer," + FAIL_NOTIFICATION + " text,"
             + SERVER_STATE + " text" + ");";
 
     // // Uri
@@ -189,19 +189,11 @@ public class SRVContentProvider extends android.content.ContentProvider {
 
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(DB_CREATE);
-            ContentValues cv = new ContentValues();
-            for (int i = 1; i <= 3; i++) {
-                cv.put(SERVER_NAME, "name " + i);
-                cv.put(SERVER_URL, "url1 " + i);
-                cv.put(SERVER_CHKURL, "url2" + i);
-                cv.put(UPDATE_TIME, "5");
-                cv.put(FAIL_NOTIFICATION, "true");
-                cv.put(SERVER_STATE, "ok" + i);
-                db.insert(SRV_TABLE, null, cv);
-            }
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL ("DROP TABLE " + SRV_TABLE);
+            onCreate(db);
         }
     }
 }

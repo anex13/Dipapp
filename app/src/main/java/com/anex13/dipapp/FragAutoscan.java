@@ -1,55 +1,40 @@
 package com.anex13.dipapp;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.List;
-
-public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
     private TimeAlarm alarm;
     ListView lv;
+    Button newsrvbtn;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.autoscan, container, false);
-        FloatingActionButton fab =(FloatingActionButton) rootView.findViewById(R.id.fab);
-
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        newsrvbtn = (Button) rootView.findViewById(R.id.addsrvbutton);
+        newsrvbtn.setOnClickListener(this);
         lv = (ListView) rootView.findViewById(R.id.srvlist);
+        registerForContextMenu(lv);
         alarm = new TimeAlarm();
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //обновить состояние запилить
-            }
-        });
+        fab.setOnClickListener(this);
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        getLoaderManager().initLoader(123,null,this);
+        getLoaderManager().initLoader(123, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -59,18 +44,30 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        return new CursorLoader(getContext(),SRVContentProvider.SERVERS_CONTENT_URI,null,null,null,null);
+        return new CursorLoader(getContext(), SRVContentProvider.SERVERS_CONTENT_URI, null, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        lv.setAdapter(new SRVadapter(getActivity(),data));
- //диствью сет адаптер (тнью май курсор адаптер (курсор))
+        lv.setAdapter(new SRVadapter(getActivity(), data));
+        //диствью сет адаптер (тнью май курсор адаптер (курсор))
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab:
+                //update srv state
+                break;
+            case R.id.addsrvbutton:
+                ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
+                break;
+        }
     }
 }
 
