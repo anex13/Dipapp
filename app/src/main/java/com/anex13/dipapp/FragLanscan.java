@@ -38,7 +38,7 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
     EditText scanurl;
     public final static String ANSVER = "ansver";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp";
-    LinearLayout linLayout=null;
+    LinearLayout linLayout = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,18 +57,18 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
 
                 LayoutInflater ltInflater = getActivity().getLayoutInflater();
 
-                    View item = ltInflater.inflate(R.layout.lan_item, linLayout, false);
-                    TextView tvName = (TextView) item.findViewById(R.id.textHostname);
-                    tvName.setText(ans[0]);
-                    TextView tvip = (TextView) item.findViewById(R.id.textIP);
-                    tvip.setText( ans[1]);
-                    TextView tvmac = (TextView) item.findViewById(R.id.textMacAddr);
-                    tvmac.setText("mac: " + ans[2]);
-                    TextView tvvendor = (TextView) item.findViewById(R.id.textVendor);
-                    tvvendor.setText("vendor: " + ans[3]);
-                    item.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-                    linLayout.addView(item);
-                }
+                View item = ltInflater.inflate(R.layout.lan_item, linLayout, false);
+                TextView tvName = (TextView) item.findViewById(R.id.textHostname);
+                tvName.setText(ans[0]);
+                TextView tvip = (TextView) item.findViewById(R.id.textIP);
+                tvip.setText(ans[1]);
+                TextView tvmac = (TextView) item.findViewById(R.id.textMacAddr);
+                tvmac.setText("mac: " + ans[2]);
+                TextView tvvendor = (TextView) item.findViewById(R.id.textVendor);
+                tvvendor.setText("vendor: " + ans[3]);
+                item.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                linLayout.addView(item);
+            }
 
         };
 
@@ -98,3 +98,6 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
         getActivity().unregisterReceiver(receiver);
     }
 }
+//забрать урлу из текстэдита
+//вьюсвитчер
+//портсканер

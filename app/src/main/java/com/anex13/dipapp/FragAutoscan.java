@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
-    private TimeAlarm alarm;
     ListView lv;
     Button newsrvbtn;
 
@@ -27,7 +26,6 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         newsrvbtn.setOnClickListener(this);
         lv = (ListView) rootView.findViewById(R.id.srvlist);
         registerForContextMenu(lv);
-        alarm = new TimeAlarm();
         fab.setOnClickListener(this);
         return rootView;
     }
@@ -70,4 +68,9 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 }
-
+//переделать лаяут итемов листа
+//фаб сделать в адд серв
+//контекстное меню - удалить\редактировать\обновить
+//аларм манагер
+//собсна сама проверка
+//pull to refresh

@@ -121,7 +121,7 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
                     }).start();
                     ((MainActivity) getActivity()).showFragment(new FragAutoscan(), false);
                 }
-                Toast toast1 = Toast.makeText(getContext(), "Fill all fields", Toast.LENGTH_LONG);
+                Toast toast1 = Toast.makeText(getContext(), "Fill all fields or press cancel", Toast.LENGTH_LONG);
                 toast1.show();
 
                 break;
@@ -132,17 +132,24 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
     public void onFocusChange(View v, boolean hasFocus) {
         switch (v.getId()) {
             case R.id.addsrvname:
-                vs1.showNext();
+                if (srvname.getText().toString().equals("")){
+                vs1.showNext();}
                 break;
             case R.id.addsrvurl:
-                vs2.showNext();
+                if (srvurl.getText().toString().equals("")){
+                vs2.showNext();}
                 break;
             case R.id.addchkurl:
-                vs3.showNext();
+                if (srvchkurl.getText().toString().equals("")){
+                vs3.showNext();}
                 break;
             default:
-                vs4.showNext();
+                if (srvupdatetime.getText().toString().equals("")){
+                vs4.showNext();}
                 break;
         }
     }
 }
+//мб над будут полья
+//
+//

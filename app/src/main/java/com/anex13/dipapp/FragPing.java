@@ -73,3 +73,7 @@ public class FragPing extends Fragment implements View.OnClickListener {
         }
     }
 }
+//вьюсвичер
+//
+//
+//

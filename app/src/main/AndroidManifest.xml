@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service android:name=".IntentSrvs" />
-        <receiver android:name=".TimeAlarm" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

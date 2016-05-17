@@ -221,3 +221,6 @@ public class IntentSrvs extends IntentService {
 }
 // https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf   база mac-vendor  какнибудь запилить
 // InetAddress.getByName("host ip").getHostName();  hostname по ip
+// выровнять руки и переделать нормально
+//добавить базу вендоров
+//
