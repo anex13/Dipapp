@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
         showFragment(new FragWiki(), false);
+        toolbar.setTitleTextColor(0xffffffff);
+
 
     }
 

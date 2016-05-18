@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -27,6 +28,7 @@ public class SRVadapter extends CursorAdapter{
     Server server = new Server(cursor);
         ((TextView) view.findViewById(R.id.srvname)).setText(server.getName());
         ((TextView) view.findViewById(R.id.srvurl)).setText(server.getUrl());
+        ((ImageView) view.findViewById(R.id.srvState)).setColorFilter(server.getcolor());
         //((TextView) view.findViewById(R.id.srvstate)).setText(server.getName());
         //((TextView) view.findViewById(R.id.srvname)).setText(server.getName());
     }

@@ -34,7 +34,7 @@ public class SRVContentProvider extends android.content.ContentProvider {
             + SERVER_ID + " integer primary key autoincrement, "
             + SERVER_NAME + " text, " + SERVER_URL + " text," + SERVER_CHKURL
             + " text," + UPDATE_TIME + " integer," + FAIL_NOTIFICATION + " text,"
-            + SERVER_STATE + " text" + ");";
+            + SERVER_STATE + " integer" + ");";
 
     // // Uri
     // authority

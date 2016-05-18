@@ -22,8 +22,8 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.autoscan, container, false);
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        newsrvbtn = (Button) rootView.findViewById(R.id.addsrvbutton);
-        newsrvbtn.setOnClickListener(this);
+       // newsrvbtn = (Button) rootView.findViewById(R.id.addsrvbutton);
+        //newsrvbtn.setOnClickListener(this);
         lv = (ListView) rootView.findViewById(R.id.srvlist);
         registerForContextMenu(lv);
         fab.setOnClickListener(this);
@@ -61,9 +61,10 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         switch (v.getId()) {
             case R.id.fab:
                 //update srv state
+                ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
                 break;
             case R.id.addsrvbutton:
-                ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
+                //((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
                 break;
         }
     }

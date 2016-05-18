@@ -3,7 +3,6 @@ package com.anex13.dipapp;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -23,12 +22,19 @@ import java.util.regex.Pattern;
  */
 public class IntentSrvs extends IntentService {
 
+    private final static String TAG = "HardwareAddress";
+    private final static String MAC_RE = "^%s\\s+0x1\\s+0x2\\s+([:0-9a-fA-F]+)\\s+\\*\\s+\\w+$";
+    private final static int BUF = 8 * 1024;
     private static final String ACTION_TRACE = "ACTION_TRACE";
     private static final String ACTION_PING = "ACTION_PING";
     private static final String ACTION_SCAN = "ACTION_SCAN";
+    private static final String ACTION_MONITOR = "ACTION_MONITOR";
     private static final String PARAM_URL = "url";
     public static final String ANSVER = "ansver";
     final static String LOG_TAG = "myLogs";
+    private static final int NB_THREADS = 10;
+    String hostname = "";
+    String mac;
 
     public IntentSrvs() {
         super("PingSrvc");
@@ -119,6 +125,22 @@ public class IntentSrvs extends IntentService {
                 }
                 Log.i(LOG_TAG, "Scan finished");
                 break;
+            case ACTION_MONITOR:
+                ExecutorService executor1 = Executors.newFixedThreadPool(NB_THREADS);
+                //read url chkurl
+
+                String srvurl = "";
+                String srvchkurl = "";
+                executor1.execute(monRunnable(srvurl, srvchkurl));
+
+                Log.i(LOG_TAG, "Waiting for executor to terminate...");
+                executor1.shutdown();
+                try {
+                    executor1.awaitTermination(60 * 1000, TimeUnit.MILLISECONDS);
+                } catch (InterruptedException ignored) {
+                }
+                Log.i(LOG_TAG, "monitorcheck finished");
+                break;
         }
     }
 
@@ -144,13 +166,17 @@ public class IntentSrvs extends IntentService {
         context.startService(pingIntent);
     }
 
+    public static void startmonitor(Context context, String url) {
+        Intent pingIntent = new Intent(context, IntentSrvs.class);
+        pingIntent.setAction(ACTION_MONITOR);
+        pingIntent.putExtra(PARAM_URL, url);
+        context.startService(pingIntent);
+    }
+
     public void onDestroy() {
         super.onDestroy();
     }
 
-    private static final int NB_THREADS = 10;
-    String hostname = "";
-    String mac;
 
     private Runnable pingRunnable(final String host) {
         return new Runnable() {
@@ -159,13 +185,11 @@ public class IntentSrvs extends IntentService {
                 boolean state = statechk(host);
                 if (state == true) {
                     try {
-                        // state=InetAddress.getByName(host).isReachable(1000);
                         hostname = InetAddress.getByName(host).getHostName();
                         mac = getHardwareAddress(host);
                     } catch (UnknownHostException e) {
                         Log.e(LOG_TAG, "Not found", e);
                     }
-                    // if (state==true){
                     scanresult[0] = hostname;
                     scanresult[1] = host;
                     scanresult[2] = mac;
@@ -180,9 +204,20 @@ public class IntentSrvs extends IntentService {
         };
     }
 
-    private final static String TAG = "HardwareAddress";
-    private final static String MAC_RE = "^%s\\s+0x1\\s+0x2\\s+([:0-9a-fA-F]+)\\s+\\*\\s+\\w+$";
-    private final static int BUF = 8 * 1024;
+    private Runnable monRunnable(final String url, final String checkurl) {
+        return new Runnable() {
+            public void run() {
+                // scan
+                if (statechk(url)) {
+                    // state = 1;
+                } else if (statechk(checkurl)) {
+                    // state = 0;
+                }
+                //state=2
+
+            }
+        };
+    }
 
     public static String getHardwareAddress(String ip) {
         String hw = "  no mac";

@@ -115,7 +115,7 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Server server = new Server(servername, serverurl, serverchkurl, serverupdate);
+                            Server server = new Server(servername, serverurl, serverchkurl, serverupdate,1);
                             getActivity().getContentResolver().insert(SRVContentProvider.SERVERS_CONTENT_URI, server.toContentValues());
                         }
                     }).start();

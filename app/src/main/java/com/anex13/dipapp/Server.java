@@ -11,12 +11,14 @@ public class Server {
     String url;
     String chkurl;
     String time;
+    int state;
 
-    public Server(String name,String url,String chkurl,String time) {
+    public Server(String name,String url,String chkurl,String time,int state) {
         this.name = name;
         this.url = url;
         this.chkurl = chkurl;
         this.time = time;
+        this.state=state;
     }
 
     public Server(Cursor cursor) {
@@ -24,14 +26,20 @@ public class Server {
         url = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_URL));
         chkurl = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_CHKURL));
         time = cursor.getString(cursor.getColumnIndex(SRVContentProvider.UPDATE_TIME));
+        state= cursor.getInt(cursor.getColumnIndex(SRVContentProvider.SERVER_STATE));
+
     }
+
+
 
     public ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
+
         cv.put(SRVContentProvider.SERVER_NAME, name);
         cv.put(SRVContentProvider.SERVER_URL, url);
         cv.put(SRVContentProvider.SERVER_CHKURL, chkurl);
         cv.put(SRVContentProvider.UPDATE_TIME, time);
+        cv.put(SRVContentProvider.SERVER_STATE, state);
         return cv;
     }
 
@@ -51,11 +59,34 @@ public class Server {
         this.time = time;
     }
 
+    public void setState(int state) {
+        this.state = state;
+    }
+
     public String getUrl() {
 
         return url;
     }
 
+    public int getState() {
+        return state;
+    }
+
+    public int getcolor() {
+        int color;
+        switch (state){
+            case 0 :
+                color=0xFFFF0000;
+                break;
+            case 1:
+                color=0xFF00FF00;
+                break;
+            default:
+                color=0x80000000;
+                break;
+        }
+        return color;
+    }
     public String getChkurl() {
         return chkurl;
     }

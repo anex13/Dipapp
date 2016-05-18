@@ -10,7 +10,8 @@
         android:text="1C SRV1 TS"
         android:id="@+id/srvname"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentStart="false"
+        android:paddingStart="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +20,9 @@
         android:text="192.168.198.51"
         android:id="@+id/srvurl"
         android:layout_below="@+id/srvname"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:paddingStart="15dp"
+        android:password="false" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -27,17 +30,19 @@
         android:text=" Alarm   "
         android:id="@+id/switch1"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/imageButton"
-        android:layout_marginEnd="24dp"
-        android:layout_alignBottom="@+id/imageButton" />
+        android:layout_toStartOf="@+id/srvState"
+        android:layout_alignBottom="@+id/srvState"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp" />
 
-    <ImageButton
-        android:layout_width="45dp"
-        android:layout_height="40dp"
-        android:id="@+id/imageButton"
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/srvState"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:src="@drawable/abc_switch_thumb_material"
         android:layout_alignBottom="@+id/srvurl"
-        android:background="@android:drawable/presence_away" />
+        android:paddingEnd="15dp" />
 
 </RelativeLayout>
