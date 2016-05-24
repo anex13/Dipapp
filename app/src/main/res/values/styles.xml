@@ -18,4 +18,11 @@
     <style name="DrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@android:color/white</item>
     </style>
+
+    <style name="CustomShowcaseTheme" parent="ShowcaseView">
+        <item name="sv_backgroundColor">#d9000000</item>
+        <item name="sv_showcaseColor">#a65927</item>
+        <item name="sv_buttonText">Close</item>
+    </style>
+
 </resources>

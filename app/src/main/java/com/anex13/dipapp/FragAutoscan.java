@@ -69,8 +69,6 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 }
-//переделать лаяут итемов листа
-//фаб сделать в адд серв
 //контекстное меню - удалить\редактировать\обновить
 //аларм манагер
 //собсна сама проверка

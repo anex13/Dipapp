@@ -1,5 +1,6 @@
 package com.anex13.dipapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
+import android.view.View;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -18,24 +22,37 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     int color;
     ActionBarDrawerToggle toggle;
-
+    View hb;
+ShowcaseView scw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        hb = findViewById(android.R.id.home);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
         showFragment(new FragWiki(), false);
         toolbar.setTitleTextColor(0xffffffff);
-
+        if (isFirstTime()) {
+            //first run help
+            Target viewTarget = new ViewTarget(UIUtils.getNavButtonView(toolbar));
+            scw= new ShowcaseView.Builder(this)
+                    .setTarget(viewTarget)
+                    .hideOnTouchOutside()
+                    .setContentTitle("Main Menu")
+                    .setContentText("To open main menu press this button or swipe from left")
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .build();
+            scw.setShowcase(viewTarget, true);
+        }
 
     }
 
@@ -92,12 +109,21 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         if (addToBackStack) {
             transaction.addToBackStack(null);
-            // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            // getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         }
         transaction.commit();
         drawer.closeDrawers();
     }
-
+    private boolean isFirstTime()
+    {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if (!ranBefore) {
+            // first time
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+        }
+        return !ranBefore;
+    }
 }

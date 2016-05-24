@@ -112,9 +112,10 @@ public class IntentSrvs extends IntentService {
                 break;
             case ACTION_SCAN:
                 ExecutorService executor = Executors.newFixedThreadPool(NB_THREADS);
+                String[] splurl=url.split("\\.");
+                String lanurl=splurl[0]+"."+splurl[1]+"."+splurl[2]+".";
                 for (int dest = 1; dest < 255; dest++) {
-                    String host = "192.168.100." + dest;
-                    //забрать и обработать урлу из фрагмента
+                    String host = lanurl + dest;
                     executor.execute(pingRunnable(host));
                 }
                 Log.i(LOG_TAG, "Waiting for executor to terminate...");
@@ -124,6 +125,13 @@ public class IntentSrvs extends IntentService {
                 } catch (InterruptedException ignored) {
                 }
                 Log.i(LOG_TAG, "Scan finished");
+                Intent broadcastIntentfinish = new Intent();
+                broadcastIntentfinish.setAction(FragPing.BROADCAST_ACTION);
+                broadcastIntentfinish.addCategory(Intent.CATEGORY_DEFAULT);
+                String[] scanfinish= new String[1];
+                scanfinish[0]="scanfinish";
+                broadcastIntentfinish.putExtra(ANSVER,scanfinish );
+                sendBroadcast(broadcastIntentfinish);
                 break;
             case ACTION_MONITOR:
                 ExecutorService executor1 = Executors.newFixedThreadPool(NB_THREADS);

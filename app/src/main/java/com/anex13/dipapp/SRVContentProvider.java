@@ -15,7 +15,7 @@ import android.text.TextUtils;
  */
 public class SRVContentProvider extends android.content.ContentProvider {
     static final String DB_NAME = "mydb";
-    static final int DB_VERSION = 1;
+    static final int DB_VERSION = 2;
 
     // Таблица
     static final String SRV_TABLE = "servers";
@@ -26,15 +26,17 @@ public class SRVContentProvider extends android.content.ContentProvider {
     static final String SERVER_URL = "url";
     static final String SERVER_CHKURL = "checkurl";
     static final String UPDATE_TIME = "updatetime";
+    static final String SERVER_NEXT_CHECK = "nextcheck";
     static final String FAIL_NOTIFICATION = "notification";
     static final String SERVER_STATE = "state";
+
 
     // Скрипт создания таблицы
     static final String DB_CREATE = "create table " + SRV_TABLE + "("
             + SERVER_ID + " integer primary key autoincrement, "
             + SERVER_NAME + " text, " + SERVER_URL + " text," + SERVER_CHKURL
-            + " text," + UPDATE_TIME + " integer," + FAIL_NOTIFICATION + " text,"
-            + SERVER_STATE + " integer" + ");";
+            + " text," + UPDATE_TIME + " text," + SERVER_NEXT_CHECK + " text,"
+            + FAIL_NOTIFICATION + " integer,"+ SERVER_STATE + " integer" + ");";
 
     // // Uri
     // authority
@@ -107,8 +109,6 @@ public class SRVContentProvider extends android.content.ContentProvider {
         db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query(SRV_TABLE, projection, selection,
                 selectionArgs, null, null, sortOrder);
-        // просим ContentResolver уведомлять этот курсор
-        // об изменениях данных в CONTACT_CONTENT_URI
         cursor.setNotificationUri(getContext().getContentResolver(),
                 SERVERS_CONTENT_URI);
         return cursor;

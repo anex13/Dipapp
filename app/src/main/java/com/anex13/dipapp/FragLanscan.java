@@ -4,8 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,9 +37,10 @@ import java.util.concurrent.TimeUnit;
 
 public class FragLanscan extends Fragment implements View.OnClickListener {
     BroadcastReceiver receiver;
-    // ListView lv;
+    ProgressBar pBar;
     String[] ans;
     Button btnscn;
+    final static String TAG= "mylog";
     EditText scanurl;
     public final static String ANSVER = "ansver";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp";
@@ -42,21 +48,32 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        WifiManager wifiMgr = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
+        int ip = wifiInfo.getIpAddress();
+        String ipAddress = Formatter.formatIpAddress(ip);
         final View rootView = inflater.inflate(R.layout.lanscan, container, false);
+        pBar = (ProgressBar) rootView.findViewById(R.id.lanpb);
+        pBar.setVisibility(View.INVISIBLE);
         btnscn = (Button) rootView.findViewById(R.id.buttonscn);
         scanurl = (EditText) rootView.findViewById(R.id.editText);
         btnscn.setOnClickListener(this);
-        // lv = (ListView) rootView.findViewById(R.id.wikilist);
+        scanurl.setText(ipAddress);
 
         linLayout = (LinearLayout) rootView.findViewById(R.id.linrnet);
 
         receiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
                 ans = intent.getStringArrayExtra(ANSVER);
-
-
+                switch (ans[0]){
+                    case "scanfinish":
+                        // scan finished actions
+                        Toast toast1 = Toast.makeText(getContext(), "Network scan is finished", Toast.LENGTH_LONG);
+                        toast1.show();
+                        pBar.setVisibility(View.INVISIBLE);
+                        break;
+                    default:
                 LayoutInflater ltInflater = getActivity().getLayoutInflater();
-
                 View item = ltInflater.inflate(R.layout.lan_item, linLayout, false);
                 TextView tvName = (TextView) item.findViewById(R.id.textHostname);
                 tvName.setText(ans[0]);
@@ -67,7 +84,15 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
                 TextView tvvendor = (TextView) item.findViewById(R.id.textVendor);
                 tvvendor.setText("vendor: " + ans[3]);
                 item.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
+                item.setTag(ans[1]);
                 linLayout.addView(item);
+               item.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       //сюда запилить фраг портов
+                       Log.d(TAG,"id"+v.getTag());
+                   }
+               });}
             }
 
         };
@@ -79,6 +104,7 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         String url;
+        pBar.setVisibility(View.VISIBLE);
         url = scanurl.getText().toString();
         linLayout.removeAllViews();
         IntentSrvs.startScan(getActivity(), url);
@@ -98,6 +124,3 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
         getActivity().unregisterReceiver(receiver);
     }
 }
-//забрать урлу из текстэдита
-//вьюсвитчер
-//портсканер

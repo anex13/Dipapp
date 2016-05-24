@@ -14,6 +14,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import java.sql.Time;
+
 /**
  * Created by namel on 17.05.2016.
  */
@@ -33,11 +35,13 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
     String serverurl = "";
     String serverchkurl = "";
     String serverupdate = "";
+    Switch alarmsw;
     ViewSwitcher vs1;
     ViewSwitcher vs2;
     ViewSwitcher vs3;
     ViewSwitcher vs4;
     Toast toast;
+    //Time now = new Time();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
         infurl = (ImageButton) rootView.findViewById(R.id.infurl);
         infchk = (ImageButton) rootView.findViewById(R.id.infchk);
         inftime = (ImageButton) rootView.findViewById(R.id.inftime);
+        alarmsw = (Switch) rootView.findViewById(R.id.addswitchalarm);
         addbutton.setOnClickListener(this);
         cancelbutton.setOnClickListener(this);
         infname.setOnClickListener(this);
@@ -107,6 +112,9 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
                 break;
             default:
                 //add button
+                int switchalrm;
+               final int serverid=3;
+               final String servernextupdate="1234";
                 servername = srvname.getText().toString();
                 serverurl = srvurl.getText().toString();
                 serverchkurl = srvchkurl.getText().toString();
@@ -115,7 +123,7 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Server server = new Server(servername, serverurl, serverchkurl, serverupdate,1);
+                            Server server = new Server(serverid,servername, serverurl, serverchkurl, serverupdate,servernextupdate,1,2);
                             getActivity().getContentResolver().insert(SRVContentProvider.SERVERS_CONTENT_URI, server.toContentValues());
                         }
                     }).start();

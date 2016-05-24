@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -21,6 +23,7 @@ public class FragPing extends Fragment implements View.OnClickListener {
     Button pingbtn;
     Button tracebtn;
     EditText pingurl;
+    ProgressBar pBar;
     public final static String ANSVER = "ansver";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp";
 
@@ -28,6 +31,8 @@ public class FragPing extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.ping, container, false);
         tv = (TextView) rootView.findViewById(R.id.textView2);
+        pBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        pBar.setVisibility(View.INVISIBLE);
         pingbtn = (Button) rootView.findViewById(R.id.buttonping);
         tracebtn = (Button) rootView.findViewById(R.id.buttontrace);
         pingurl = (EditText) rootView.findViewById(R.id.pingurl);
@@ -37,6 +42,8 @@ public class FragPing extends Fragment implements View.OnClickListener {
             public void onReceive(Context context, Intent intent) {
                 ans = intent.getStringExtra(ANSVER);
                 tv.setText(ans+"\n" + tv.getText());
+                pBar.setVisibility(View.INVISIBLE);
+
             }
         };
 
@@ -66,9 +73,11 @@ public class FragPing extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.buttonping:
                 IntentSrvs.startPing(getActivity(), url);
+                pBar.setVisibility(View.VISIBLE);
                 break;
             default:
                 IntentSrvs.startTrace(getActivity(), url);
+                //pBar.setVisibility(View.VISIBLE);
                 break;
         }
     }
