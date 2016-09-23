@@ -35,7 +35,7 @@ public class IntentSrvs extends IntentService {
     private static final int NB_THREADS = 10;
     String hostname = "";
     String mac;
-
+//НЕ ТРОГАТЬ БЛЯ
     public IntentSrvs() {
         super("PingSrvc");
     }

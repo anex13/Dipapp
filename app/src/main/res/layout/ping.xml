@@ -44,7 +44,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Ping results"
             android:id="@+id/textView2"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"

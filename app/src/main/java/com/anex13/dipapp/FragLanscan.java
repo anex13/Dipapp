@@ -103,6 +103,7 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
+    // TODO: 23.09.2016  res strings
     // TODO: 23.09.2016 запилить прогрессбар черным цветом на фаб
     @Override
     public void onClick(View v) {

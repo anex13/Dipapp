@@ -35,7 +35,7 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         getLoaderManager().initLoader(123, null, this);
         super.onActivityCreated(savedInstanceState);
     }
-
+// TODO: 23.09.2016 допилить наконецто это гавно!!!!!
 // создать курсор адаптер
 //     https://www.javacodegeeks.com/2013/09/android-viewholder-pattern-example.html
 

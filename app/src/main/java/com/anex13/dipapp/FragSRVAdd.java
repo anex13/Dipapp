@@ -135,6 +135,8 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
                 break;
         }
     }
+
+    // TODO: 23.09.2016 см фрагавтоскан
 //Подсказки на полях ввода
     @Override
     public void onFocusChange(View v, boolean hasFocus) {

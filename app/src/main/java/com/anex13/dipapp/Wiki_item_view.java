@@ -22,7 +22,7 @@ public class Wiki_item_view extends Fragment {
         return new Wiki_item_view();
     }
 
-
+    // TODO: 23.09.2016  узнать как делают нормальные люди 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView =

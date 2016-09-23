@@ -46,11 +46,9 @@ public class WikiSublist extends Fragment {
         } else if (savedInstanceState != null && savedInstanceState.containsKey(TAG_PAGEENUM)) {
             pageenum = Pageenum.valueOf(savedInstanceState.getString(TAG_PAGEENUM, "1"));
         }
-        //Pageenum.WIN.name()
         wiki_list = getResources().getStringArray(pageenum.getList());
         lv.setAdapter(new ArrayAdapter<>(lv.getContext(), android.R.layout.simple_list_item_1, wiki_list));
         lv.setTextFilterEnabled(true);
-        //Обрабатываем щелчки на элементах ListView:
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                       public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                                           ((MainActivity) getActivity()).showFragment(Wiki_item_view.getInstance(pageenum, position), true);

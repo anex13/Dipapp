@@ -77,12 +77,12 @@ public class FragPing extends Fragment implements View.OnClickListener {
                 break;
             default:
                 IntentSrvs.startTrace(getActivity(), url);
-                //pBar.setVisibility(View.VISIBLE);
+                pBar.setVisibility(View.VISIBLE);
                 break;
         }
     }
 }
-//вьюсвичер
-//
+//todo viewswitcher refs
+// TODO: 23.09.2016  сделать чтото с кнопками? тулбар ? автозаполнение едита текстом?
 //
 //

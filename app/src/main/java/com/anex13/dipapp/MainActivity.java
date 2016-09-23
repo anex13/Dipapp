@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
     ActionBarDrawerToggle toggle;
     View hb;
 ShowcaseView scw;
-
+// TODO: 23.09.2016 ресы повыносить разобраться с прикручиванием рекламы
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
