@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.format.Formatter;
@@ -39,12 +40,13 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
     BroadcastReceiver receiver;
     ProgressBar pBar;
     String[] ans;
-    Button btnscn;
+    FloatingActionButton  btnscn;
     final static String TAG= "mylog";
     EditText scanurl;
     public final static String ANSVER = "ansver";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp";
     LinearLayout linLayout = null;
+    Toast toast2;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
         final View rootView = inflater.inflate(R.layout.lanscan, container, false);
         pBar = (ProgressBar) rootView.findViewById(R.id.lanpb);
         pBar.setVisibility(View.INVISIBLE);
-        btnscn = (Button) rootView.findViewById(R.id.buttonscn);
+        btnscn = (FloatingActionButton) rootView.findViewById(R.id.buttonscn);
         scanurl = (EditText) rootView.findViewById(R.id.editText);
         btnscn.setOnClickListener(this);
         scanurl.setText(ipAddress);
@@ -101,13 +103,19 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
+    // TODO: 23.09.2016 запилить прогрессбар черным цветом на фаб
     @Override
     public void onClick(View v) {
         String url;
+        if (pBar.getVisibility()!=View.VISIBLE){
         pBar.setVisibility(View.VISIBLE);
         url = scanurl.getText().toString();
         linLayout.removeAllViews();
-        IntentSrvs.startScan(getActivity(), url);
+        IntentSrvs.startScan(getActivity(), url);}
+        else {
+            toast2 = Toast.makeText(getContext(), "Please wait", Toast.LENGTH_SHORT);
+            toast2.show();
+        }
     }
 
     public void onResume() {

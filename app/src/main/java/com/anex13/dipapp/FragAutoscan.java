@@ -48,7 +48,6 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         lv.setAdapter(new SRVadapter(getActivity(), data));
-        //диствью сет адаптер (тнью май курсор адаптер (курсор))
     }
 
     @Override

@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity
     ActionBarDrawerToggle toggle;
     View hb;
 ShowcaseView scw;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
