@@ -15,7 +15,7 @@ import android.text.TextUtils;
  */
 public class SRVContentProvider extends android.content.ContentProvider {
     static final String DB_NAME = "mydb";
-    static final int DB_VERSION = 2;
+    static final int DB_VERSION = 3;
 
     // Таблица
     static final String SRV_TABLE = "servers";

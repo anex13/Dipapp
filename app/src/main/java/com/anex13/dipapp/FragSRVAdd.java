@@ -112,25 +112,29 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
                 break;
             default:
                 //add button
-                int switchalrm;
-               final int serverid=3;
+                final int switchalrm;
                final String servernextupdate="1234";
                 servername = srvname.getText().toString();
                 serverurl = srvurl.getText().toString();
                 serverchkurl = srvchkurl.getText().toString();
                 serverupdate = srvupdatetime.getText().toString();
+                if (srvalrmsw.isChecked())
+                switchalrm =1;
+                else
+                switchalrm =0;
                 if (!servername.equals("") && !serverurl.equals("") && !serverchkurl.equals("") && !serverupdate.equals("")) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Server server = new Server(serverid,servername, serverurl, serverchkurl, serverupdate,servernextupdate,1,2);
+                            Server server = new Server(servername, serverurl, serverchkurl, serverupdate,servernextupdate,switchalrm,2);
                             getActivity().getContentResolver().insert(SRVContentProvider.SERVERS_CONTENT_URI, server.toContentValues());
                         }
                     }).start();
                     ((MainActivity) getActivity()).showFragment(new FragAutoscan(), false);
                 }
+                else {
                 Toast toast1 = Toast.makeText(getContext(), "Fill all fields or press cancel", Toast.LENGTH_LONG);
-                toast1.show();
+                toast1.show();}
 
                 break;
         }

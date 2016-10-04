@@ -16,14 +16,11 @@ import android.widget.ListView;
 
 public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
     ListView lv;
-    Button newsrvbtn;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.autoscan, container, false);
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-       // newsrvbtn = (Button) rootView.findViewById(R.id.addsrvbutton);
-        //newsrvbtn.setOnClickListener(this);
         lv = (ListView) rootView.findViewById(R.id.srvlist);
         registerForContextMenu(lv);
         fab.setOnClickListener(this);
@@ -57,15 +54,7 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fab:
-                //update srv state
-                ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
-                break;
-            case R.id.addsrvbutton:
-                //((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
-                break;
-        }
+        ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
     }
 }
 //контекстное меню - удалить\редактировать\обновить
