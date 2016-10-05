@@ -24,10 +24,17 @@
             android:name=".SRVContentProvider"
             android:authorities="com.anex13.providers.SRVContentProvider">
         </provider>
+        <receiver android:name=".AutoStart">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
 
     </application>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <receiver android:process=":remote" android:name=".Alarm"></receiver>
 
 </manifest>

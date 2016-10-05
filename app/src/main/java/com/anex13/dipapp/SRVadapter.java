@@ -43,7 +43,6 @@ public class SRVadapter extends CursorAdapter{
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int alrm;
                 if (server.getAlarm()!=0)
                     server.setAlarm(0);
                 else
