@@ -7,6 +7,7 @@ import android.database.Cursor;
  * Created by namel on 16.05.2016.
  */
 public class Server {
+    int id;
     String name;
     String url;
     String chkurl;
@@ -26,6 +27,7 @@ public class Server {
     }
 
     public Server(Cursor cursor) {
+        id =cursor.getInt(cursor.getColumnIndex(SRVContentProvider.SERVER_ID));
         name = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_NAME));
         url = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_URL));
         chkurl = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_CHKURL));
@@ -47,6 +49,14 @@ public class Server {
         cv.put(SRVContentProvider.FAIL_NOTIFICATION, alarm);
         cv.put(SRVContentProvider.SERVER_STATE, state);
         return cv;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setNextchktime(String nextchktime) {
