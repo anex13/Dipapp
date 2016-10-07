@@ -11,12 +11,12 @@ public class Server {
     String name;
     String url;
     String chkurl;
-    String time;
-    String nextchktime;
+    int time;
+    int nextchktime;
     int alarm;
     int state;
 
-    public Server(String name,String url,String chkurl,String time,String nextchktime,int alarm,int state) {
+    public Server(String name,String url,String chkurl,int time,int nextchktime,int alarm,int state) {
         this.name = name;
         this.url = url;
         this.chkurl = chkurl;
@@ -31,9 +31,9 @@ public class Server {
         name = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_NAME));
         url = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_URL));
         chkurl = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_CHKURL));
-        time = cursor.getString(cursor.getColumnIndex(SRVContentProvider.UPDATE_TIME));
+        time = cursor.getInt(cursor.getColumnIndex(SRVContentProvider.UPDATE_TIME));
         state= cursor.getInt(cursor.getColumnIndex(SRVContentProvider.SERVER_STATE));
-        nextchktime= cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_NEXT_CHECK));
+        nextchktime= cursor.getInt(cursor.getColumnIndex(SRVContentProvider.SERVER_NEXT_CHECK));
         alarm= cursor.getInt(cursor.getColumnIndex(SRVContentProvider.FAIL_NOTIFICATION));
     }
 
@@ -59,7 +59,7 @@ public class Server {
         this.id = id;
     }
 
-    public void setNextchktime(String nextchktime) {
+    public void setNextchktime(int nextchktime) {
         this.nextchktime = nextchktime;
     }
     public void setAlarm(int alarm) {
@@ -74,7 +74,7 @@ public class Server {
     public void setChkurl(String chkurl) {
         this.chkurl = chkurl;
     }
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
     public void setState(int state) {
@@ -106,14 +106,14 @@ public class Server {
 
         return url;
     }
-    public String getNextchktime() {
+    public int getNextchktime() {
         return nextchktime;
 
     }
     public String getChkurl() {
         return chkurl;
     }
-    public String getTime() {
+    public int getTime() {
         return time;
     }
     public String getName() {

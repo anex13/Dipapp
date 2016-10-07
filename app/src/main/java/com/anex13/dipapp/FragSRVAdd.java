@@ -34,7 +34,7 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
     String servername = "";
     String serverurl = "";
     String serverchkurl = "";
-    String serverupdate = "";
+    int serverupdate ;
     Switch alarmsw;
     ViewSwitcher vs1;
     ViewSwitcher vs2;
@@ -113,20 +113,20 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
             default:
                 //add button
                 final int switchalrm;
-               final String servernextupdate="1234";
+               final int servernextupdate=1234;
                 servername = srvname.getText().toString();
                 serverurl = srvurl.getText().toString();
                 serverchkurl = srvchkurl.getText().toString();
-                serverupdate = srvupdatetime.getText().toString();
+                serverupdate = Integer.parseInt(srvupdatetime.getText().toString());
                 if (srvalrmsw.isChecked())
                 switchalrm =1;
                 else
                 switchalrm =0;
-                if (!servername.equals("") && !serverurl.equals("") && !serverchkurl.equals("") && !serverupdate.equals("")) {
+                if (!servername.equals("") && !serverurl.equals("") && !serverchkurl.equals("") && serverupdate!=0) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Server server = new Server(servername, serverurl, serverchkurl, serverupdate,servernextupdate,switchalrm,2);
+                            Server server = new Server(servername, serverurl, serverchkurl, serverupdate,servernextupdate,switchalrm,1);
                             getActivity().getContentResolver().insert(SRVContentProvider.SERVERS_CONTENT_URI, server.toContentValues());
                         }
                     }).start();

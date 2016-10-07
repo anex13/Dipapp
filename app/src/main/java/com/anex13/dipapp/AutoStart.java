@@ -6,13 +6,15 @@ import android.content.Intent;
 
 public class AutoStart extends BroadcastReceiver
 {
-    Alarm alarm = new Alarm();
     @Override
     public void onReceive(Context context, Intent intent)
     {
+        Context mcontext = context;
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED))
         {
-            alarm.setAlarm(context);
+
+            SRVChecker srvChecker = new SRVChecker(mcontext);
+            srvChecker.checkItNow();
         }
     }
 }

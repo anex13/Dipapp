@@ -15,7 +15,7 @@ import android.text.TextUtils;
  */
 public class SRVContentProvider extends android.content.ContentProvider {
     static final String DB_NAME = "mydb";
-    static final int DB_VERSION = 3;
+    static final int DB_VERSION = 4;
 
     // Таблица
     static final String SRV_TABLE = "servers";
@@ -35,7 +35,7 @@ public class SRVContentProvider extends android.content.ContentProvider {
     static final String DB_CREATE = "create table " + SRV_TABLE + "("
             + SERVER_ID + " integer primary key autoincrement, "
             + SERVER_NAME + " text, " + SERVER_URL + " text," + SERVER_CHKURL
-            + " text," + UPDATE_TIME + " text," + SERVER_NEXT_CHECK + " text,"
+            + " text," + UPDATE_TIME + " integer," + SERVER_NEXT_CHECK + " integer,"
             + FAIL_NOTIFICATION + " integer,"+ SERVER_STATE + " integer" + ");";
 
     // // Uri
@@ -169,6 +169,7 @@ public class SRVContentProvider extends android.content.ContentProvider {
         getContext().getContentResolver().notifyChange(uri, null);
         return cnt;
     }
+
 
     public String getType(Uri uri) {
         switch (uriMatcher.match(uri)) {
