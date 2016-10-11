@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import java.sql.Time;
+import java.util.Date;
 
 /**
  * Created by namel on 17.05.2016.
@@ -113,11 +114,13 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
             default:
                 //add button
                 final int switchalrm;
-               final int servernextupdate=1234;
+                long now = java.lang.System.currentTimeMillis();
+
+               final long servernextupdate =now + (serverupdate * 1000*60);
                 servername = srvname.getText().toString();
                 serverurl = srvurl.getText().toString();
                 serverchkurl = srvchkurl.getText().toString();
-                serverupdate = Integer.parseInt(srvupdatetime.getText().toString());
+                serverupdate = Integer.parseInt(srvupdatetime.getText().toString())*60*1000;
                 if (srvalrmsw.isChecked())
                 switchalrm =1;
                 else
@@ -126,7 +129,7 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Server server = new Server(servername, serverurl, serverchkurl, serverupdate,servernextupdate,switchalrm,1);
+                            Server server = new Server(servername, serverurl, serverchkurl, serverupdate,servernextupdate,switchalrm,2);
                             getActivity().getContentResolver().insert(SRVContentProvider.SERVERS_CONTENT_URI, server.toContentValues());
                         }
                     }).start();

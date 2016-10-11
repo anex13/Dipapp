@@ -12,11 +12,11 @@ public class Server {
     String url;
     String chkurl;
     int time;
-    int nextchktime;
+    long nextchktime;
     int alarm;
     int state;
 
-    public Server(String name,String url,String chkurl,int time,int nextchktime,int alarm,int state) {
+    public Server(String name,String url,String chkurl,int time,long nextchktime,int alarm,int state) {
         this.name = name;
         this.url = url;
         this.chkurl = chkurl;
@@ -33,7 +33,7 @@ public class Server {
         chkurl = cursor.getString(cursor.getColumnIndex(SRVContentProvider.SERVER_CHKURL));
         time = cursor.getInt(cursor.getColumnIndex(SRVContentProvider.UPDATE_TIME));
         state= cursor.getInt(cursor.getColumnIndex(SRVContentProvider.SERVER_STATE));
-        nextchktime= cursor.getInt(cursor.getColumnIndex(SRVContentProvider.SERVER_NEXT_CHECK));
+        nextchktime= cursor.getLong(cursor.getColumnIndex(SRVContentProvider.SERVER_NEXT_CHECK));
         alarm= cursor.getInt(cursor.getColumnIndex(SRVContentProvider.FAIL_NOTIFICATION));
     }
 
@@ -59,7 +59,7 @@ public class Server {
         this.id = id;
     }
 
-    public void setNextchktime(int nextchktime) {
+    public void setNextchktime(long nextchktime) {
         this.nextchktime = nextchktime;
     }
     public void setAlarm(int alarm) {
@@ -106,7 +106,7 @@ public class Server {
 
         return url;
     }
-    public int getNextchktime() {
+    public long getNextchktime() {
         return nextchktime;
 
     }

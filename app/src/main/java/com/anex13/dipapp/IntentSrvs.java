@@ -30,6 +30,7 @@ public class IntentSrvs extends IntentService {
     private static final String ACTION_SCAN = "ACTION_SCAN";
     private static final String ACTION_MONITOR = "ACTION_MONITOR";
     private static final String PARAM_URL = "url";
+    private static final String PARAM_CHKURL = "chkurl";
     public static final String ANSVER = "ansver";
     final static String LOG_TAG = "myLogs";
     private static final int NB_THREADS = 10;
@@ -137,8 +138,8 @@ public class IntentSrvs extends IntentService {
                 ExecutorService executor1 = Executors.newFixedThreadPool(NB_THREADS);
                 //read url chkurl
 
-                String srvurl = "";
-                String srvchkurl = "";
+                String srvurl = intent.getStringExtra(PARAM_URL);
+                String srvchkurl = intent.getStringExtra(PARAM_CHKURL);
                 executor1.execute(monRunnable(srvurl, srvchkurl));
 
                 Log.i(LOG_TAG, "Waiting for executor to terminate...");
@@ -174,11 +175,13 @@ public class IntentSrvs extends IntentService {
         context.startService(pingIntent);
     }
 
-    public static void startmonitor(Context context, String url) {
+    public static void startmonitor(Context context, String url, String chkurl) {
         Intent pingIntent = new Intent(context, IntentSrvs.class);
         pingIntent.setAction(ACTION_MONITOR);
         pingIntent.putExtra(PARAM_URL, url);
+        pingIntent.putExtra(PARAM_CHKURL, chkurl);
         context.startService(pingIntent);
+        Log.i(LOG_TAG, "start mon url chkurl"+url+"  "+chkurl);
     }
 
     public void onDestroy() {
@@ -216,12 +219,20 @@ public class IntentSrvs extends IntentService {
         return new Runnable() {
             public void run() {
                 // scan
+                String state;
                 if (statechk(url)) {
-                    // state = 1;
+                     state = "1";
                 } else if (statechk(checkurl)) {
-                    // state = 0;
+                     state = "0";
                 }
-                //state=2
+                else
+                state="2";
+                Intent broadcastIntent = new Intent();
+                broadcastIntent.setAction(SRVChecker.BROADCAST_ACTION);
+                broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                broadcastIntent.putExtra(ANSVER, state);
+                sendBroadcast(broadcastIntent);
+                Log.i(LOG_TAG, "запущен мон ранабл стэйт ="+state);
 
             }
         };

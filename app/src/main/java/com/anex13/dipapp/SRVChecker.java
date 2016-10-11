@@ -1,8 +1,13 @@
 package com.anex13.dipapp;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
+import android.view.View;
 
 import java.util.Date;
 
@@ -12,6 +17,17 @@ import java.util.Date;
 
 public class SRVChecker {
     private static Context mcontext;
+    private static Cursor c;
+    static String selection = null;
+    static String[] selectionArgs = null;
+    static String sortOrder = null;
+    static String[] projection = null;
+    static long fivemins = 5 * 60 * 1000;
+    static BroadcastReceiver receiver;
+    public final static String ANSVER = "ansver";
+    public final static String BROADCAST_ACTION = "com.anex13.dipapp";
+    static String ans;
+    final static String LOG_TAG = "myLogs";
 
     public SRVChecker(Context context) {
         this.mcontext = context;
@@ -20,41 +36,52 @@ public class SRVChecker {
     }
 
     public static void checkItNow() {
-
-        //ручная проверка с переустановкой аларма
         // выбрать все серваки с (FAIL_NOTIFICATION != 0)
-        Server[] servers = new Server[9];// todo не забыть
-        for (Server srv : servers) {
-            check(srv);
-        }
-
+        selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
+        selectionArgs = new String[]{"0"};
+        c = mcontext.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
+        check(c);
+        Log.i(LOG_TAG, "chck it now");
     }
 
     public static void alrmCheck() {
-
-        //запуск с таймера автоматом
-        // выбрать все серваки с (FAIL_NOTIFICATION != 0)&&(SERVER_NEXT_CHECK > NOW-10sec)&&(SERVER_NEXT_CHECK < NOW+5 min)
-        Server[] servers = new Server[9];// todo не забыть
-        for (Server srv : servers) {
-            check(srv);
-        }
-
-
+        long now = java.lang.System.currentTimeMillis();
+        selection = SRVContentProvider.FAIL_NOTIFICATION + " <>? AND "+SRVContentProvider.SERVER_NEXT_CHECK+" <?";
+        selectionArgs = new String[]{"0",Long.toString(now+fivemins)};
+        c = mcontext.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
+        //todo запустить следующий алярм
+        check(c);
     }
 
-    private static void check(Server server) {
-        final Server srv = server;
-        final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, server.getId());
-        //Проверить
-        //записать в дб SERVER_STATE и установить SERVER_NEXT_CHECK= NOW+UPDATE_TIME
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mcontext.getContentResolver().update(uri, srv.toContentValues(), null, null);
+    private static void check(Cursor c) {
+        long now=java.lang.System.currentTimeMillis();
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    final Server crsrSRV = new Server(c);
+                    IntentSrvs.startmonitor(mcontext, crsrSRV.getUrl(),crsrSRV.getChkurl());
+                    receiver = new BroadcastReceiver() {
+                        public void onReceive(Context context, Intent intent) {
+                            ans = intent.getStringExtra(ANSVER);
+                            Log.i(LOG_TAG, "ansver="+ans);
+                        }
+                    };
+                    crsrSRV.setState(Integer.parseInt(ans));//todo вернуть стэйт с проверки
+                    crsrSRV.setNextchktime(now+crsrSRV.getTime());
+                    final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, crsrSRV.getId());
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mcontext.getContentResolver().update(uri, crsrSRV.toContentValues(), null, null);
+                        }
+                    }).start();
+                } while (c.moveToNext());
             }
-        }).start();
+            c.close();
+        } else {
+            // Log.d(LOG_TAG, "Cursor is null");
+        }
+
 
 
         //установить следующий аларм взять первый серв из (FAIL_NOTIFICATION != 0) и сортировать по SERVER_NEXT_CHECK

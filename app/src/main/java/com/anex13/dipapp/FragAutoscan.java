@@ -22,6 +22,8 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         View rootView = inflater.inflate(R.layout.autoscan, container, false);
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         lv = (ListView) rootView.findViewById(R.id.srvlist);
+        Button btn = (Button) rootView.findViewById(R.id.buttonchkitnow) ;
+        btn.setOnClickListener(this);
         registerForContextMenu(lv);
         fab.setOnClickListener(this);
         return rootView;
@@ -53,8 +55,14 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v) {switch (v.getId()){
+        case R.id.fab:
         ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
+        break;
+        case R.id.buttonchkitnow:
+            SRVChecker.checkItNow();
+            break;
+    }
     }
 }
 //контекстное меню - удалить\редактировать\обновить
