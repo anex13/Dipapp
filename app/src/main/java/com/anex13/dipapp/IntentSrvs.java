@@ -66,7 +66,7 @@ public class IntentSrvs extends IntentService {
         boolean str;
         String pingansver = ping(url, 54, 1);
         str = !pingansver.contains("100% packet loss");
-        Log.i(LOG_TAG, "state chk " + pingansver);
+        Log.i(LOG_TAG, "state chk " + str);
         // Некоторые девайсы не пингуются =\
         return str;
     }
@@ -135,21 +135,24 @@ public class IntentSrvs extends IntentService {
                 sendBroadcast(broadcastIntentfinish);
                 break;
             case ACTION_MONITOR:
-                ExecutorService executor1 = Executors.newFixedThreadPool(NB_THREADS);
-                //read url chkurl
 
                 String srvurl = intent.getStringExtra(PARAM_URL);
                 String srvchkurl = intent.getStringExtra(PARAM_CHKURL);
-                executor1.execute(monRunnable(srvurl, srvchkurl));
-
-                Log.i(LOG_TAG, "Waiting for executor to terminate...");
-                executor1.shutdown();
-                try {
-                    executor1.awaitTermination(60 * 1000, TimeUnit.MILLISECONDS);
-                } catch (InterruptedException ignored) {
+                String state;
+                if (statechk(srvurl)) {
+                    state = "1";
+                } else if (statechk(srvchkurl)) {
+                    state = "0";
                 }
-                Log.i(LOG_TAG, "monitorcheck finished");
-                break;
+                else
+                    state="2";
+                Intent monIntent = new Intent();
+                monIntent.setAction(SRVChecker.BROADCAST_ACTION);
+                monIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                monIntent.putExtra(ANSVER, state);
+                sendBroadcast(monIntent);
+                Log.i(LOG_TAG, "запущен бродкаст ="+state);
+
         }
     }
 
@@ -215,28 +218,6 @@ public class IntentSrvs extends IntentService {
         };
     }
 
-    private Runnable monRunnable(final String url, final String checkurl) {
-        return new Runnable() {
-            public void run() {
-                // scan
-                String state;
-                if (statechk(url)) {
-                     state = "1";
-                } else if (statechk(checkurl)) {
-                     state = "0";
-                }
-                else
-                state="2";
-                Intent broadcastIntent = new Intent();
-                broadcastIntent.setAction(SRVChecker.BROADCAST_ACTION);
-                broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                broadcastIntent.putExtra(ANSVER, state);
-                sendBroadcast(broadcastIntent);
-                Log.i(LOG_TAG, "запущен мон ранабл стэйт ="+state);
-
-            }
-        };
-    }
 
     public static String getHardwareAddress(String ip) {
         String hw = "  no mac";

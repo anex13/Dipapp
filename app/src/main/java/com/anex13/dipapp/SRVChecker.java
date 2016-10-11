@@ -24,7 +24,7 @@ public class SRVChecker {
     static String[] projection = null;
     static long fivemins = 5 * 60 * 1000;
     static BroadcastReceiver receiver;
-    public final static String ANSVER = "ansver";
+    public static final String ANSVER = "ansver";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp";
     static String ans;
     final static String LOG_TAG = "myLogs";
@@ -54,7 +54,7 @@ public class SRVChecker {
     }
 
     private static void check(Cursor c) {
-        long now=java.lang.System.currentTimeMillis();
+        final long now=java.lang.System.currentTimeMillis();
         if (c != null) {
             if (c.moveToFirst()) {
                 do {
@@ -64,22 +64,23 @@ public class SRVChecker {
                         public void onReceive(Context context, Intent intent) {
                             ans = intent.getStringExtra(ANSVER);
                             Log.i(LOG_TAG, "ansver="+ans);
+                            crsrSRV.setState(Integer.parseInt(ans));//todo вернуть стэйт с проверки
+                            crsrSRV.setNextchktime(now+crsrSRV.getTime());
+                            final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, crsrSRV.getId());
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mcontext.getContentResolver().update(uri, crsrSRV.toContentValues(), null, null);
+                                }
+                            }).start();
                         }
                     };
-                    crsrSRV.setState(Integer.parseInt(ans));//todo вернуть стэйт с проверки
-                    crsrSRV.setNextchktime(now+crsrSRV.getTime());
-                    final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, crsrSRV.getId());
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mcontext.getContentResolver().update(uri, crsrSRV.toContentValues(), null, null);
-                        }
-                    }).start();
+
                 } while (c.moveToNext());
             }
             c.close();
         } else {
-            // Log.d(LOG_TAG, "Cursor is null");
+             Log.d(LOG_TAG, "Cursor is null");
         }
 
 
