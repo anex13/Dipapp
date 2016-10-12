@@ -6,10 +6,13 @@ package com.anex13.dipapp;
         import android.content.Context;
         import android.content.Intent;
         import android.os.PowerManager;
+        import android.provider.Settings;
+        import android.util.Log;
         import android.widget.Toast;
 
 public class Alarm extends BroadcastReceiver
 {
+    final static String LOG_TAG = "myLogs";
     @Override
     public void onReceive(Context context, Intent intent)
     {
@@ -17,25 +20,26 @@ public class Alarm extends BroadcastReceiver
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
         wl.acquire();
 
-        // Put here YOUR code.
-        Toast.makeText(context, "Alarm !!!!!!!!!!", Toast.LENGTH_LONG).show(); // For example
+        Log.i(LOG_TAG, "alrms tart chck");
+        IntentSrvs.alrmCheck(context);
 
         wl.release();
     }
 
-    public void setAlarm(Context context)
-    {
+    public static void setAlarm(Context context,long next)
+    {Log.i(LOG_TAG, "alrm set"+next+ "   current time  " + System.currentTimeMillis());
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, Alarm.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * 10, pi); // Millisec * Second * Minute
+        am.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),next-System.currentTimeMillis(), pi); // Millisec * Second * Minute
     }
 
-    public void cancelAlarm(Context context)
+    public static void cancelAlarm(Context context)
     {
         Intent intent = new Intent(context, Alarm.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);
+        Log.i(LOG_TAG, "alrm canceled");
     }
 }

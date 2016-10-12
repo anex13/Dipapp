@@ -60,8 +60,8 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
         break;
         case R.id.buttonchkitnow:
-            SRVChecker checker=new SRVChecker(getContext());
-            checker.checkItNow();
+
+            IntentSrvs.checkItNow(getContext());
             break;
     }
     }

@@ -13,8 +13,7 @@ public class AutoStart extends BroadcastReceiver
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED))
         {
 
-            SRVChecker srvChecker = new SRVChecker(mcontext);
-            srvChecker.checkItNow();
+            IntentSrvs.checkItNow(context);
         }
     }
 }
