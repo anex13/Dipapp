@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class SRVChecker {
     public final static String BROADCAST_ACTION = "com.anex13.dipapp";
     static String ans;
     final static String LOG_TAG = "myLogs";
+    static int trig;
 
     public SRVChecker(Context context) {
         this.mcontext = context;
@@ -53,11 +55,14 @@ public class SRVChecker {
         check(c);
     }
 
-    private static void check(Cursor c) {
+    static void check(Cursor c) {
         final long now=java.lang.System.currentTimeMillis();
+
         if (c != null) {
             if (c.moveToFirst()) {
                 do {
+
+                    trig = 0;
                     final Server crsrSRV = new Server(c);
                     IntentSrvs.startmonitor(mcontext, crsrSRV.getUrl(),crsrSRV.getChkurl());
                     receiver = new BroadcastReceiver() {
@@ -73,8 +78,16 @@ public class SRVChecker {
                                     mcontext.getContentResolver().update(uri, crsrSRV.toContentValues(), null, null);
                                 }
                             }).start();
+                            trig =1;
                         }
                     };
+                    IntentFilter filter = new IntentFilter(BROADCAST_ACTION);
+                    filter.addCategory(Intent.CATEGORY_DEFAULT);
+                    mcontext.registerReceiver(receiver, filter);
+
+
+
+
 
                 } while (c.moveToNext());
             }
