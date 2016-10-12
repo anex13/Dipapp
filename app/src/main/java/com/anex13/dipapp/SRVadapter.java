@@ -43,8 +43,9 @@ public class SRVadapter extends CursorAdapter{
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (server.getAlarm()!=0)
+                if (server.getAlarm()!=0){
                     server.setAlarm(0);
+                    server.setState(2);}
                 else
                     server.setAlarm(1);
                 final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, server.getId());

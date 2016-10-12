@@ -6,9 +6,7 @@ package com.anex13.dipapp;
         import android.content.Context;
         import android.content.Intent;
         import android.os.PowerManager;
-        import android.provider.Settings;
         import android.util.Log;
-        import android.widget.Toast;
 
 public class Alarm extends BroadcastReceiver
 {
@@ -27,11 +25,11 @@ public class Alarm extends BroadcastReceiver
     }
 
     public static void setAlarm(Context context,long next)
-    {Log.i(LOG_TAG, "alrm set"+next+ "   current time  " + System.currentTimeMillis());
+    {Log.i(LOG_TAG, "alrm set"+ ((next-System.currentTimeMillis())/1000));
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, Alarm.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),next-System.currentTimeMillis(), pi); // Millisec * Second * Minute
+        am.set(AlarmManager.RTC_WAKEUP,next, pi);
     }
 
     public static void cancelAlarm(Context context)

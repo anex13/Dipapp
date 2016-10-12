@@ -1,7 +1,6 @@
 package com.anex13.dipapp;
 
 import android.app.IntentService;
-import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
