@@ -24,9 +24,11 @@ import java.util.regex.Pattern;
  * Created by namel on 21.04.2016.
  */
 public class IntentSrvs extends IntentService {
-    private static final String ACTION_MONITORNOW = "checkitnow";
-    private static final String ACTION_MONITORALRM = "alrmcheck";
-    private static Context mcontext;
+    private static final String ACTION_MONITORING = "srvmonitor";
+    private static final String PARAM_ID = "serverID";
+    private static final String PARAM_NEXTTIME = "nextALRMtime";
+    private static final String PARAM_UPDTIME = "timing";
+    private static final String PARAM_NAME ="SRVName" ;
     private static Cursor c;
     static String selection = null;
     static String[] selectionArgs = null;
@@ -145,41 +147,35 @@ public class IntentSrvs extends IntentService {
                 broadcastIntentfinish.putExtra(ANSVER, scanfinish);
                 sendBroadcast(broadcastIntentfinish);
                 break;
-            case ACTION_MONITORNOW:
-                selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
-                selectionArgs = new String[]{"0"};
-                c = mcontext.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
-                try {
-                    check(c);
-                    Log.i(LOG_TAG, "check kursor");
-                } finally {
-                    c.close();
-                    Log.i(LOG_TAG, "cursor close");
-                }
+            case ACTION_MONITORING:
+                int state;
+                if (statechk(intent.getStringExtra(PARAM_URL))) {
+                    Log.i(LOG_TAG, "1chk ");
+                    state = 1;
+                } else if (statechk(intent.getStringExtra(PARAM_CHKURL))) {
+                    state = 0;
+                } else
+                    state = 2;
+                Log.i(LOG_TAG, "state = " + state);
+                final Server server = new Server( intent.getStringExtra(PARAM_NAME),
+                        intent.getStringExtra(PARAM_URL),
+                        intent.getStringExtra(PARAM_CHKURL),
+                        Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)),Long.parseLong(intent.getStringExtra(PARAM_NEXTTIME)),1,state);
+
+                server.setNextchktime(System.currentTimeMillis() + Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)));
+                final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, server.getId());
+                Log.i(LOG_TAG, "update db entry");
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getApplicationContext().getContentResolver().update(uri, server.toContentValues(), null, null);
+                    }
+                }).start();
                 //// TODO: 12.10.2016 add code here
-                setalrm();
+
                 break;
-
-
-            case ACTION_MONITORALRM:
-
-                long timenow = java.lang.System.currentTimeMillis();
-                Alarm.cancelAlarm(mcontext);
-                selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ? AND " + SRVContentProvider.SERVER_NEXT_CHECK + " <?";
-                selectionArgs = new String[]{"0", Long.toString(timenow + fivemins)};
-                c = mcontext.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
-                //todo запустить следующий алярм
-                try {
-                    check(c);
-                    Log.i(LOG_TAG, "check kursor");
-                } finally {
-                    c.close();
-                    Log.i(LOG_TAG, "cursor close");
-                }
-                setalrm();
-                break;
-
         }
+
     }
 
 
@@ -204,83 +200,70 @@ public class IntentSrvs extends IntentService {
         context.startService(pingIntent);
     }
 
-    private static void setalrm() {
+    private static void setalrm(Context context) {
         long timenow = java.lang.System.currentTimeMillis();
         selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
         selectionArgs = new String[]{"0"};
         sortOrder = SRVContentProvider.SERVER_NEXT_CHECK;
-        c = mcontext.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
+        c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
         try {
+            if (c != null){
             Log.i(LOG_TAG, "cursor for next alrm");
             c.moveToFirst();
             Server nalrm = new Server(c);
-            Alarm alarm =new Alarm();
-            alarm.setAlarm(mcontext, nalrm.getNextchktime());
+            Alarm alarm = new Alarm();
+            alarm.setAlarm(context, nalrm.getNextchktime());}
 
         } finally {
-            c.close();
+            if (c != null)
+                c.close();
             Log.i(LOG_TAG, "close alrm cursr");
         }
     }
 
 
     public static void checkItNow(Context context) {
-        Intent monallIntent = new Intent(context, IntentSrvs.class);
-        monallIntent.setAction(ACTION_MONITORNOW);
-        context.startService(monallIntent);
-        mcontext = context;
+        selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
+        selectionArgs = new String[]{"0"};
+        sendIntents(context, null, selection, selectionArgs, null);
         Log.i(LOG_TAG, "check it now intent start");
+
 
     }
 
     public static void alrmCheck(Context context) {
-        Intent monalrmIntent = new Intent(context, IntentSrvs.class);
-        monalrmIntent.setAction(ACTION_MONITORALRM);
-        context.startService(monalrmIntent);
-        mcontext = context;
+        selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ? AND " + SRVContentProvider.SERVER_NEXT_CHECK + " <?";
+        selectionArgs = new String[]{"0", Long.toString(System.currentTimeMillis() + fivemins)};
+        sendIntents(context, null, selection, selectionArgs, null);
         Log.i(LOG_TAG, "alrm check intent start");
     }
 
-    static void check(Cursor c) {
-        final long now = java.lang.System.currentTimeMillis();
+    static void sendIntents(Context context, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
+        long now = java.lang.System.currentTimeMillis();
         if (c != null) {
             if (c.moveToFirst()) {
                 do {
-                    final Server crsrSRV = new Server(c);
-                    int state;
-                    if (statechk(crsrSRV.getUrl())) {
-                        Log.i(LOG_TAG, "1chk ");
-                        state = 1;
-                    } else if (statechk(crsrSRV.getChkurl())) {
-                        state = 0;
-                    } else
-                        state = 2;
-                    Log.i(LOG_TAG, "state = " + state);
-                    crsrSRV.setState(state);
-                    crsrSRV.setNextchktime(now + crsrSRV.getTime());
-                    final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, crsrSRV.getId());
-                    Log.i(LOG_TAG, "update db entry");
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mcontext.getContentResolver().update(uri, crsrSRV.toContentValues(), null, null);
-                        }
-                    }).start();
+
+                    Server crsrSRV = new Server(c);
+                    Intent pingIntent = new Intent(context, IntentSrvs.class);
+                    pingIntent.setAction(ACTION_MONITORING);
+                    pingIntent.putExtra(PARAM_ID, crsrSRV.getId());
+                    pingIntent.putExtra(PARAM_NAME, crsrSRV.getName());
+                    pingIntent.putExtra(PARAM_URL, crsrSRV.getUrl());
+                    pingIntent.putExtra(PARAM_CHKURL, crsrSRV.getChkurl());
+                    pingIntent.putExtra(PARAM_UPDTIME, crsrSRV.getTime());
+                    pingIntent.putExtra(PARAM_NEXTTIME, crsrSRV.getNextchktime());
+                    context.startService(pingIntent);
+
+
                 } while (c.moveToNext());
-            }
+            }c.close();
         } else {
             Log.d(LOG_TAG, "Cursor is null");
         }
-        //установить следующий аларм взять первый серв из (FAIL_NOTIFICATION != 0) и сортировать по SERVER_NEXT_CHECK
-    }
+        setalrm(context);
 
-    public static void startmonitor(Context context, String url, String chkurl) {
-        Intent pingIntent = new Intent(context, IntentSrvs.class);
-        pingIntent.setAction(ACTION_MONITOR);
-        pingIntent.putExtra(PARAM_URL, url);
-        pingIntent.putExtra(PARAM_CHKURL, chkurl);
-        context.startService(pingIntent);
-        Log.i(LOG_TAG, "start mon url chkurl" + url + "  " + chkurl);
     }
 
     public void onDestroy() {
@@ -349,7 +332,8 @@ public class IntentSrvs extends IntentService {
         }
         return hw;
     }
-}
+
+   }
 // https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf   база mac-vendor  какнибудь запилить
 // InetAddress.getByName("host ip").getHostName();  hostname по ip
 // выровнять руки и переделать нормально

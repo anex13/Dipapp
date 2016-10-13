@@ -11,12 +11,12 @@ public class Server {
     String name;
     String url;
     String chkurl;
-    int time;
+    long time;
     long nextchktime;
     int alarm;
     int state;
 
-    public Server(String name,String url,String chkurl,int time,long nextchktime,int alarm,int state) {
+    public Server(String name,String url,String chkurl,long time,long nextchktime,int alarm,int state) {
         this.name = name;
         this.url = url;
         this.chkurl = chkurl;
@@ -113,7 +113,7 @@ public class Server {
     public String getChkurl() {
         return chkurl;
     }
-    public int getTime() {
+    public long getTime() {
         return time;
     }
     public String getName() {
