@@ -25,7 +25,7 @@ public class FragPing extends Fragment implements View.OnClickListener {
     EditText pingurl;
     ProgressBar pBar;
     public final static String ANSVER = "ansver";
-    public final static String BROADCAST_ACTION = "com.anex13.dipapp";
+    public final static String BROADCAST_ACTION = "com.anex13.dipapp.ping";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -1,11 +1,15 @@
 package com.anex13.dipapp;
 
+import android.Manifest;
 import android.app.IntentService;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -28,7 +32,8 @@ public class IntentSrvs extends IntentService {
     private static final String PARAM_ID = "serverID";
     private static final String PARAM_NEXTTIME = "nextALRMtime";
     private static final String PARAM_UPDTIME = "timing";
-    private static final String PARAM_NAME ="SRVName" ;
+    private static final String PARAM_NAME = "SRVName";
+    private static final String PARAM_ALRM = "alrm";
     private static Cursor c;
     static String selection = null;
     static String[] selectionArgs = null;
@@ -41,7 +46,6 @@ public class IntentSrvs extends IntentService {
     private static final String ACTION_TRACE = "ACTION_TRACE";
     private static final String ACTION_PING = "ACTION_PING";
     private static final String ACTION_SCAN = "ACTION_SCAN";
-    private static final String ACTION_MONITOR = "ACTION_MONITOR";
     private static final String PARAM_URL = "url";
     private static final String PARAM_CHKURL = "chkurl";
     public static final String ANSVER = "ansver";
@@ -54,7 +58,8 @@ public class IntentSrvs extends IntentService {
         super("PingSrvc");
     }
 
-    public static String ping(String url, int ttl, int count) {
+    public String ping(String url, int ttl, int count) {
+        Log.i(LOG_TAG, "ping method");
         String str = "^_^error";
         try {
 
@@ -69,13 +74,16 @@ public class IntentSrvs extends IntentService {
                 output.append(buffer, 0, i);
             reader.close();
             str = output.toString();
+            Log.i(LOG_TAG, "str get  " + str);
         } catch (IOException e) {
+            Log.i(LOG_TAG, "exception" + e.getMessage());
             e.printStackTrace();
         }
+        Log.i(LOG_TAG, str);
         return str;
     }
 
-    public static Boolean statechk(String url) {
+    public Boolean statechk(String url) {
         boolean str;
         String pingansver = ping(url, 54, 1);
         str = !pingansver.contains("100% packet loss");
@@ -90,12 +98,14 @@ public class IntentSrvs extends IntentService {
         String url = intent.getStringExtra(PARAM_URL);
         switch (action) {
             case ACTION_PING:
+                Log.i(LOG_TAG, url);
                 String pingResult = ping(url, 54, 4);
                 Intent broadcastIntent = new Intent();
                 broadcastIntent.setAction(FragPing.BROADCAST_ACTION);
                 broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
                 broadcastIntent.putExtra(ANSVER, pingResult);
                 sendBroadcast(broadcastIntent);
+                Log.i(LOG_TAG, "ping broadcast  " + pingResult);
                 break;
             case ACTION_TRACE:
                 String last = "0";
@@ -148,7 +158,9 @@ public class IntentSrvs extends IntentService {
                 sendBroadcast(broadcastIntentfinish);
                 break;
             case ACTION_MONITORING:
+                Log.i(LOG_TAG, intent.getStringExtra(PARAM_NAME) + "   " + intent.getStringExtra(PARAM_URL) + "   " + intent.getStringExtra(PARAM_CHKURL) + "   " + intent.getStringExtra(PARAM_UPDTIME) + "   " + intent.getStringExtra(PARAM_NEXTTIME) + "   " + intent.getStringExtra(PARAM_ID));
                 int state;
+                if (!intent.getStringExtra(PARAM_ALRM).equals("alrm")) {
                 if (statechk(intent.getStringExtra(PARAM_URL))) {
                     Log.i(LOG_TAG, "1chk ");
                     state = 1;
@@ -157,13 +169,16 @@ public class IntentSrvs extends IntentService {
                 } else
                     state = 2;
                 Log.i(LOG_TAG, "state = " + state);
-                final Server server = new Server( intent.getStringExtra(PARAM_NAME),
+                final Server server = new Server(intent.getStringExtra(PARAM_NAME),
                         intent.getStringExtra(PARAM_URL),
                         intent.getStringExtra(PARAM_CHKURL),
-                        Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)),Long.parseLong(intent.getStringExtra(PARAM_NEXTTIME)),1,state);
+                        Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)),
+                        Long.parseLong(intent.getStringExtra(PARAM_NEXTTIME)),
+                        1, 1);
 
                 server.setNextchktime(System.currentTimeMillis() + Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)));
-                final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, server.getId());
+                server.setState(state);
+                final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, Integer.parseInt(intent.getStringExtra(PARAM_ID)));
                 Log.i(LOG_TAG, "update db entry");
                 new Thread(new Runnable() {
                     @Override
@@ -171,9 +186,13 @@ public class IntentSrvs extends IntentService {
                         getApplicationContext().getContentResolver().update(uri, server.toContentValues(), null, null);
                     }
                 }).start();
-                //// TODO: 12.10.2016 add code here
+                Log.i(LOG_TAG, "update db entry finish");
+            }
+            //// TODO: 12.10.2016 add code here
+                else{
+                setalrm(getApplicationContext());}
 
-                break;
+            break;
         }
 
     }
@@ -184,6 +203,7 @@ public class IntentSrvs extends IntentService {
         pingIntent.setAction(ACTION_PING);
         pingIntent.putExtra(PARAM_URL, url);
         context.startService(pingIntent);
+        Log.i(LOG_TAG, "startping method");
     }
 
     public static void startTrace(Context context, String url) {
@@ -201,19 +221,19 @@ public class IntentSrvs extends IntentService {
     }
 
     private static void setalrm(Context context) {
-        long timenow = java.lang.System.currentTimeMillis();
         selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
         selectionArgs = new String[]{"0"};
         sortOrder = SRVContentProvider.SERVER_NEXT_CHECK;
         c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
         try {
-            if (c != null){
-            Log.i(LOG_TAG, "cursor for next alrm");
-            c.moveToFirst();
-            Server nalrm = new Server(c);
-            Alarm alarm = new Alarm();
-            alarm.setAlarm(context, nalrm.getNextchktime());}
-
+            if (c != null) {
+                Log.i(LOG_TAG, "cursor for next alrm");
+                c.moveToFirst();
+                Server nalrm = new Server(c);
+                Log.i(LOG_TAG, nalrm.getId() + "   " + nalrm.getState());
+                Alarm alarm = new Alarm();
+                alarm.setAlarm(context, nalrm.getNextchktime());
+            }
         } finally {
             if (c != null)
                 c.close();
@@ -240,25 +260,32 @@ public class IntentSrvs extends IntentService {
 
     static void sendIntents(Context context, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
-        long now = java.lang.System.currentTimeMillis();
         if (c != null) {
             if (c.moveToFirst()) {
                 do {
 
                     Server crsrSRV = new Server(c);
                     Intent pingIntent = new Intent(context, IntentSrvs.class);
+
                     pingIntent.setAction(ACTION_MONITORING);
-                    pingIntent.putExtra(PARAM_ID, crsrSRV.getId());
+                    pingIntent.putExtra(PARAM_ALRM,"no");
+                    pingIntent.putExtra(PARAM_ID, Integer.toString(crsrSRV.getId()));
                     pingIntent.putExtra(PARAM_NAME, crsrSRV.getName());
                     pingIntent.putExtra(PARAM_URL, crsrSRV.getUrl());
                     pingIntent.putExtra(PARAM_CHKURL, crsrSRV.getChkurl());
-                    pingIntent.putExtra(PARAM_UPDTIME, crsrSRV.getTime());
-                    pingIntent.putExtra(PARAM_NEXTTIME, crsrSRV.getNextchktime());
+                    pingIntent.putExtra(PARAM_UPDTIME, Long.toString(crsrSRV.getTime()));
+                    pingIntent.putExtra(PARAM_NEXTTIME, Long.toString(crsrSRV.getNextchktime()));
                     context.startService(pingIntent);
 
 
                 } while (c.moveToNext());
-            }c.close();
+
+            }
+            c.close();
+            Intent pingIntent = new Intent(context, IntentSrvs.class);
+            pingIntent.setAction(ACTION_MONITORING);
+            pingIntent.putExtra(PARAM_ALRM, "alrm");
+            context.startService(pingIntent);
         } else {
             Log.d(LOG_TAG, "Cursor is null");
         }
@@ -333,7 +360,7 @@ public class IntentSrvs extends IntentService {
         return hw;
     }
 
-   }
+}
 // https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf   база mac-vendor  какнибудь запилить
 // InetAddress.getByName("host ip").getHostName();  hostname по ip
 // выровнять руки и переделать нормально

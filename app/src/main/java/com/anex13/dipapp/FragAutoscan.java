@@ -1,11 +1,15 @@
 package com.anex13.dipapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
@@ -16,7 +20,7 @@ import android.widget.ListView;
 
 public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
     ListView lv;
-
+    private static final int MY_PERMISSIONS_REQUEST_WAKE_LOCK =1 ;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.autoscan, container, false);
@@ -61,7 +65,8 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         break;
         case R.id.buttonchkitnow:
 
-            IntentSrvs.checkItNow(getContext());
+                IntentSrvs.checkItNow(getContext());
+
             break;
     }
     }

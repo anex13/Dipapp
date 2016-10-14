@@ -1,10 +1,14 @@
 package com.anex13.dipapp;
 
+import android.Manifest;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +22,7 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final int MY_PERMISSIONS_REQUEST_WAKE_LOCK =1 ;
     private DrawerLayout drawer;
     Toolbar toolbar;
     int color;
@@ -29,7 +34,6 @@ ShowcaseView scw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,6 +47,8 @@ ShowcaseView scw;
         navigationView.setNavigationItemSelectedListener(this);
         showFragment(new FragWiki(), false);
         toolbar.setTitleTextColor(0xffffffff);
+
+
         if (isFirstTime()) {
             //first run help
             Target viewTarget = new ViewTarget(UIUtils.getNavButtonView(toolbar));
