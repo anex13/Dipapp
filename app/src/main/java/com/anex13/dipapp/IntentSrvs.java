@@ -1,15 +1,17 @@
 package com.anex13.dipapp;
 
-import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.IntentService;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -54,6 +56,7 @@ public class IntentSrvs extends IntentService {
     String hostname = "";
     String mac;
 
+
     public IntentSrvs() {
         super("PingSrvc");
     }
@@ -74,12 +77,10 @@ public class IntentSrvs extends IntentService {
                 output.append(buffer, 0, i);
             reader.close();
             str = output.toString();
-            Log.i(LOG_TAG, "str get  " + str);
         } catch (IOException e) {
             Log.i(LOG_TAG, "exception" + e.getMessage());
             e.printStackTrace();
         }
-        Log.i(LOG_TAG, str);
         return str;
     }
 
@@ -161,38 +162,39 @@ public class IntentSrvs extends IntentService {
                 Log.i(LOG_TAG, intent.getStringExtra(PARAM_NAME) + "   " + intent.getStringExtra(PARAM_URL) + "   " + intent.getStringExtra(PARAM_CHKURL) + "   " + intent.getStringExtra(PARAM_UPDTIME) + "   " + intent.getStringExtra(PARAM_NEXTTIME) + "   " + intent.getStringExtra(PARAM_ID));
                 int state;
                 if (!intent.getStringExtra(PARAM_ALRM).equals("alrm")) {
-                if (statechk(intent.getStringExtra(PARAM_URL))) {
-                    Log.i(LOG_TAG, "1chk ");
-                    state = 1;
-                } else if (statechk(intent.getStringExtra(PARAM_CHKURL))) {
-                    state = 0;
-                } else
-                    state = 2;
-                Log.i(LOG_TAG, "state = " + state);
-                final Server server = new Server(intent.getStringExtra(PARAM_NAME),
-                        intent.getStringExtra(PARAM_URL),
-                        intent.getStringExtra(PARAM_CHKURL),
-                        Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)),
-                        Long.parseLong(intent.getStringExtra(PARAM_NEXTTIME)),
-                        1, 1);
+                    if (statechk(intent.getStringExtra(PARAM_URL))) {
+                        Log.i(LOG_TAG, "1chk ");
+                        state = 1;
+                    } else if (statechk(intent.getStringExtra(PARAM_CHKURL))) {
+                        state = 0;
+                    } else
+                        state = 2;
+                    Log.i(LOG_TAG, "state = " + state);
+                    final Server server = new Server(intent.getStringExtra(PARAM_NAME),
+                            intent.getStringExtra(PARAM_URL),
+                            intent.getStringExtra(PARAM_CHKURL),
+                            Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)),
+                            Long.parseLong(intent.getStringExtra(PARAM_NEXTTIME)),
+                            1, 1);
 
-                server.setNextchktime(System.currentTimeMillis() + Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)));
-                server.setState(state);
-                final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, Integer.parseInt(intent.getStringExtra(PARAM_ID)));
-                Log.i(LOG_TAG, "update db entry");
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        getApplicationContext().getContentResolver().update(uri, server.toContentValues(), null, null);
-                    }
-                }).start();
-                Log.i(LOG_TAG, "update db entry finish");
-            }
-            //// TODO: 12.10.2016 add code here
-                else{
-                setalrm(getApplicationContext());}
+                    server.setNextchktime(System.currentTimeMillis() + Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)));
+                    server.setState(state);
+                    final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, Integer.parseInt(intent.getStringExtra(PARAM_ID)));
+                    Log.i(LOG_TAG, "update db entry");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getApplicationContext().getContentResolver().update(uri, server.toContentValues(), null, null);
+                        }
+                    }).start();
+                    Log.i(LOG_TAG, "update db entry finish");
+                }
+                //// TODO: 12.10.2016 add code here
+                else {
+                    setalrm(getApplicationContext());
+                }
 
-            break;
+                break;
         }
 
     }
@@ -221,6 +223,7 @@ public class IntentSrvs extends IntentService {
     }
 
     private static void setalrm(Context context) {
+        Server nalrm = null;
         selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
         selectionArgs = new String[]{"0"};
         sortOrder = SRVContentProvider.SERVER_NEXT_CHECK;
@@ -229,10 +232,24 @@ public class IntentSrvs extends IntentService {
             if (c != null) {
                 Log.i(LOG_TAG, "cursor for next alrm");
                 c.moveToFirst();
-                Server nalrm = new Server(c);
+                nalrm = new Server(c);
                 Log.i(LOG_TAG, nalrm.getId() + "   " + nalrm.getState());
-                Alarm alarm = new Alarm();
-                alarm.setAlarm(context, nalrm.getNextchktime());
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                //запилить джоб шедулер
+                JobScheduler jobScheduler = (JobScheduler) MainActivity.getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
+                JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(context.getPackageName(),
+                        JobSrvce.class.getName()));
+                Log.i(LOG_TAG,"jobsheduled for "+((nalrm.getNextchktime()-System.currentTimeMillis())/1000)+"sec");
+                builder.setPeriodic(nalrm.getNextchktime()- System.currentTimeMillis());
+                builder.setRequiresDeviceIdle(true);
+                jobScheduler.schedule(builder.build());
+
+            } else {
+                if (nalrm != null) {
+                    Alarm alarm=new Alarm();
+                    alarm.setAlarm(context, nalrm.getNextchktime());
+                }
             }
         } finally {
             if (c != null)
@@ -241,8 +258,19 @@ public class IntentSrvs extends IntentService {
         }
     }
 
+    public static void cancelALRM(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            JobScheduler jobScheduler = (JobScheduler) MainActivity.getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            jobScheduler.cancelAll();
+        } else {
+            Alarm alarm=new Alarm();
+            alarm.cancelAlarm(context);
+        }
+
+    }
 
     public static void checkItNow(Context context) {
+        cancelALRM(context);
         selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
         selectionArgs = new String[]{"0"};
         sendIntents(context, null, selection, selectionArgs, null);
@@ -252,11 +280,13 @@ public class IntentSrvs extends IntentService {
     }
 
     public static void alrmCheck(Context context) {
+        cancelALRM(context);
         selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ? AND " + SRVContentProvider.SERVER_NEXT_CHECK + " <?";
         selectionArgs = new String[]{"0", Long.toString(System.currentTimeMillis() + fivemins)};
         sendIntents(context, null, selection, selectionArgs, null);
         Log.i(LOG_TAG, "alrm check intent start");
     }
+
 
     static void sendIntents(Context context, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
@@ -268,7 +298,7 @@ public class IntentSrvs extends IntentService {
                     Intent pingIntent = new Intent(context, IntentSrvs.class);
 
                     pingIntent.setAction(ACTION_MONITORING);
-                    pingIntent.putExtra(PARAM_ALRM,"no");
+                    pingIntent.putExtra(PARAM_ALRM, "no");
                     pingIntent.putExtra(PARAM_ID, Integer.toString(crsrSRV.getId()));
                     pingIntent.putExtra(PARAM_NAME, crsrSRV.getName());
                     pingIntent.putExtra(PARAM_URL, crsrSRV.getUrl());
@@ -279,17 +309,18 @@ public class IntentSrvs extends IntentService {
 
 
                 } while (c.moveToNext());
+                Intent pingIntent = new Intent(context, IntentSrvs.class);
+                pingIntent.setAction(ACTION_MONITORING);
+                pingIntent.putExtra(PARAM_ALRM, "alrm");
+                context.startService(pingIntent);
 
             }
-            c.close();
-            Intent pingIntent = new Intent(context, IntentSrvs.class);
-            pingIntent.setAction(ACTION_MONITORING);
-            pingIntent.putExtra(PARAM_ALRM, "alrm");
-            context.startService(pingIntent);
+            else {
+                c.close();
+            }
         } else {
             Log.d(LOG_TAG, "Cursor is null");
         }
-        setalrm(context);
 
     }
 

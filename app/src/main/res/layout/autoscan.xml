@@ -8,6 +8,18 @@
     tools:context="com.anex13.dipapp.MainActivity">
 
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_to_queue_white_24dp"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="16dp" />
+
     <ListView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -21,24 +33,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_to_queue_white_24dp"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="16dp" />
-
     <Button
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonchkitnow"
-        app:layout_constraintTop_toTopOf="@+id/srvlist"
-        android:layout_marginTop="416dp"
-        app:layout_constraintRight_toRightOf="@+id/srvlist" />
+        app:layout_constraintRight_toRightOf="@+id/fab"
+        app:layout_constraintBottom_toTopOf="@+id/fab"
+        android:layout_marginBottom="8dp" />
 </android.support.constraint.ConstraintLayout>

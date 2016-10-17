@@ -20,13 +20,14 @@ import android.widget.ListView;
 
 public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
     ListView lv;
-    private static final int MY_PERMISSIONS_REQUEST_WAKE_LOCK =1 ;
+    private static final int MY_PERMISSIONS_REQUEST_WAKE_LOCK = 1;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.autoscan, container, false);
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         lv = (ListView) rootView.findViewById(R.id.srvlist);
-        Button btn = (Button) rootView.findViewById(R.id.buttonchkitnow) ;
+        Button btn = (Button) rootView.findViewById(R.id.buttonchkitnow);
         btn.setOnClickListener(this);
         registerForContextMenu(lv);
         fab.setOnClickListener(this);
@@ -59,16 +60,15 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     }
 
     @Override
-    public void onClick(View v) {switch (v.getId()){
-        case R.id.fab:
-        ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
-        break;
-        case R.id.buttonchkitnow:
-
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab:
+                ((MainActivity) getActivity()).showFragment(new FragSRVAdd(), true);
+                break;
+            case R.id.buttonchkitnow:
                 IntentSrvs.checkItNow(getContext());
-
-            break;
-    }
+                break;
+        }
     }
 }
 //контекстное меню - удалить\редактировать\обновить
