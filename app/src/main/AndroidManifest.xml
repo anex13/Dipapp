@@ -31,7 +31,7 @@
         </receiver>
         <receiver android:name=".Alarm" android:exported="true" >
             <intent-filter>
-                <action android:name="com.anex13.MYALRM"></action>
+                <action android:name="com.anex13.dipapp.MYALRM"></action>
             </intent-filter>
         </receiver>
         <service

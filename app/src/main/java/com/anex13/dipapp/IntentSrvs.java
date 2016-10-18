@@ -240,20 +240,21 @@ public class IntentSrvs extends IntentService {
                 JobScheduler jobScheduler = (JobScheduler) MainActivity.getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
                 JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(context.getPackageName(),
                         JobSrvce.class.getName()));
-                Log.i(LOG_TAG,"jobsheduled for "+((nalrm.getNextchktime()-System.currentTimeMillis())/1000)+"sec");
-                builder.setPeriodic(nalrm.getNextchktime()- System.currentTimeMillis());
+                Log.i(LOG_TAG, "jobsheduled for " + ((nalrm.getNextchktime() - System.currentTimeMillis()) / 1000) + "sec");
+                builder.setPeriodic(nalrm.getNextchktime() - System.currentTimeMillis());
                 builder.setRequiresDeviceIdle(true);
                 jobScheduler.schedule(builder.build());
 
             } else {
                 if (nalrm != null) {
-                    Alarm alarm=new Alarm();
+                    Alarm alarm = new Alarm();
                     alarm.setAlarm(context, nalrm.getNextchktime());
                 }
             }
         } finally {
             if (c != null)
                 c.close();
+
             Log.i(LOG_TAG, "close alrm cursr");
         }
     }
@@ -263,8 +264,8 @@ public class IntentSrvs extends IntentService {
             JobScheduler jobScheduler = (JobScheduler) MainActivity.getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
             jobScheduler.cancelAll();
         } else {
-            Alarm alarm=new Alarm();
-            alarm.cancelAlarm(context);
+            Alarm alarm = new Alarm();
+            Alarm.cancelAlarm(context);
         }
 
     }
@@ -289,39 +290,42 @@ public class IntentSrvs extends IntentService {
 
 
     static void sendIntents(Context context, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
-        if (c != null) {
-            if (c.moveToFirst()) {
-                do {
+        try {
+            c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
+            if (c != null) {
+                if (c.moveToFirst()) {
+                    do {
 
-                    Server crsrSRV = new Server(c);
+                        Server crsrSRV = new Server(c);
+                        Intent pingIntent = new Intent(context, IntentSrvs.class);
+
+                        pingIntent.setAction(ACTION_MONITORING);
+                        pingIntent.putExtra(PARAM_ALRM, "no");
+                        pingIntent.putExtra(PARAM_ID, Integer.toString(crsrSRV.getId()));
+                        pingIntent.putExtra(PARAM_NAME, crsrSRV.getName());
+                        pingIntent.putExtra(PARAM_URL, crsrSRV.getUrl());
+                        pingIntent.putExtra(PARAM_CHKURL, crsrSRV.getChkurl());
+                        pingIntent.putExtra(PARAM_UPDTIME, Long.toString(crsrSRV.getTime()));
+                        pingIntent.putExtra(PARAM_NEXTTIME, Long.toString(crsrSRV.getNextchktime()));
+                        context.startService(pingIntent);
+
+
+                    } while (c.moveToNext());
                     Intent pingIntent = new Intent(context, IntentSrvs.class);
-
                     pingIntent.setAction(ACTION_MONITORING);
-                    pingIntent.putExtra(PARAM_ALRM, "no");
-                    pingIntent.putExtra(PARAM_ID, Integer.toString(crsrSRV.getId()));
-                    pingIntent.putExtra(PARAM_NAME, crsrSRV.getName());
-                    pingIntent.putExtra(PARAM_URL, crsrSRV.getUrl());
-                    pingIntent.putExtra(PARAM_CHKURL, crsrSRV.getChkurl());
-                    pingIntent.putExtra(PARAM_UPDTIME, Long.toString(crsrSRV.getTime()));
-                    pingIntent.putExtra(PARAM_NEXTTIME, Long.toString(crsrSRV.getNextchktime()));
+                    pingIntent.putExtra(PARAM_ALRM, "alrm");
                     context.startService(pingIntent);
 
-
-                } while (c.moveToNext());
-                Intent pingIntent = new Intent(context, IntentSrvs.class);
-                pingIntent.setAction(ACTION_MONITORING);
-                pingIntent.putExtra(PARAM_ALRM, "alrm");
-                context.startService(pingIntent);
-
+                }
+            } else {
+                Log.d(LOG_TAG, "Cursor is null");
             }
-            else {
-                c.close();
-            }
-        } else {
-            Log.d(LOG_TAG, "Cursor is null");
+
         }
-
+        finally {
+            c.close();
+            Log.i(LOG_TAG, "close srvers cursr");
+        }
     }
 
     public void onDestroy() {

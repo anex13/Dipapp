@@ -25,16 +25,19 @@ public class Alarm extends BroadcastReceiver {
     }
 
     public static void setAlarm(Context context, long next) {
-        Log.i(LOG_TAG, "alrm set" + ((next - System.currentTimeMillis()) / 1000));
+
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent("com.anex13.dipapp.MYALRM");
+        Intent i = new Intent(context,Alarm.class);
+        i.setAction("com.anex13.dipapp.MYALRM");
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
-        am.set(AlarmManager.RTC_WAKEUP, next, pi);
+        am.setWindow(AlarmManager.RTC_WAKEUP, next,5000, pi);
+        Log.i(LOG_TAG, "alrm set");
     }
 
     public static void cancelAlarm(Context context) {
-        Intent intent = new Intent("com.anex13.dipapp.MYALRM");
-        PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+        Intent i = new Intent(context,Alarm.class);
+        i.setAction("com.anex13.dipapp.MYALRM");
+        PendingIntent sender = PendingIntent.getBroadcast(context, 0, i, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);
         Log.i(LOG_TAG, "alrm canceled");
