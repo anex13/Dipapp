@@ -1,26 +1,27 @@
 package com.anex13.dipapp;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
+    private static final int MENU_EDIT_SERVER =1 ;
+    private static final int MENU_DEL_SERVER =2 ;
     ListView lv;
-    private static final int MY_PERMISSIONS_REQUEST_WAKE_LOCK = 1;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,9 +40,6 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         getLoaderManager().initLoader(123, null, this);
         super.onActivityCreated(savedInstanceState);
     }
-// TODO: 23.09.2016 допилить наконецто это гавно!!!!!
-// создать курсор адаптер
-//     https://www.javacodegeeks.com/2013/09/android-viewholder-pattern-example.html
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -51,6 +49,7 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
         lv.setAdapter(new SRVadapter(getActivity(), data));
     }
 
@@ -58,7 +57,35 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        ListView lvm=(ListView)v;
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        //int id  = ((Server) lvm.getAdapter().getItem(info.position)).getId();
+        String name  = ((Server) lvm.getAdapter().getItem(info.position)).getName();
+        menu.setHeaderTitle(name);
+        menu.add(Menu.NONE, MENU_EDIT_SERVER, Menu.NONE,"Edit server");
+        menu.add(Menu.NONE, MENU_DEL_SERVER, Menu.NONE,"Delete server");
+    }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_EDIT_SERVER:
+                //AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+               // Log.d(TAG, "removing item pos=" + info.position);
+               // lv.getAdapter().remove(info.position);
+                return true;
+            case MENU_DEL_SERVER:
+
+
+
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -71,7 +98,5 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 }
-//контекстное меню - удалить\редактировать\обновить
-//аларм манагер
-//собсна сама проверка
+//контекстное меню - удалить\редактировать\
 //pull to refresh
