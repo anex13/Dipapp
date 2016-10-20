@@ -16,9 +16,6 @@ import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import java.sql.Time;
-import java.util.Date;
-
 /**
  * Created by namel on 17.05.2016.
  */
@@ -177,7 +174,6 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
     }
 
     // TODO: 23.09.2016 см фрагавтоскан
-//Подсказки на полях ввода
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         switch (v.getId()) {
@@ -200,6 +196,3 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
         }
     }
 }
-//мб над будут полья
-//
-//

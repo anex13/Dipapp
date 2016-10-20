@@ -65,7 +65,6 @@ public class FragPing extends Fragment implements View.OnClickListener {
         getActivity().unregisterReceiver(receiver);
     }
 
-
     public void onClick(View v) {
         String url;
         url = pingurl.getText().toString();
@@ -84,5 +83,3 @@ public class FragPing extends Fragment implements View.OnClickListener {
 }
 //todo viewswitcher refs
 // TODO: 23.09.2016  сделать чтото с кнопками? тулбар ? автозаполнение едита текстом?
-//
-//

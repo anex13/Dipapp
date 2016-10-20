@@ -1,17 +1,21 @@
 package com.anex13.dipapp;
 
-import android.annotation.TargetApi;
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -55,7 +59,6 @@ public class IntentSrvs extends IntentService {
     private static final int NB_THREADS = 10;
     String hostname = "";
     String mac;
-
 
     public IntentSrvs() {
         super("PingSrvc");
@@ -159,46 +162,48 @@ public class IntentSrvs extends IntentService {
                 sendBroadcast(broadcastIntentfinish);
                 break;
             case ACTION_MONITORING:
-                Log.i(LOG_TAG, intent.getStringExtra(PARAM_NAME) + "   " + intent.getStringExtra(PARAM_URL) + "   " + intent.getStringExtra(PARAM_CHKURL) + "   " + intent.getStringExtra(PARAM_UPDTIME) + "   " + intent.getStringExtra(PARAM_NEXTTIME) + "   " + intent.getStringExtra(PARAM_ID));
                 int state;
-                if (!intent.getStringExtra(PARAM_ALRM).equals("alrm")) {
-                    if (statechk(intent.getStringExtra(PARAM_URL))) {
-                        Log.i(LOG_TAG, "1chk ");
-                        state = 1;
-                    } else if (statechk(intent.getStringExtra(PARAM_CHKURL))) {
-                        state = 0;
-                    } else
-                        state = 2;
-                    Log.i(LOG_TAG, "state = " + state);
-                    final Server server = new Server(intent.getStringExtra(PARAM_NAME),
-                            intent.getStringExtra(PARAM_URL),
-                            intent.getStringExtra(PARAM_CHKURL),
-                            Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)),
-                            Long.parseLong(intent.getStringExtra(PARAM_NEXTTIME)),
-                            1, 1);
+                switch (intent.getStringExtra(PARAM_ALRM)) {
+                    case "no":
+                        if (statechk(intent.getStringExtra(PARAM_URL))) {
+                            Log.i(LOG_TAG, "1chk ");
+                            state = 1;
+                        } else if (statechk(intent.getStringExtra(PARAM_CHKURL))) {
+                            state = 0;
+                        } else
+                            state = 2;
+                        Log.i(LOG_TAG, "state = " + state);
+                        final Server server = new Server(intent.getStringExtra(PARAM_NAME),
+                                intent.getStringExtra(PARAM_URL),
+                                intent.getStringExtra(PARAM_CHKURL),
+                                Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)),
+                                Long.parseLong(intent.getStringExtra(PARAM_NEXTTIME)),
+                                1, 1);
 
-                    server.setNextchktime(System.currentTimeMillis() + Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)));
-                    server.setState(state);
-                    final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, Integer.parseInt(intent.getStringExtra(PARAM_ID)));
-                    Log.i(LOG_TAG, "update db entry");
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            getApplicationContext().getContentResolver().update(uri, server.toContentValues(), null, null);
-                        }
-                    }).start();
-                    Log.i(LOG_TAG, "update db entry finish");
+                        server.setNextchktime(System.currentTimeMillis() + Long.parseLong(intent.getStringExtra(PARAM_UPDTIME)));
+                        server.setState(state);
+                        final Uri uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, Integer.parseInt(intent.getStringExtra(PARAM_ID)));
+                        Log.i(LOG_TAG, "update db entry");
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                getApplicationContext().getContentResolver().update(uri, server.toContentValues(), null, null);
+                            }
+                        }).start();
+                        Log.i(LOG_TAG, "update db entry finish");
+                        break;
+                    case "alrm":
+                        setalrm(getApplicationContext());
+                        break;
+                    case "notification check":
+                        //проверить и если над запустить нотификейшн манагера
+                        notificationCheck(getApplicationContext());
+                        break;
                 }
-                //// TODO: 12.10.2016 add code here
-                else {
-                    setalrm(getApplicationContext());
-                }
-
                 break;
         }
 
     }
-
 
     public static void startPing(Context context, String url) {
         Intent pingIntent = new Intent(context, IntentSrvs.class);
@@ -288,7 +293,6 @@ public class IntentSrvs extends IntentService {
         Log.i(LOG_TAG, "alrm check intent start");
     }
 
-
     static void sendIntents(Context context, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         try {
             c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
@@ -315,14 +319,15 @@ public class IntentSrvs extends IntentService {
                     pingIntent.setAction(ACTION_MONITORING);
                     pingIntent.putExtra(PARAM_ALRM, "alrm");
                     context.startService(pingIntent);
+                    pingIntent.putExtra(PARAM_ALRM, "notification check");
+                    context.startService(pingIntent);
 
                 }
             } else {
                 Log.d(LOG_TAG, "Cursor is null");
             }
 
-        }
-        finally {
+        } finally {
             c.close();
             Log.i(LOG_TAG, "close srvers cursr");
         }
@@ -331,7 +336,6 @@ public class IntentSrvs extends IntentService {
     public void onDestroy() {
         super.onDestroy();
     }
-
 
     private Runnable pingRunnable(final String host) {
         return new Runnable() {
@@ -358,7 +362,6 @@ public class IntentSrvs extends IntentService {
             }
         };
     }
-
 
     public static String getHardwareAddress(String ip) {
         String hw = "  no mac";
@@ -395,7 +398,59 @@ public class IntentSrvs extends IntentService {
         return hw;
     }
 
+    public static void notificationCheck(Context context) {
+        try {
+            c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
+            if (c != null) {
+                if (c.moveToFirst()) {
+                    do {
+
+                        Server crsrSRV = new Server(c);
+
+                        Intent notificationIntent = new Intent(context, MainActivity.class);
+                        PendingIntent contentIntent = PendingIntent.getActivity(context,
+                                0, notificationIntent,
+                                PendingIntent.FLAG_CANCEL_CURRENT);
+
+                        Resources res = context.getResources();
+                        Notification.Builder builder = new Notification.Builder(context);
+
+                        builder.setContentIntent(contentIntent)
+                                .setSmallIcon(R.mipmap.ic_launcher1)
+                                //.setTicker(res.getString(R.string.warning)) // текст в строке состояния
+                                .setTicker("Houston we have a problem")
+                                .setWhen(System.currentTimeMillis())
+                                .setAutoCancel(true)
+                                //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
+                                .setContentTitle("Some server unreachable")
+                                //.setContentText(res.getString(R.string.notifytext))
+                                .setContentText("Server "+crsrSRV.getName()+" is unreachable"); // Текст уведомления
+
+                        // Notification notification = builder.getNotification(); // до API 16
+                        Notification notification = builder.build();
+                        Uri ringURI =
+                                RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        notification.sound = ringURI;
+                        NotificationManager notificationManager = (NotificationManager) context
+                                .getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.notify(742, notification);
+                    } while (c.moveToNext());
+
+                }
+            } else {
+                Log.d(LOG_TAG, "Cursor is null");
+            }
+
+        } finally {
+            c.close();
+            // TODO: 20.10.2016 прикрутить мыло с настройкой в префс
+        }
+
+    }
+
 }
+
+
 // https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf   база mac-vendor  какнибудь запилить
 // InetAddress.getByName("host ip").getHostName();  hostname по ip
 // выровнять руки и переделать нормально

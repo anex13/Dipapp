@@ -33,7 +33,6 @@ public class FragWiki extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    // TODO: 23.09.2016 наебенить лайаутов под разные штуки
     @Override
     public void onClick(View v) {
         Pageenum pageenum;
@@ -56,3 +55,4 @@ public class FragWiki extends Fragment implements View.OnClickListener {
     }
 
 }
+// TODO: 20.10.2016 заполнить разделы 

@@ -28,7 +28,6 @@ public class JobSrvce extends android.app.job.JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
         this.params = params;
-        Toast.makeText(getApplicationContext(), "starting job service...", Toast.LENGTH_SHORT).show();
         IntentSrvs.alrmCheck(getApplicationContext());
         return true;
     }
@@ -39,3 +38,4 @@ public class JobSrvce extends android.app.job.JobService {
     }
 
 }
+// TODO: 20.10.2016  сматри аларм 

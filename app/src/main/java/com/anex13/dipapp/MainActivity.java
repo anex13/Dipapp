@@ -28,7 +28,6 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static final int MY_PERMISSIONS_REQUEST_WAKE_LOCK = 1;
     private DrawerLayout drawer;
     Toolbar toolbar;
     int color;
@@ -58,7 +57,6 @@ public class MainActivity extends AppCompatActivity
 
 
         if (isFirstTime()) {
-            //first run help
             Target viewTarget = new ViewTarget(UIUtils.getNavButtonView(toolbar));
             scw = new ShowcaseView.Builder(this)
                     .setTarget(viewTarget)
@@ -146,13 +144,12 @@ public class MainActivity extends AppCompatActivity
 
     private boolean isFirstTime() {
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        boolean ranBefore = preferences.getBoolean("RanBefore", false);
-        if (!ranBefore) {
-            // first time
+        boolean runBefore = preferences.getBoolean("RanBefore", false);
+        if (!runBefore) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("RanBefore", true);
             editor.commit();
         }
-        return !ranBefore;
+        return !runBefore;
     }
 }

@@ -10,9 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 
-/**
- * Created by namel on 06.05.2016.
- */
+
 public class SRVContentProvider extends android.content.ContentProvider {
     static final String DB_NAME = "mydb";
     static final int DB_VERSION = 5;

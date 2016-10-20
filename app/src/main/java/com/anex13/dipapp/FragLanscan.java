@@ -69,7 +69,6 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
                 ans = intent.getStringArrayExtra(ANSVER);
                 switch (ans[0]){
                     case "scanfinish":
-                        // scan finished actions
                         Toast toast1 = Toast.makeText(getContext(), "Network scan is finished", Toast.LENGTH_LONG);
                         toast1.show();
                         pBar.setVisibility(View.INVISIBLE);
@@ -103,8 +102,6 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    // TODO: 23.09.2016  res strings
-    // TODO: 23.09.2016 запилить прогрессбар черным цветом на фаб
     @Override
     public void onClick(View v) {
         String url;
@@ -133,3 +130,4 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
         getActivity().unregisterReceiver(receiver);
     }
 }
+// TODO: 20.10.2016 вендор и порты 

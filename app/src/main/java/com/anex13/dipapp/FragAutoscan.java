@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,10 +64,10 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        Log.i(LOGTAG,"oncreate context menu ");
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         Cursor c  = ((Cursor) lv.getAdapter().getItem(info.position));
         menusrv=new Server(c);
@@ -80,7 +79,6 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case MENU_EDIT_SERVER:
                 args= menusrv.toBundle();
@@ -95,14 +93,12 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
                         getActivity().getContentResolver().delete(uri,null,null);
                     }
                 }).start();
-
-
-
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -115,5 +111,4 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 }
-//контекстное меню - удалить\редактировать\
-//pull to refresh
+// TODO: 20.10.2016 пулл ту рефрэш , разобраться с эдит срв , отображать время след алярма и состояние проверки, покрутить лайаут 
