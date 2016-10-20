@@ -1,5 +1,7 @@
 package com.anex13.dipapp;
 
+import android.content.ContentUris;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -42,11 +44,16 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
     ViewSwitcher vs3;
     ViewSwitcher vs4;
     Toast toast;
-    //Time now = new Time();
+    Bundle bundle;
+    int id;
+    Uri uri;
+
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.srv_add, container, false);
+        bundle=getArguments();
         srvname = (EditText) rootView.findViewById(R.id.addsrvname);
         srvname.setOnFocusChangeListener(this);
         srvurl = (EditText) rootView.findViewById(R.id.addsrvurl);
@@ -85,6 +92,22 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
         vs3.setOutAnimation(outAnim);
         vs4.setInAnimation(inAnim);
         vs4.setOutAnimation(outAnim);
+        if (bundle!=null){
+            Server srv=new Server(bundle);
+            id=srv.getId();
+            srvname.setText(srv.getName());
+            srvurl.setText(srv.getUrl());
+            srvchkurl.setText(srv.getChkurl());
+            srvupdatetime.setText(Long.toString(srv.getTime()/60000));
+            alarmsw.setChecked(srv.getAlarm()!=0);
+            uri = ContentUris.withAppendedId(SRVContentProvider.SERVERS_CONTENT_URI, id);
+            vs1.setVisibility(View.INVISIBLE);
+            vs2.setVisibility(View.INVISIBLE);
+            vs3.setVisibility(View.INVISIBLE);
+            vs4.setVisibility(View.INVISIBLE);
+            addbutton.setText("Update");
+
+        }
 
         return rootView;
     }
@@ -126,13 +149,23 @@ public class FragSRVAdd extends Fragment implements View.OnClickListener, View.O
                 else
                 switchalrm =0;
                 if (!servername.equals("") && !serverurl.equals("") && !serverchkurl.equals("") && serverupdate!=0) {
+                    if (bundle==null){
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             Server server = new Server(servername, serverurl, serverchkurl, serverupdate,servernextupdate,switchalrm,2);
                             getActivity().getContentResolver().insert(SRVContentProvider.SERVERS_CONTENT_URI, server.toContentValues());
                         }
-                    }).start();
+                    }).start();}
+                    else {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Server server = new Server(servername, serverurl, serverchkurl, serverupdate,servernextupdate,switchalrm,2);
+                                getActivity().getContentResolver().update(uri, server.toContentValues(),null,null);
+                            }
+                        }).start();
+                    }
                     ((MainActivity) getActivity()).showFragment(new FragAutoscan(), false);
                 }
                 else {

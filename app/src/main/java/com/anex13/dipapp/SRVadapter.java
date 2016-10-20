@@ -7,6 +7,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.constraint.ConstraintLayout;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ public class SRVadapter extends CursorAdapter{
     @Override
     public void bindView(View view, Context context, final Cursor cursor) {
     final Server server = new Server(cursor);
+        ConstraintLayout item =(ConstraintLayout) view.findViewById(R.id.itemlayout) ;
         Switch switch1=(Switch) view.findViewById(R.id.switch1);
         ((TextView) view.findViewById(R.id.srvname)).setText(server.getName());
         ((TextView) view.findViewById(R.id.srvurl)).setText(server.getUrl());

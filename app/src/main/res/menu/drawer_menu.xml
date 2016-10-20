@@ -23,6 +23,6 @@
             android:title="Settings"></item>
         <item
             android:id="@+id/menuexit"
-            android:title="Exit"></item>
+            android:title="Stop all auto check"></item>
     </group>
 </menu>
