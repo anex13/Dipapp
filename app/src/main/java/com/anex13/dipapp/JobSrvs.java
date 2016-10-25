@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class JobSrvce extends android.app.job.JobService {
+public class JobSrvs extends android.app.job.JobService {
     private JobParameters params;
 
     @Override

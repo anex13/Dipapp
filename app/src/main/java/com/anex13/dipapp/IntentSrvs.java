@@ -1,5 +1,6 @@
 package com.anex13.dipapp;
 
+import android.app.Activity;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,18 +13,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -39,7 +40,7 @@ public class IntentSrvs extends IntentService {
     private static final String PARAM_NEXTTIME = "nextALRMtime";
     private static final String PARAM_UPDTIME = "timing";
     private static final String PARAM_NAME = "SRVName";
-    private static final String PARAM_ALRM = "alrm";
+    private static final String PARAM_ACT = "alrm";
     private static Cursor c;
     static String selection = null;
     static String[] selectionArgs = null;
@@ -64,44 +65,12 @@ public class IntentSrvs extends IntentService {
         super("PingSrvc");
     }
 
-    public String ping(String url, int ttl, int count) {
-        Log.i(LOG_TAG, "ping method");
-        String str = "^_^error";
-        try {
-
-            Process process = Runtime.getRuntime().exec(
-                    "/system/bin/ping -W 1 -c " + count + " -t " + ttl + " " + url);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    process.getInputStream()));
-            int i;
-            char[] buffer = new char[4096];
-            StringBuffer output = new StringBuffer();
-            while ((i = reader.read(buffer)) > 0)
-                output.append(buffer, 0, i);
-            reader.close();
-            str = output.toString();
-        } catch (IOException e) {
-            Log.i(LOG_TAG, "exception" + e.getMessage());
-            e.printStackTrace();
-        }
-        return str;
-    }
-
-    public Boolean statechk(String url) {
-        boolean str;
-        String pingansver = ping(url, 54, 1);
-        str = !pingansver.contains("100% packet loss");
-        Log.i(LOG_TAG, "state chk " + url + "  ansv   " + str);
-        // Некоторые девайсы не пингуются =\
-        return str;
-    }
-
     @Override
     protected void onHandleIntent(Intent intent) {
         String action = intent.getAction();
         String url = intent.getStringExtra(PARAM_URL);
         switch (action) {
-            case ACTION_PING:
+            case ACTION_PING: //simple ping
                 Log.i(LOG_TAG, url);
                 String pingResult = ping(url, 54, 4);
                 Intent broadcastIntent = new Intent();
@@ -111,7 +80,7 @@ public class IntentSrvs extends IntentService {
                 sendBroadcast(broadcastIntent);
                 Log.i(LOG_TAG, "ping broadcast  " + pingResult);
                 break;
-            case ACTION_TRACE:
+            case ACTION_TRACE: //traceroute
                 String last = "0";
                 String now = "";
                 int ttl1 = 1;
@@ -138,13 +107,13 @@ public class IntentSrvs extends IntentService {
                 broadcastIntent1.putExtra(ANSVER, "\n Tracing finished \n");
                 sendBroadcast(broadcastIntent1);
                 break;
-            case ACTION_SCAN:
+            case ACTION_SCAN: //lan scaner
                 ExecutorService executor = Executors.newFixedThreadPool(NB_THREADS);
                 String[] splurl = url.split("\\.");
                 String lanurl = splurl[0] + "." + splurl[1] + "." + splurl[2] + ".";
                 for (int dest = 1; dest < 255; dest++) {
                     String host = lanurl + dest;
-                    executor.execute(pingRunnable(host));
+                    executor.execute(lanScanerRunnable(host));
                 }
                 Log.i(LOG_TAG, "Waiting for executor to terminate...");
                 executor.shutdown();
@@ -161,11 +130,11 @@ public class IntentSrvs extends IntentService {
                 broadcastIntentfinish.putExtra(ANSVER, scanfinish);
                 sendBroadcast(broadcastIntentfinish);
                 break;
-            case ACTION_MONITORING:
+            case ACTION_MONITORING:  //auto monitoring
                 int state;
-                switch (intent.getStringExtra(PARAM_ALRM)) {
+                switch (intent.getStringExtra(PARAM_ACT)) { //check for action in intents queue
                     case "no":
-                        if (statechk(intent.getStringExtra(PARAM_URL))) {
+                        if (statechk(intent.getStringExtra(PARAM_URL))) { //check server and other same network host
                             Log.i(LOG_TAG, "1chk ");
                             state = 1;
                         } else if (statechk(intent.getStringExtra(PARAM_CHKURL))) {
@@ -196,7 +165,6 @@ public class IntentSrvs extends IntentService {
                         setalrm(getApplicationContext());
                         break;
                     case "notification check":
-                        //проверить и если над запустить нотификейшн манагера
                         notificationCheck(getApplicationContext());
                         break;
                 }
@@ -227,6 +195,7 @@ public class IntentSrvs extends IntentService {
         context.startService(pingIntent);
     }
 
+    //set alarm for nearest check
     private static void setalrm(Context context) {
         Server nalrm = null;
         selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
@@ -244,7 +213,7 @@ public class IntentSrvs extends IntentService {
                 //запилить джоб шедулер
                 JobScheduler jobScheduler = (JobScheduler) MainActivity.getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
                 JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(context.getPackageName(),
-                        JobSrvce.class.getName()));
+                        JobSrvs.class.getName()));
                 Log.i(LOG_TAG, "jobsheduled for " + ((nalrm.getNextchktime() - System.currentTimeMillis()) / 1000) + "sec");
                 builder.setPeriodic(nalrm.getNextchktime() - System.currentTimeMillis());
                 builder.setRequiresDeviceIdle(true);
@@ -264,6 +233,7 @@ public class IntentSrvs extends IntentService {
         }
     }
 
+    //cancel all alarms
     public static void cancelALRM(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             JobScheduler jobScheduler = (JobScheduler) MainActivity.getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
@@ -275,6 +245,7 @@ public class IntentSrvs extends IntentService {
 
     }
 
+    //servers check called manually (all servers checked)
     public static void checkItNow(Context context) {
         cancelALRM(context);
         selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ?";
@@ -285,6 +256,7 @@ public class IntentSrvs extends IntentService {
 
     }
 
+    //servers check called by alarm (time dependent)
     public static void alrmCheck(Context context) {
         cancelALRM(context);
         selection = SRVContentProvider.FAIL_NOTIFICATION + " <> ? AND " + SRVContentProvider.SERVER_NEXT_CHECK + " <?";
@@ -293,6 +265,7 @@ public class IntentSrvs extends IntentService {
         Log.i(LOG_TAG, "alrm check intent start");
     }
 
+    //generating intents queue for server monitoring
     static void sendIntents(Context context, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         try {
             c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
@@ -304,7 +277,7 @@ public class IntentSrvs extends IntentService {
                         Intent pingIntent = new Intent(context, IntentSrvs.class);
 
                         pingIntent.setAction(ACTION_MONITORING);
-                        pingIntent.putExtra(PARAM_ALRM, "no");
+                        pingIntent.putExtra(PARAM_ACT, "no");
                         pingIntent.putExtra(PARAM_ID, Integer.toString(crsrSRV.getId()));
                         pingIntent.putExtra(PARAM_NAME, crsrSRV.getName());
                         pingIntent.putExtra(PARAM_URL, crsrSRV.getUrl());
@@ -317,9 +290,9 @@ public class IntentSrvs extends IntentService {
                     } while (c.moveToNext());
                     Intent pingIntent = new Intent(context, IntentSrvs.class);
                     pingIntent.setAction(ACTION_MONITORING);
-                    pingIntent.putExtra(PARAM_ALRM, "alrm");
+                    pingIntent.putExtra(PARAM_ACT, "alrm");
                     context.startService(pingIntent);
-                    pingIntent.putExtra(PARAM_ALRM, "notification check");
+                    pingIntent.putExtra(PARAM_ACT, "notification check");
                     context.startService(pingIntent);
 
                 }
@@ -333,11 +306,8 @@ public class IntentSrvs extends IntentService {
         }
     }
 
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    private Runnable pingRunnable(final String host) {
+    //generating broadcast for lan scaner
+    private Runnable lanScanerRunnable(final String host) {
         return new Runnable() {
             public void run() {
                 String[] scanresult = new String[4];
@@ -363,6 +333,7 @@ public class IntentSrvs extends IntentService {
         };
     }
 
+    //get mac-adr by ip
     public static String getHardwareAddress(String ip) {
         String hw = "  no mac";
         BufferedReader bufferedReader = null;
@@ -398,6 +369,7 @@ public class IntentSrvs extends IntentService {
         return hw;
     }
 
+    //notification on state is bad
     public static void notificationCheck(Context context) {
         try {
             c = context.getContentResolver().query(SRVContentProvider.SERVERS_CONTENT_URI, projection, selection, selectionArgs, sortOrder, null);
@@ -424,7 +396,7 @@ public class IntentSrvs extends IntentService {
                                 //.setContentTitle(res.getString(R.string.notifytitle)) // Заголовок уведомления
                                 .setContentTitle("Some server unreachable")
                                 //.setContentText(res.getString(R.string.notifytext))
-                                .setContentText("Server "+crsrSRV.getName()+" is unreachable"); // Текст уведомления
+                                .setContentText("Server " + crsrSRV.getName() + " is unreachable"); // Текст уведомления
 
                         // Notification notification = builder.getNotification(); // до API 16
                         Notification notification = builder.build();
@@ -434,6 +406,7 @@ public class IntentSrvs extends IntentService {
                         NotificationManager notificationManager = (NotificationManager) context
                                 .getSystemService(Context.NOTIFICATION_SERVICE);
                         notificationManager.notify(742, notification);
+                        sendMail();
                     } while (c.moveToNext());
 
                 }
@@ -443,11 +416,62 @@ public class IntentSrvs extends IntentService {
 
         } finally {
             c.close();
+
             // TODO: 20.10.2016 прикрутить мыло с настройкой в префс
         }
 
     }
 
+    public static void sendMail(){
+        String fromEmail = "it.zavod.bulbash@gmail.com";
+        String fromPassword = "742617000027";
+        String toEmails = "it.zavod@bulbash.com";
+        List<String> toEmailList = Arrays.asList(toEmails
+                .split("\\s*,\\s*"));
+        Log.i("SendMailActivity", "To List: " + toEmailList);
+        String emailSubject = "servers error";
+        String emailBody = "test msg from monitoring app";
+        new SendMailTask().execute(fromEmail,
+                fromPassword, toEmailList, emailSubject, emailBody);
+    }
+
+    //core ping utility impl
+    public String ping(String url, int ttl, int count) {
+        Log.i(LOG_TAG, "ping method");
+        String str = "^_^error";
+        try {
+
+            Process process = Runtime.getRuntime().exec(
+                    "/system/bin/ping -W 1 -c " + count + " -t " + ttl + " " + url);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    process.getInputStream()));
+            int i;
+            char[] buffer = new char[4096];
+            StringBuffer output = new StringBuffer();
+            while ((i = reader.read(buffer)) > 0)
+                output.append(buffer, 0, i);
+            reader.close();
+            str = output.toString();
+        } catch (IOException e) {
+            Log.i(LOG_TAG, "exception" + e.getMessage());
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+    //ping to bul
+    public Boolean statechk(String url) {
+        boolean str;
+        String pingansver = ping(url, 54, 1);
+        str = !pingansver.contains("100% packet loss");
+        Log.i(LOG_TAG, "state chk " + url + "  ansv   " + str);
+        // Некоторые девайсы не пингуются =\
+        return str;
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }
 
 
@@ -455,4 +479,4 @@ public class IntentSrvs extends IntentService {
 // InetAddress.getByName("host ip").getHostName();  hostname по ip
 // выровнять руки и переделать нормально
 //добавить базу вендоров
-//
+//https://www.google.com/settings/u/1/security/lesssecureapps необходимо включить

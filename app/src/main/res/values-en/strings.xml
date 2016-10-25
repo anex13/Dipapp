@@ -11,6 +11,20 @@
     <string name="frag2">Ping and Trace</string>
     <string name="frag3">LanScan</string>
     <string name="frag4">Wiki</string>
+    <string name="pr_monitoring_Header">Auto monitoring settings</string>
+    <string name="pr_wifi_only">WiFi only</string>
+    <string name="fr_ping_btn_Ping">Ping</string>
+    <string name="fr_ping_btn_trace">Trace</string>
+    <string name="fr_srvadd_sw_autochck">Eneble automatic check</string>
+    <string name="fr_srvadd_btn_add">Add server</string>
+    <string name="fr_srvadd_btn_cancel">Cancel</string>
+    <string name="fr_srvadd_txtsw_srvname">Server name</string>
+    <string name="fr_srvadd_txtsw_delaytime_lng">Update time in minutes</string>
+    <string name="fr_srvadd_txtsw_delaytime_shrt">Update time</string>
+    <string name="fr_srvadd_txtsw_srvurl_long">Server url or ip address</string>
+    <string name="fr_srvadd_txtsw_srvurl_shrt">Server url</string>
+    <string name="fr_srvadd_txtsw_chkurl_lng">Url to check network</string>
+    <string name="fr_srvadd_txtsw_chkuurl_shrt">Checking url</string>
 
     <string-array name="nix_array">
         <item>00. Common Bash commands.</item>

@@ -1,6 +1,7 @@
 package com.anex13.dipapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if (isFirstTime()) {
-            Target viewTarget = new ViewTarget(UIUtils.getNavButtonView(toolbar));
+            Target viewTarget = new ViewTarget(getNavButtonView(toolbar));
             scw = new ShowcaseView.Builder(this)
                     .setTarget(viewTarget)
                     .hideOnTouchOutside()
@@ -69,7 +71,16 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
-
+    //public static Activity getActivitymy(){
+      //  Activity activity=
+        //return activity;
+    //}
+    public static ImageButton getNavButtonView(Toolbar toolbar) {
+        for (int i = 0; i < toolbar.getChildCount(); i++)
+            if (toolbar.getChildAt(i) instanceof ImageButton)
+                return (ImageButton) toolbar.getChildAt(i);
+        return null;
+    }
     public static Context getContext() {
         return MainActivity.context;
     }
@@ -109,6 +120,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.menuexit:
                 IntentSrvs.cancelALRM(getContext());
+                break;
+            case R.id.menusetings:
+                fragment = new FragPrefs();
+                toolbar.setTitle("Settings");
+                color = 0x99ffffff;
                 break;
             default:
                 fragment = new FragWiki();
