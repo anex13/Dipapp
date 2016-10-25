@@ -20,51 +20,6 @@
             android:orientation="vertical"
             android:layout_marginLeft="4dp">
 
-            <ViewSwitcher
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:measureAllChildren="false"
-                android:id="@+id/wsJsheduler">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:measureWithLargestChild="false"></LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <CheckBox
-                        android:text="@string/pr_wifi_only"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/wifionly"
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        app:layout_constraintBottom_toTopOf="@+id/oncharge"
-                        app:layout_constraintRight_toRightOf="@+id/oncharge"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="@+id/oncharge" />
-
-                    <CheckBox
-                        android:text="On charging only"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/oncharge"
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        app:layout_constraintBottom_toTopOf="@+id/textView12"
-                        app:layout_constraintRight_toRightOf="@+id/textView12"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="@+id/textView12" />
-
-                </LinearLayout>
-
-            </ViewSwitcher>
-
             <TextView
                 android:text="@string/pr_monitoring_Header"
                 android:layout_width="366dp"
@@ -76,6 +31,18 @@
                 tools:layout_constraintLeft_creator="1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Switch
+                android:text="WiFi only"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sw_wifi_only" />
+
+            <Switch
+                android:text="On charging only"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sw_on_charge" />
 
             <Switch
                 android:text="Start on boot"
@@ -114,10 +81,10 @@
                 android:id="@+id/pingcount"
                 tools:layout_constraintRight_creator="1"
                 tools:layout_constraintBottom_creator="1"
-                app:layout_constraintBottom_toTopOf="@+id/textView9"
-                app:layout_constraintRight_toRightOf="@+id/textView9"
+                app:layout_constraintBottom_toTopOf="@+id/tv_email_set"
+                app:layout_constraintRight_toRightOf="@+id/tv_email_set"
                 tools:layout_constraintLeft_creator="1"
-                app:layout_constraintLeft_toLeftOf="@+id/textView9" />
+                app:layout_constraintLeft_toLeftOf="@+id/tv_email_set" />
 
             <Space
                 android:layout_width="match_parent"
@@ -129,201 +96,162 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/sw_email" />
 
-            <ViewSwitcher
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ws_email"
-                android:measureAllChildren="false">
+                android:id="@+id/tv_email_set"
+                android:text="Email settings"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/sw_gmail"
+                app:layout_constraintRight_toRightOf="@+id/sw_gmail"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/sw_gmail" />
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"></LinearLayout>
+            <Switch
+                android:text="use Gmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sw_gmail"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/edit_email"
+                app:layout_constraintRight_toRightOf="@+id/edit_email"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_email" />
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/edit_smtpsrv"
+                app:layout_constraintRight_toRightOf="@+id/edit_smtpsrv"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_smtpsrv"
+                android:id="@+id/space" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView9"
-                        android:text="Email settings"
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        app:layout_constraintBottom_toTopOf="@+id/sw_gmail"
-                        app:layout_constraintRight_toRightOf="@+id/sw_gmail"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="@+id/sw_gmail" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/edit_email"
+                android:text="Email"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/edit_pass"
+                app:layout_constraintRight_toRightOf="@+id/edit_pass"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_pass" />
 
-                    <Switch
-                        android:text="use Gmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/sw_gmail"
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        app:layout_constraintBottom_toTopOf="@+id/edit_email"
-                        app:layout_constraintRight_toRightOf="@+id/edit_email"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="@+id/edit_email" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/edit_pass"
+                android:text="Password"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/space"
+                app:layout_constraintRight_toRightOf="@+id/space"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/space" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        app:layout_constraintBottom_toTopOf="@+id/edit_smtpsrv"
-                        app:layout_constraintRight_toRightOf="@+id/edit_smtpsrv"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="@+id/edit_smtpsrv"
-                        android:id="@+id/space" />
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gmail_ref" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:ems="10"
-                        android:id="@+id/edit_email"
-                        android:text="Email"
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        app:layout_constraintBottom_toTopOf="@+id/edit_pass"
-                        app:layout_constraintRight_toRightOf="@+id/edit_pass"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="@+id/edit_pass" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="smtp serv"
+                android:ems="10"
+                android:id="@+id/edit_smtpsrv"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/edit_smtpport"
+                app:layout_constraintRight_toRightOf="@+id/edit_smtpport"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_smtpport" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:ems="10"
-                        android:id="@+id/edit_pass"
-                        android:text="Password"
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        app:layout_constraintBottom_toTopOf="@+id/space"
-                        app:layout_constraintRight_toRightOf="@+id/space"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="@+id/space" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/edit_smtpport"
+                android:text="port"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/sw_auth"
+                app:layout_constraintRight_toRightOf="@+id/sw_auth"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/sw_auth" />
 
-                    <ViewSwitcher
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:measureAllChildren="false"
-                        android:id="@+id/ws_Gmail">
+            <Switch
+                android:text="Auth needed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sw_auth"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/sw_tls"
+                app:layout_constraintRight_toRightOf="@+id/sw_tls"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/sw_tls" />
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+            <Switch
+                android:text="Strat TLS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sw_tls"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/edit_mailheader"
+                app:layout_constraintRight_toRightOf="@+id/edit_mailheader"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_mailheader" />
 
-                            <TextView
-                                android:text="TextView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/gmail_ref" />
-                        </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/edit_mailto"
+                android:text="Email to: "
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Email Header"
+                android:ems="10"
+                android:id="@+id/edit_mailheader"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/edit_mailto"
+                app:layout_constraintRight_toRightOf="@+id/edit_mailto"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_mailto" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textPersonName"
-                                android:text="smtp serv"
-                                android:ems="10"
-                                android:id="@+id/edit_smtpsrv"
-                                tools:layout_constraintRight_creator="1"
-                                tools:layout_constraintBottom_creator="1"
-                                app:layout_constraintBottom_toTopOf="@+id/edit_smtpport"
-                                app:layout_constraintRight_toRightOf="@+id/edit_smtpport"
-                                tools:layout_constraintLeft_creator="1"
-                                app:layout_constraintLeft_toLeftOf="@+id/edit_smtpport" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:ems="10"
-                                android:id="@+id/edit_smtpport"
-                                android:text="port"
-                                tools:layout_constraintRight_creator="1"
-                                tools:layout_constraintBottom_creator="1"
-                                app:layout_constraintBottom_toTopOf="@+id/sw_auth"
-                                app:layout_constraintRight_toRightOf="@+id/sw_auth"
-                                tools:layout_constraintLeft_creator="1"
-                                app:layout_constraintLeft_toLeftOf="@+id/sw_auth" />
-
-                            <Switch
-                                android:text="Auth needed"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/sw_auth"
-                                tools:layout_constraintRight_creator="1"
-                                tools:layout_constraintBottom_creator="1"
-                                app:layout_constraintBottom_toTopOf="@+id/sw_tls"
-                                app:layout_constraintRight_toRightOf="@+id/sw_tls"
-                                tools:layout_constraintLeft_creator="1"
-                                app:layout_constraintLeft_toLeftOf="@+id/sw_tls" />
-
-                            <Switch
-                                android:text="Strat TLS"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/sw_tls"
-                                tools:layout_constraintRight_creator="1"
-                                tools:layout_constraintBottom_creator="1"
-                                app:layout_constraintBottom_toTopOf="@+id/edit_mailheader"
-                                app:layout_constraintRight_toRightOf="@+id/edit_mailheader"
-                                tools:layout_constraintLeft_creator="1"
-                                app:layout_constraintLeft_toLeftOf="@+id/edit_mailheader" />
-                        </LinearLayout>
-                    </ViewSwitcher>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:ems="10"
-                        android:id="@+id/edit_mailto"
-                        android:text="Email to: "
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintRight_toRightOf="parent"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="parent" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:text="Email Header"
-                        android:ems="10"
-                        android:id="@+id/edit_mailheader"
-                        tools:layout_constraintRight_creator="1"
-                        tools:layout_constraintBottom_creator="1"
-                        app:layout_constraintBottom_toTopOf="@+id/edit_mailto"
-                        app:layout_constraintRight_toRightOf="@+id/edit_mailto"
-                        tools:layout_constraintLeft_creator="1"
-                        app:layout_constraintLeft_toLeftOf="@+id/edit_mailto" />
-
-                    <Button
-                        android:text="Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mailprefssave" />
-
-                </LinearLayout>
-
-            </ViewSwitcher>
+            <Button
+                android:text="Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mailprefssave" />
 
         </LinearLayout>
     </ScrollView>
