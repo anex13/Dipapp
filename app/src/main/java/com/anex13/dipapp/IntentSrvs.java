@@ -11,6 +11,7 @@ import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.media.RingtoneManager;
@@ -406,7 +407,7 @@ public class IntentSrvs extends IntentService {
                         NotificationManager notificationManager = (NotificationManager) context
                                 .getSystemService(Context.NOTIFICATION_SERVICE);
                         notificationManager.notify(742, notification);
-                        sendMail();
+                        sendMail(context);
                     } while (c.moveToNext());
 
                 }
@@ -422,17 +423,22 @@ public class IntentSrvs extends IntentService {
 
     }
 
-    public static void sendMail(){
-        String fromEmail = "it.zavod.bulbash@gmail.com";
-        String fromPassword = "742617000027";
-        String toEmails = "it.zavod@bulbash.com";
-        List<String> toEmailList = Arrays.asList(toEmails
-                .split("\\s*,\\s*"));
-        Log.i("SendMailActivity", "To List: " + toEmailList);
-        String emailSubject = "servers error";
-        String emailBody = "test msg from monitoring app";
-        new SendMailTask().execute(fromEmail,
-                fromPassword, toEmailList, emailSubject, emailBody);
+    public static void sendMail(Context context){
+        SharedPreferences spref =context.getSharedPreferences(FragPrefs.PREF_TAG,MODE_PRIVATE);
+        if (spref.getBoolean(FragPrefs.USE_MAIL,false)){
+            String emailBody = "test msg from monitoring app";
+            // TODO: 26.10.2016 запилить тело мыла
+            try {
+                Log.i("SendMailTask", "About to instantiate GMail...");
+                GMail androidEmail = new GMail(emailBody,context);
+                androidEmail.createEmailMessage();
+                androidEmail.sendEmail();
+                Log.i("SendMailTask", "Mail Sent.");
+            } catch (Exception e) {
+                Log.e("SendMailTask", e.getMessage(), e);
+            }
+        }
+
     }
 
     //core ping utility impl

@@ -201,6 +201,12 @@
                     android:layout_height="match_parent"
                     android:id="@+id/notGmail_group">
 
+                    <TextView
+                        android:text="Smtp server params"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView12" />
+
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -252,10 +258,11 @@
                         app:layout_constraintRight_toRightOf="@+id/edit_mailheader"
                         tools:layout_constraintLeft_creator="1"
                         app:layout_constraintLeft_toLeftOf="@+id/edit_mailheader" />
+
                 </LinearLayout>
 
                 <TextView
-                    android:text="TextView"
+                    android:text="тут будет ссыль на гмэйл настройки"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/gmail_ref" />

@@ -40,7 +40,7 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
     SharedPreferences sPref;
     EditText email, password, smtpurl, smtpPort, mailto, mailheader;
     Button mailSave;
-    TextView gmailref, tvset;
+    TextView gmailref;
     View mailGroup, ownsrvGroup;
 
 
@@ -51,7 +51,6 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
         mailGroup =(View) rootView.findViewById(R.id.mail_group);
         ownsrvGroup =(View) rootView.findViewById(R.id.notGmail_group);
         gmailref = (TextView) rootView.findViewById(R.id.gmail_ref);
-        tvset = (TextView) rootView.findViewById(R.id.tv_email_set);
         autostart = (Switch) rootView.findViewById(R.id.swonboot);
         autostart.setChecked(sPref.getBoolean(AUTO_START, false));
         autostart.setOnCheckedChangeListener(this);
@@ -130,8 +129,24 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
                setVisibilityGmail();
                 break;
             case R.id.sw_auth:
+                ed = sPref.edit();
+                ed.putBoolean(USE_AUTH, buttonView.isChecked());
+                ed.apply();
                 break;
             case R.id.sw_tls:
+                ed = sPref.edit();
+                ed.putBoolean(USE_TLS, buttonView.isChecked());
+                ed.apply();
+                break;
+            case R.id.sw_wifi_only:
+                ed = sPref.edit();
+                ed.putBoolean(USE_WIFI, buttonView.isChecked());
+                ed.apply();
+                break;
+            case R.id.sw_on_charge:
+                ed = sPref.edit();
+                ed.putBoolean(USE_CHARGE, buttonView.isChecked());
+                ed.apply();
                 break;
             default:
                 //
@@ -163,7 +178,15 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mailprefssave:
-                //write mail prefs
+                SharedPreferences.Editor ed;
+                ed = sPref.edit();
+                ed.putString(MAIL_FROM, email.getText().toString());
+                ed.putString(MAIL_PASS, password.getText().toString());
+                ed.putString(MAIL_TO, mailto.getText().toString());
+                ed.putString(MAIL_HEAD, mailheader.getText().toString());
+                ed.putString(MAIL_URL, smtpurl.getText().toString());
+                ed.putString(MAIL_PORT, smtpPort.getText().toString());
+                ed.apply();
                 break;
         }
     }
@@ -183,3 +206,5 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
 
     }
 }
+
+// TODO: 26.10.2016 https://www.google.com/settings/u/1/security/lesssecureapps
