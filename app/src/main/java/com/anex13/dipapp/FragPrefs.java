@@ -41,12 +41,15 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
     EditText email, password, smtpurl, smtpPort, mailto, mailheader;
     Button mailSave;
     TextView gmailref, tvset;
+    View mailGroup, ownsrvGroup;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.prefs_frag, container, false);
         sPref = getActivity().getSharedPreferences(PREF_TAG, MODE_PRIVATE);
+        mailGroup =(View) rootView.findViewById(R.id.mail_group);
+        ownsrvGroup =(View) rootView.findViewById(R.id.notGmail_group);
         gmailref = (TextView) rootView.findViewById(R.id.gmail_ref);
         tvset = (TextView) rootView.findViewById(R.id.tv_email_set);
         autostart = (Switch) rootView.findViewById(R.id.swonboot);
@@ -56,8 +59,8 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
         useMail.setOnCheckedChangeListener(this);
         useMail.setChecked(sPref.getBoolean(USE_MAIL, false));
         useGmail = (Switch) rootView.findViewById(R.id.sw_gmail);
-        useGmail.setOnCheckedChangeListener(this);
         useGmail.setChecked(sPref.getBoolean(USE_GMAIL, false));
+        useGmail.setOnCheckedChangeListener(this);
         starTLS = (Switch) rootView.findViewById(R.id.sw_tls);
         starTLS.setOnCheckedChangeListener(this);
         starTLS.setChecked(sPref.getBoolean(USE_TLS, false));
@@ -92,24 +95,10 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
             wifionly.setVisibility(View.GONE);
         }
         if (!sPref.getBoolean(USE_MAIL, false)) {
-            tvset.setVisibility(View.GONE);
-            useGmail.setVisibility(View.GONE);
-            email.setVisibility(View.GONE);
-            password.setVisibility(View.GONE);
-            gmailref.setVisibility(View.GONE);
-            smtpurl.setVisibility(View.GONE);
-            smtpPort.setVisibility(View.GONE);
-            authNeeded.setVisibility(View.GONE);
-            starTLS.setVisibility(View.GONE);
-            mailto.setVisibility(View.GONE);
-            mailheader.setVisibility(View.GONE);
-            mailSave.setVisibility(View.GONE);
+            mailGroup.setVisibility(View.GONE);
         } else {
             if (sPref.getBoolean(USE_GMAIL, false)) {
-                smtpurl.setVisibility(View.GONE);
-                smtpPort.setVisibility(View.GONE);
-                authNeeded.setVisibility(View.GONE);
-                starTLS.setVisibility(View.GONE);
+                ownsrvGroup.setVisibility(View.GONE);
             } else
                 gmailref.setVisibility(View.GONE);
         }
@@ -132,13 +121,13 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
                 ed.putBoolean(USE_MAIL, buttonView.isChecked());
                 ed.apply();
                 setVisibilityMail();
-                setVisibilityGmail();
+               setVisibilityGmail();
                 break;
             case R.id.sw_gmail:
                 ed = sPref.edit();
                 ed.putBoolean(USE_GMAIL, buttonView.isChecked());
                 ed.apply();
-                setVisibilityGmail();
+               setVisibilityGmail();
                 break;
             case R.id.sw_auth:
                 break;
@@ -152,26 +141,9 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
 
     private void setVisibilityMail() {
         if (!sPref.getBoolean(USE_MAIL, false)) {
-            tvset.setVisibility(View.GONE);
-            useGmail.setVisibility(View.GONE);
-            email.setVisibility(View.GONE);
-            password.setVisibility(View.GONE);
-            gmailref.setVisibility(View.GONE);
-            smtpurl.setVisibility(View.GONE);
-            smtpPort.setVisibility(View.GONE);
-            authNeeded.setVisibility(View.GONE);
-            starTLS.setVisibility(View.GONE);
-            mailto.setVisibility(View.GONE);
-            mailheader.setVisibility(View.GONE);
-            mailSave.setVisibility(View.GONE);
+        mailGroup.setVisibility(View.GONE);
         } else {
-            tvset.setVisibility(View.VISIBLE);
-            useGmail.setVisibility(View.VISIBLE);
-            email.setVisibility(View.VISIBLE);
-            password.setVisibility(View.VISIBLE);
-            mailto.setVisibility(View.VISIBLE);
-            mailheader.setVisibility(View.VISIBLE);
-            mailSave.setVisibility(View.VISIBLE);
+            mailGroup.setVisibility(View.VISIBLE);
         }
     }
 
@@ -179,16 +151,10 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
         if (sPref.getBoolean(USE_MAIL, false)) {
             if (sPref.getBoolean(USE_GMAIL, false)) {
                 gmailref.setVisibility(View.VISIBLE);
-                smtpurl.setVisibility(View.GONE);
-                smtpPort.setVisibility(View.GONE);
-                authNeeded.setVisibility(View.GONE);
-                starTLS.setVisibility(View.GONE);
+                ownsrvGroup.setVisibility(View.GONE);
             } else {
                 gmailref.setVisibility(View.GONE);
-                smtpurl.setVisibility(View.VISIBLE);
-                smtpPort.setVisibility(View.VISIBLE);
-                authNeeded.setVisibility(View.VISIBLE);
-                starTLS.setVisibility(View.VISIBLE);
+                ownsrvGroup.setVisibility(View.VISIBLE);
             }
         }
     }
