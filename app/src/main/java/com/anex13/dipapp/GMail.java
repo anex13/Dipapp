@@ -6,11 +6,13 @@ package com.anex13.dipapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -38,13 +40,14 @@ public class GMail {
     Properties emailProperties;
     Session mailSession;
     MimeMessage emailMessage;
-
+ Context mcontext;
     public GMail() {
 
     }
 
     public GMail(String emailBody, Context context) {
         SharedPreferences sPref = context.getSharedPreferences(FragPrefs.PREF_TAG, Context.MODE_PRIVATE);
+        mcontext=context;
         if (sPref.getBoolean(FragPrefs.USE_GMAIL, false)) {
             this.emailPort = "587";// gmail's smtp port
             this.smtpAuth = "true";
@@ -111,3 +114,4 @@ public class GMail {
 // final String smtpAuth = "true";
 //final String starttls = "true";
 //final String emailHost = "smtp.gmail.com";
+//tts?

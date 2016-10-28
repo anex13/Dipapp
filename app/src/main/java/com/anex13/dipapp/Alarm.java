@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.PowerManager;
 
 public class Alarm extends BroadcastReceiver {
@@ -23,7 +24,10 @@ public class Alarm extends BroadcastReceiver {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context,Alarm.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
         am.setWindow(AlarmManager.RTC_WAKEUP, next,5000, pi);
+        else
+            am.set(AlarmManager.RTC_WAKEUP, next, pi);
     }
 
     public static void cancelAlarm(Context context) {
