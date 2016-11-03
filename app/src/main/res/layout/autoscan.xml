@@ -10,8 +10,8 @@
 
     <ListView
         android:id="@+id/srvlist"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -31,14 +31,83 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginRight="24dp"
+        app:fabSize="normal" />
 
-    <Button
-        android:id="@+id/buttonchkitnow"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
+        android:layout_height="48dp"
         app:layout_constraintBottom_toTopOf="@+id/fab"
-        app:layout_constraintRight_toRightOf="@+id/fab" />
+        app:layout_constraintRight_toRightOf="@+id/fab"
+        android:id="@+id/fabaddgroup">
+
+        <TextView
+            android:text="add Server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView8"
+            android:layout_weight="1" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_add_to_queue_white_24dp"
+            android:id="@+id/fabaddsrv"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        app:layout_constraintRight_toRightOf="@+id/fab"
+        app:layout_constraintBottom_toTopOf="@+id/fabaddgroup"
+        android:id="@+id/fabrefreshgroup">
+
+        <TextView
+            android:text="refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView9"
+            android:layout_weight="1" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_search_white_24dp"
+            android:id="@+id/fabrefresh"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        app:layout_constraintRight_toRightOf="@+id/fab"
+        app:layout_constraintBottom_toTopOf="@+id/fabrefreshgroup"
+        android:layout_height="48dp"
+        android:id="@+id/fabstopalrmgroup">
+
+        <TextView
+            android:text="stop all timers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10"
+            android:layout_weight="1" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_stop_white_24dp"
+            android:id="@+id/fabstopalrm"
+            android:layout_weight="1" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
