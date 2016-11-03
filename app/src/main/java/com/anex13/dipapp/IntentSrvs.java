@@ -121,10 +121,10 @@ public class IntentSrvs extends IntentService {
                 }
                 Log.i(LOG_TAG, "Scan finished");
                 Intent broadcastIntentfinish = new Intent();
-                broadcastIntentfinish.setAction(FragPing.BROADCAST_ACTION);
+                broadcastIntentfinish.setAction(FragLanscan.BROADCAST_ACTION);
                 broadcastIntentfinish.addCategory(Intent.CATEGORY_DEFAULT);
                 String[] scanfinish = new String[1];
-                scanfinish[0] = "scanfinish";
+                scanfinish[0] = FragLanscan.TAGSCANFINISH;
                 broadcastIntentfinish.putExtra(ANSVER, scanfinish);
                 sendBroadcast(broadcastIntentfinish);
                 break;
@@ -310,10 +310,11 @@ public class IntentSrvs extends IntentService {
             public void run() {
                 String[] scanresult = new String[4];
                 boolean state = statechk(host);
-                if (state == true) {
+                if (state) {
                     try {
                         hostname = InetAddress.getByName(host).getHostName();
                         mac = getHardwareAddress(host);
+                        Log.i(LOG_TAG, hostname);
                     } catch (UnknownHostException e) {
                         Log.e(LOG_TAG, "Not found", e);
                     }
@@ -322,10 +323,11 @@ public class IntentSrvs extends IntentService {
                     scanresult[2] = mac;
                     scanresult[3] = "vendor";
                     Intent broadcastIntent = new Intent();
-                    broadcastIntent.setAction(FragPing.BROADCAST_ACTION);
+                    broadcastIntent.setAction(FragLanscan.BROADCAST_ACTION);
                     broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
                     broadcastIntent.putExtra(ANSVER, scanresult);
                     sendBroadcast(broadcastIntent);
+                    Log.i(LOG_TAG, "radcast sent");
                 }
             }
         };
