@@ -26,8 +26,8 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     private static final int MENU_EDIT_SERVER = 1;
     private static final int MENU_DEL_SERVER = 2;
     private static final String LOGTAG = "my log";
-    private Animation fabOpenAnimation;
-    private Animation fabCloseAnimation;
+    private Animation fabOpenAnimation,fabOpenAnimation1,fabOpenAnimation2;
+    private Animation fabCloseAnimation, fabCloseAnimation1, fabCloseAnimation2;
     private static boolean menuisopen = false;
     ListView lv;
     Server menusrv;
@@ -64,8 +64,12 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
     private void getAnimations() {
 
         fabOpenAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.open_fab_menu);
+        fabOpenAnimation1 = AnimationUtils.loadAnimation(getContext(), R.anim.open_fab_menu1);
+        fabOpenAnimation2 = AnimationUtils.loadAnimation(getContext(), R.anim.open_fab_menu2);
 
         fabCloseAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.close_fab_menu);
+        fabCloseAnimation1 = AnimationUtils.loadAnimation(getContext(), R.anim.close_fab_menu1);
+        fabCloseAnimation2 = AnimationUtils.loadAnimation(getContext(), R.anim.close_fab_menu2);
 
     }
 
@@ -151,14 +155,14 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
 
     public void openMenu() {
         viewadd.startAnimation(fabOpenAnimation);
-        viewrefresh.startAnimation(fabOpenAnimation);
-        viewstop.startAnimation(fabOpenAnimation);
+        viewrefresh.startAnimation(fabOpenAnimation1);
+        viewstop.startAnimation(fabOpenAnimation2);
         menuisopen = true;
     }
 
     public void closeMenu() {
-        viewadd.startAnimation(fabCloseAnimation);
-        viewrefresh.startAnimation(fabCloseAnimation);
+        viewadd.startAnimation(fabCloseAnimation2);
+        viewrefresh.startAnimation(fabCloseAnimation1);
         viewstop.startAnimation(fabCloseAnimation);
         menuisopen=false;
     }

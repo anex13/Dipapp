@@ -4,10 +4,10 @@
 <translate
     android:fromXDelta="150%"
     android:toXDelta="0%"
-    android:duration="300"
+    android:duration="500"
     android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
     <scale
-        android:duration="300"
+        android:duration="500"
         android:fromXScale="0"
         android:fromYScale="0"
         android:interpolator="@android:anim/linear_interpolator"
@@ -16,7 +16,7 @@
         android:toXScale="1"
         android:toYScale="1" />
     <alpha
-        android:duration="300"
+        android:duration="500"
         android:fromAlpha="0.0"
         android:interpolator="@android:anim/accelerate_interpolator"
         android:toAlpha="1.0" />
