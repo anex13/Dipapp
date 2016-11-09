@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -22,19 +23,18 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener  {
+public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
     private static final int MENU_EDIT_SERVER = 1;
     private static final int MENU_DEL_SERVER = 2;
     private static final String LOGTAG = "my log";
-    private Animation fabOpenAnimation,fabOpenAnimation1,fabOpenAnimation2;
-    private Animation fabCloseAnimation, fabCloseAnimation1, fabCloseAnimation2;
+    private Animation fabOpenAnimation, fabOpenAnimation1, fabOpenAnimation2, fabMainAnimation, fabCloseAnimation;
     private static boolean menuisopen = false;
     ListView lv;
     Server menusrv;
     FragSRVAdd editfrag = new FragSRVAdd();
     Bundle args = new Bundle();
     FloatingActionButton fabmain, fabadd, fabrefresh, stopalrm;
-    View viewadd,viewrefresh,viewstop;
+    View viewadd, viewrefresh, viewstop;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,14 +47,14 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         fabadd.setOnClickListener(this);
         fabrefresh.setOnClickListener(this);
         stopalrm.setOnClickListener(this);
-        viewadd= (View) rootView.findViewById(R.id.fabaddgroup);
-        viewrefresh= (View) rootView.findViewById(R.id.fabrefreshgroup);
-        viewstop= (View) rootView.findViewById(R.id.fabstopalrmgroup);
+        viewadd = (View) rootView.findViewById(R.id.fabaddgroup);
+        viewrefresh = (View) rootView.findViewById(R.id.fabrefreshgroup);
+        viewstop = (View) rootView.findViewById(R.id.fabstopalrmgroup);
         viewadd.setVisibility(View.INVISIBLE);
         viewrefresh.setVisibility(View.INVISIBLE);
         viewstop.setVisibility(View.INVISIBLE);
         lv = (ListView) rootView.findViewById(R.id.srvlist);
-        menuisopen=false;
+        menuisopen = false;
         fabmain.setOnClickListener(this);
         registerForContextMenu(lv);
         getAnimations();
@@ -66,11 +66,8 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         fabOpenAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.open_fab_menu);
         fabOpenAnimation1 = AnimationUtils.loadAnimation(getContext(), R.anim.open_fab_menu1);
         fabOpenAnimation2 = AnimationUtils.loadAnimation(getContext(), R.anim.open_fab_menu2);
-
         fabCloseAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.close_fab_menu);
-        fabCloseAnimation1 = AnimationUtils.loadAnimation(getContext(), R.anim.close_fab_menu1);
-        fabCloseAnimation2 = AnimationUtils.loadAnimation(getContext(), R.anim.close_fab_menu2);
-
+        fabMainAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fab_menu_main);
     }
 
     @Override
@@ -157,14 +154,20 @@ public class FragAutoscan extends Fragment implements LoaderManager.LoaderCallba
         viewadd.startAnimation(fabOpenAnimation);
         viewrefresh.startAnimation(fabOpenAnimation1);
         viewstop.startAnimation(fabOpenAnimation2);
+        fabmain.startAnimation(fabMainAnimation);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        fabmain.setImageDrawable(getContext().getDrawable(R.drawable.ic_close_black_24dp));}
         menuisopen = true;
     }
 
     public void closeMenu() {
-        viewadd.startAnimation(fabCloseAnimation2);
-        viewrefresh.startAnimation(fabCloseAnimation1);
+        viewadd.startAnimation(fabCloseAnimation);
+        viewrefresh.startAnimation(fabCloseAnimation);
         viewstop.startAnimation(fabCloseAnimation);
-        menuisopen=false;
+        fabmain.startAnimation(fabMainAnimation);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            fabmain.setImageDrawable(getContext().getDrawable(R.drawable.ic_menu_white_24dp));}
+        menuisopen = false;
     }
 
 }

@@ -118,6 +118,11 @@ public class MainActivity extends AppCompatActivity
                 color = 0xff8bc34a;
                 //  color = R.color.colorLanscan;
                 break;
+            case R.id.menuportscan:
+                fragment= new FragPortScan();
+                toolbar.setTitle("port scan");
+                color = 0xff009688;
+                break;
             case R.id.menuexit:
                 IntentSrvs.cancelALRM(getContext());
                 break;

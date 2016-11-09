@@ -39,6 +39,8 @@ public class IntentSrvs extends IntentService {
     private static final String PARAM_UPDTIME = "timing";
     private static final String PARAM_NAME = "SRVName";
     private static final String PARAM_ACT = "alrm";
+    private static final String PARAM_PORT = "port";
+    private static final String ACTION_PORT = "portscan";
     private static Cursor c;
     static String selection = null;
     static String[] selectionArgs = null;
@@ -166,6 +168,15 @@ public class IntentSrvs extends IntentService {
                         notificationCheck(getApplicationContext());
                         break;
                 }
+                break;
+            case ACTION_PORT://// TODO: 09.11.2016 дописать тут
+                String portResult = ping(url, 54, 4);
+                Intent portansIntent = new Intent();
+                portansIntent.setAction(FragPortScan.BROADCAST_ACTION);
+                portansIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                portansIntent.putExtra(ANSVER, portResult);
+                sendBroadcast(portansIntent);
+                Log.i(LOG_TAG, "port broadcast  " + portResult);
                 break;
         }
 
@@ -464,7 +475,7 @@ public class IntentSrvs extends IntentService {
         return str;
     }
 
-    //ping to bul
+    //ping to bool
     public Boolean statechk(String url) {
         boolean str;
         String pingansver = ping(url, 54, 1);
@@ -476,6 +487,15 @@ public class IntentSrvs extends IntentService {
 
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    //port scaner
+    public static void startPortCheck(Context context,String url, String port){
+        Intent portIntent = new Intent(context, IntentSrvs.class);
+        portIntent.setAction(ACTION_PORT);
+        portIntent.putExtra(PARAM_URL, url);
+        portIntent.putExtra(PARAM_PORT, port);
+        context.startService(portIntent);
     }
 }
 
