@@ -274,6 +274,17 @@
                     android:id="@+id/mailprefssave" />
             </LinearLayout>
 
+            <TextView
+                android:text="Defoult screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView20" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/def_scr" />
+
         </LinearLayout>
     </ScrollView>
 

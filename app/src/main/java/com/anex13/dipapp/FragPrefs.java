@@ -8,17 +8,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChangeListener, View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChangeListener, View.OnClickListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
 
     public static final String AUTO_START = "autostart";
     public static final String PREF_TAG = "dipappprefs";
@@ -35,6 +38,7 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
     public static final String MAIL_PORT = "smtp port";
     public static final String USE_WIFI = "wifi only";
     public static final String USE_CHARGE = "on charge only";
+    public static final String DEF_SCR = "def scr";
     Switch autostart, useMail, useGmail, starTLS, authNeeded, wifionly, oncharge;
     SeekBar pingcount;
     SharedPreferences sPref;
@@ -42,6 +46,7 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
     Button mailSave;
     TextView gmailref;
     View mailGroup, ownsrvGroup;
+    Spinner defScreen;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,6 +94,15 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
         smtpurl.setText(sPref.getString(MAIL_URL, ""));
         smtpPort = (EditText) rootView.findViewById(R.id.edit_smtpport);
         smtpPort.setText(sPref.getString(MAIL_PORT, ""));
+        defScreen = (Spinner) rootView.findViewById(R.id.def_scr);
+        defScreen.setOnItemSelectedListener(this);
+        String[] data = {"Monitoring", "Ping and trace", "Lan scaner", "Wiki", "Port scaner"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, data);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        defScreen.setAdapter(adapter);
+        defScreen.setSelection(sPref.getInt(DEF_SCR,1)); //взять из шаред преф.
+        defScreen.setPrompt("Default screen");
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             oncharge.setVisibility(View.GONE);
             wifionly.setVisibility(View.GONE);
@@ -203,6 +217,19 @@ public class FragPrefs extends Fragment implements CompoundButton.OnCheckedChang
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        SharedPreferences.Editor ed;
+        ed = sPref.edit();
+        ed.putInt(DEF_SCR, i);
+        ed.apply();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 }

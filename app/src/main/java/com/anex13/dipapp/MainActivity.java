@@ -54,9 +54,44 @@ public class MainActivity extends AppCompatActivity
         hb = findViewById(android.R.id.home);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-        showFragment(new FragWiki(), false);
-        toolbar.setTitleTextColor(0xffffffff);
-
+        SharedPreferences sPref =getSharedPreferences(FragPrefs.PREF_TAG,MODE_PRIVATE);
+        Fragment fragdef = null;
+        switch (sPref.getInt(FragPrefs.DEF_SCR,1)) {
+            case 0:
+                fragdef = new FragAutoscan();
+                toolbar.setTitle(R.string.frag1);
+                color = 0xffff9800;
+                //   color = R.color.colorMonitor;
+                break;
+            case 1:
+                fragdef = new FragPing();
+                toolbar.setTitle(R.string.frag2);
+                color = 0xff009688;
+                //  color = R.color.colorPing;
+                break;
+            case 2:
+                fragdef = new FragLanscan();
+                toolbar.setTitle(R.string.frag3);
+                color = 0xff8bc34a;
+                //  color = R.color.colorLanscan;
+                break;
+            case 4:
+                fragdef= new FragPortScan();
+                toolbar.setTitle("port scan");
+                color = 0xff009688;
+                break;
+            default:
+                fragdef = new FragWiki();
+                toolbar.setTitle(R.string.frag4);
+                color = 0xff3f51b5;
+                // color = R.color.colorWiki ;
+                break;
+        }
+            toolbar.setBackgroundColor(color);
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                getWindow().setNavigationBarColor(color);
+            }
+            showFragment(fragdef, false);
 
         if (isFirstTime()) {
             Target viewTarget = new ViewTarget(getNavButtonView(toolbar));
