@@ -25,7 +25,7 @@ public class FragPortScan extends Fragment implements View.OnClickListener {
     Button scanDefault, scanOwn;
     ImageView rdp, http, smb,ftp;
     String ans;
-    public final static String ANSVER = "ansver";
+    public final static String ANSWER = "answer";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp.ports";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +44,9 @@ public class FragPortScan extends Fragment implements View.OnClickListener {
         scanOwn.setOnClickListener(this);
         receiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
-                ans = intent.getStringExtra(ANSVER);
+                ans = intent.getStringExtra(ANSWER);
+
+                scanAnsv.setText(ans+"\n" + scanAnsv.getText());
 
             }
         };
@@ -70,7 +72,8 @@ public class FragPortScan extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.port_scan_scandefoult_btn:
-
+IntentSrvs.startPortCheck(getContext(),scanUrl.getText().toString(),80);
+                scanAnsv.setText("");
                 break;
             default:
 

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,7 +23,7 @@ public class FragPing extends Fragment implements View.OnClickListener {
     Button tracebtn;
     EditText pingurl;
     ProgressBar pBar;
-    public final static String ANSVER = "ansver";
+    public final static String ANSWER = "answer";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp.ping";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +39,7 @@ public class FragPing extends Fragment implements View.OnClickListener {
         tracebtn.setOnClickListener(this);
         receiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
-                ans = intent.getStringExtra(ANSVER);
+                ans = intent.getStringExtra(ANSWER);
                 tv.setText(ans+"\n" + tv.getText());
                 pBar.setVisibility(View.INVISIBLE);
 

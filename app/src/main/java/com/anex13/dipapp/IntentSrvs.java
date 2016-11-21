@@ -17,11 +17,14 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,6 +44,7 @@ public class IntentSrvs extends IntentService {
     private static final String PARAM_ACT = "alrm";
     private static final String PARAM_PORT = "port";
     private static final String ACTION_PORT = "portscan";
+    private static final int PORT_THREADS = 10;
     private static Cursor c;
     static String selection = null;
     static String[] selectionArgs = null;
@@ -55,9 +59,9 @@ public class IntentSrvs extends IntentService {
     private static final String ACTION_SCAN = "ACTION_SCAN";
     private static final String PARAM_URL = "url";
     private static final String PARAM_CHKURL = "chkurl";
-    public static final String ANSVER = "ansver";
+    public static final String ANSWER = "answer";
     final static String LOG_TAG = "myLogs";
-    private static final int NB_THREADS = 10;
+    private static final int NB_THREADS = 1;
     String hostname = "";
     String mac;
 
@@ -76,7 +80,7 @@ public class IntentSrvs extends IntentService {
                 Intent broadcastIntent = new Intent();
                 broadcastIntent.setAction(FragPing.BROADCAST_ACTION);
                 broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                broadcastIntent.putExtra(ANSVER, pingResult);
+                broadcastIntent.putExtra(ANSWER, pingResult);
                 sendBroadcast(broadcastIntent);
                 Log.i(LOG_TAG, "ping broadcast  " + pingResult);
                 break;
@@ -89,7 +93,7 @@ public class IntentSrvs extends IntentService {
                     Intent broadcastIntent1 = new Intent();
                     broadcastIntent1.setAction(FragPing.BROADCAST_ACTION);
                     broadcastIntent1.addCategory(Intent.CATEGORY_DEFAULT);
-                    broadcastIntent1.putExtra(ANSVER, result);
+                    broadcastIntent1.putExtra(ANSWER, result);
                     sendBroadcast(broadcastIntent1);
                     last = now;
                     String[] splitedstr = ping(url, ttl1, 1).split("\n");
@@ -104,7 +108,7 @@ public class IntentSrvs extends IntentService {
                 Intent broadcastIntent1 = new Intent();
                 broadcastIntent1.setAction(FragPing.BROADCAST_ACTION);
                 broadcastIntent1.addCategory(Intent.CATEGORY_DEFAULT);
-                broadcastIntent1.putExtra(ANSVER, "\n Tracing finished \n");
+                broadcastIntent1.putExtra(ANSWER, "\n Tracing finished \n");
                 sendBroadcast(broadcastIntent1);
                 break;
             case ACTION_SCAN: //lan scaner
@@ -112,8 +116,7 @@ public class IntentSrvs extends IntentService {
                 String[] splurl = url.split("\\.");
                 String lanurl = splurl[0] + "." + splurl[1] + "." + splurl[2] + ".";
                 for (int dest = 1; dest < 255; dest++) {
-                    String host = lanurl + dest;
-                    executor.execute(lanScanerRunnable(host));
+                    executor.execute(lanScanerRunnable(lanurl,Integer.toString(dest)));
                 }
                 Log.i(LOG_TAG, "Waiting for executor to terminate...");
                 executor.shutdown();
@@ -122,13 +125,6 @@ public class IntentSrvs extends IntentService {
                 } catch (InterruptedException ignored) {
                 }
                 Log.i(LOG_TAG, "Scan finished");
-                Intent broadcastIntentfinish = new Intent();
-                broadcastIntentfinish.setAction(FragLanscan.BROADCAST_ACTION);
-                broadcastIntentfinish.addCategory(Intent.CATEGORY_DEFAULT);
-                String[] scanfinish = new String[1];
-                scanfinish[0] = FragLanscan.TAGSCANFINISH;
-                broadcastIntentfinish.putExtra(ANSVER, scanfinish);
-                sendBroadcast(broadcastIntentfinish);
                 break;
             case ACTION_MONITORING:  //auto monitoring
                 int state;
@@ -170,17 +166,52 @@ public class IntentSrvs extends IntentService {
                 }
                 break;
             case ACTION_PORT://// TODO: 09.11.2016 дописать тут
-                String portResult = ping(url, 54, 4);
-                Intent portansIntent = new Intent();
-                portansIntent.setAction(FragPortScan.BROADCAST_ACTION);
-                portansIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                portansIntent.putExtra(ANSVER, portResult);
-                sendBroadcast(portansIntent);
-                Log.i(LOG_TAG, "port broadcast  " + portResult);
+                String psurl = intent.getStringExtra(PARAM_URL);
+                int psport = intent.getIntExtra(PARAM_PORT, 80);
+                int maxport= 4000;
+
+                Log.d(TAG, "onHandleIntent");
+                ExecutorService portexecutor = Executors.newFixedThreadPool(PORT_THREADS);
+                for (int port = 1; port < maxport; port++) {
+                    portexecutor.execute(portScanRunable(psurl,port));
+                }
+                Log.i(LOG_TAG, "Waiting for executor to terminate...");
+                portexecutor.shutdown();
+                try {
+                    portexecutor.awaitTermination(60 * 1000, TimeUnit.MILLISECONDS);
+                } catch (InterruptedException ignored) {
+                }
+
                 break;
         }
 
+
     }
+
+    private Runnable portScanRunable(final String url, final int port) {
+        return new Runnable() {
+            public void run() {
+                try {
+                    Socket socket = new Socket();
+                    socket.connect(new InetSocketAddress(url, port), 100);
+                    Log.d(TAG, socket.toString());
+                    Log.d(TAG, "conected  "+port);
+                    String answer = "port "+port+" is open";
+                            Intent broadcastIntent = new Intent();
+                    broadcastIntent.setAction(FragPortScan.BROADCAST_ACTION);
+                    broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                    broadcastIntent.putExtra(FragPortScan.ANSWER, answer);
+                    sendBroadcast(broadcastIntent);
+                    socket.close();
+
+                } catch (Exception ex) {
+                    //Log.i(LOG_TAG, "closed port");
+                }
+
+            }
+        };
+    }
+
 
     public static void startPing(Context context, String url) {
         Intent pingIntent = new Intent(context, IntentSrvs.class);
@@ -316,29 +347,39 @@ public class IntentSrvs extends IntentService {
     }
 
     //generating broadcast for lan scaner
-    private Runnable lanScanerRunnable(final String host) {
+    private Runnable lanScanerRunnable(final String host,final String hostsuf) {
         return new Runnable() {
             public void run() {
                 String[] scanresult = new String[4];
-                boolean state = statechk(host);
+                String fulurl =host+hostsuf;
+                boolean state = statechk(fulurl);
                 if (state) {
                     try {
-                        hostname = InetAddress.getByName(host).getHostName();
-                        mac = getHardwareAddress(host);
+                        hostname = InetAddress.getByName(fulurl).getHostName();
+                        mac = getHardwareAddress(fulurl);
                         Log.i(LOG_TAG, hostname);
                     } catch (UnknownHostException e) {
                         Log.e(LOG_TAG, "Not found", e);
                     }
                     scanresult[0] = hostname;
-                    scanresult[1] = host;
+                    scanresult[1] = fulurl;
                     scanresult[2] = mac;
                     scanresult[3] = "vendor";
                     Intent broadcastIntent = new Intent();
                     broadcastIntent.setAction(FragLanscan.BROADCAST_ACTION);
                     broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                    broadcastIntent.putExtra(ANSVER, scanresult);
+                    broadcastIntent.putExtra(ANSWER, scanresult);
                     sendBroadcast(broadcastIntent);
                     Log.i(LOG_TAG, "radcast sent");
+                    if (hostsuf.equals("254")){
+                        Intent broadcastIntentfinish = new Intent();
+                        broadcastIntentfinish.setAction(FragLanscan.BROADCAST_ACTION);
+                        broadcastIntentfinish.addCategory(Intent.CATEGORY_DEFAULT);
+                        String[] scanfinish = new String[1];
+                        scanfinish[0] = FragLanscan.TAGSCANFINISH;
+                        broadcastIntentfinish.putExtra(ANSWER, scanfinish);
+                        sendBroadcast(broadcastIntentfinish);
+                    }
                 }
             }
         };
@@ -433,14 +474,14 @@ public class IntentSrvs extends IntentService {
 
     }
 
-    public static void sendMail(Context context){
-        SharedPreferences spref =context.getSharedPreferences(FragPrefs.PREF_TAG,MODE_PRIVATE);
-        if (spref.getBoolean(FragPrefs.USE_MAIL,false)){
+    public static void sendMail(Context context) {
+        SharedPreferences spref = context.getSharedPreferences(FragPrefs.PREF_TAG, MODE_PRIVATE);
+        if (spref.getBoolean(FragPrefs.USE_MAIL, false)) {
             String emailBody = "test msg from monitoring app";
             // TODO: 26.10.2016 запилить тело мыла
             try {
                 Log.i("SendMailTask", "About to instantiate GMail...");
-                GMail androidEmail = new GMail(emailBody,context);
+                GMail androidEmail = new GMail(emailBody, context);
                 androidEmail.createEmailMessage();
                 androidEmail.sendEmail();
                 Log.i("SendMailTask", "Mail Sent.");
@@ -490,7 +531,7 @@ public class IntentSrvs extends IntentService {
     }
 
     //port scaner
-    public static void startPortCheck(Context context,String url, String port){
+    public static void startPortCheck(Context context, String url, int port) {
         Intent portIntent = new Intent(context, IntentSrvs.class);
         portIntent.setAction(ACTION_PORT);
         portIntent.putExtra(PARAM_URL, url);

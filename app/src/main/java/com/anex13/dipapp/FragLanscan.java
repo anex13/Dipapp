@@ -44,7 +44,6 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
     FloatingActionButton btnscn;
     final static String TAG = "mylog";
     EditText scanurl;
-    public final static String ANSVER = "ansver";
     public final static String TAGSCANFINISH = "scanfinished";
     public final static String BROADCAST_ACTION = "com.anex13.dipapp.lanscan";
     LinearLayout linLayout = null;
@@ -71,7 +70,7 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
         receiver1 = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
                 Log.i("brodcast", "onReceive");
-                ans = intent.getStringArrayExtra(ANSVER);
+                ans = intent.getStringArrayExtra(IntentSrvs.ANSWER);
                 switch (ans[0]) {
                     case TAGSCANFINISH:
                         Toast toast1 = Toast.makeText(getContext(), "Network scan is finished", Toast.LENGTH_LONG);
@@ -128,8 +127,6 @@ public class FragLanscan extends Fragment implements View.OnClickListener {
 
     public void onPause() {
         super.onPause();
-        IntentFilter filter = new IntentFilter(BROADCAST_ACTION);
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
         getActivity().unregisterReceiver(receiver1);
     }
 }
